@@ -11,7 +11,7 @@ define( 'pageTwo',function () {
                 .visualization.get('JARjh').then(function(vis){
                     vis.show("obj2");
                 });
-                console.log('ok')
+                console.log('ok');
             }
         }
         return {

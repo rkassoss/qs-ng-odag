@@ -1,5 +1,7 @@
+var app;
 
-let config = {
+
+var config = {
     host: 'localhost',
     prefix: '/',
     port: 4848,
@@ -8,15 +10,16 @@ let config = {
 require.config({
     baseUrl: (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "") + config.prefix + "resources",
     paths: {
-        "angularRoute": "/bower_components/angular-ui-router/release/angular-ui-router"
+        "angularRoute": "/bower_components/angular-ui-router/release/angular-ui-router",
     }
 });
 
 // bootstrap the app
 require(["js/qlik"], function (qlik) {
-    require(["angular", 'angularRoute', "routes", "pageOne", 'pageTwo', 'dataService', 'qlikService'],
-        function (angular, uiRoute, routes, pageOne, pageTwo, dataService, qlikService) {
-            let app = angular.module('mashup-app', ['ui.router']);
+    require(["angular", 'angularRoute', "routes", "pageOne", 'pageTwo','qlikDropdown', 'dataService', 'qlikService'],
+        function (angular, uiRoute, routes, pageOne, pageTwo, dataService, qlikService, getObject, qlikDropdown) {
+            app = angular.module('mashup-app', ['ui.router']);
+            
             app.config(routes);
             app.component('pageOne', pageOne);
             app.component('pageTwo', pageTwo);
