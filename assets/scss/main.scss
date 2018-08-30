@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'mixins';
 
 
 body {
@@ -18,3 +19,33 @@ body {
     height: 400px;
 }
 
+#sidebarMenu {
+    position: fixed; right: 0; top: 84px; bottom: 0;
+    z-index: 999;
+    background-color: $lightBlue;
+    padding: 30px;
+
+    @include transform(translateX(100%));
+    @include transition(transform .3s);
+
+
+    ul {
+        margin-bottom: 30px;
+        li {
+            list-style: none;
+        }
+    }
+    li a {
+        color: white;
+        font-size: 28px; line-height: 38px;
+    }
+
+    &.slideIn {
+        @include transform(translateX(0));
+    }
+}
+
+
+.panel {
+    color: $darkBlue;
+}

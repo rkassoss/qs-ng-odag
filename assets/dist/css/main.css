@@ -9,3 +9,38 @@ body {
 .objectPlaceholder {
   width: 100%;
   height: 400px; }
+
+#sidebarMenu {
+  position: fixed;
+  right: 0;
+  top: 84px;
+  bottom: 0;
+  z-index: 999;
+  background-color: #0E8FFF;
+  padding: 30px;
+  -moz-transform: translateX(100%);
+  -o-transform: translateX(100%);
+  -ms-transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+  -moz-transition: transform 0.3s;
+  -o-transition: transform 0.3s;
+  -webkit-transition: transform 0.3s;
+  transition: transform 0.3s; }
+  #sidebarMenu ul {
+    margin-bottom: 30px; }
+    #sidebarMenu ul li {
+      list-style: none; }
+  #sidebarMenu li a {
+    color: white;
+    font-size: 28px;
+    line-height: 38px; }
+  #sidebarMenu.slideIn {
+    -moz-transform: translateX(0);
+    -o-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+
+.panel {
+  color: #000841; }

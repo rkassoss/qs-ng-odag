@@ -9,10 +9,6 @@ define( 'pageOne',function () {
                 
     
                 function init() {
-                    qlikService.getApp()
-                    .visualization.get('JARjh').then(function(vis){
-                        vis.show("obj1");
-                    });
                 }
             }
             return {

@@ -17,6 +17,7 @@
                             vis.show(vm.qlikId);
                             console.log(vis);
                         });
+                        
                     }
 
                     

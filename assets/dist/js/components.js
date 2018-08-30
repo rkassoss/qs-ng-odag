@@ -1,30 +1,3 @@
-define( 'pageOne',function () {
-    
-        function pageOne() {
-            pageOneController.$inject = ['dataService','qlikService'];
-            function pageOneController(dataService,qlikService) {
-                var vm = this;
-                init();
-
-                
-    
-                function init() {
-                    qlikService.getApp()
-                    .visualization.get('JARjh').then(function(vis){
-                        vis.show("obj1");
-                    });
-                }
-            }
-            return {
-                bindings: {},
-                controller: pageOneController,
-                controllerAs: 'cf',
-                templateUrl: 'app/components/page1/page1.component.html'
-            }
-        }
-
-        return pageOne();
-    });
 define( 'pageTwo',function () {
 
     function pageTwo() {
@@ -50,4 +23,58 @@ define( 'pageTwo',function () {
     }
 
     return pageTwo();
+});
+define( 'pageOne',function () {
+    
+        function pageOne() {
+            pageOneController.$inject = ['dataService','qlikService'];
+            function pageOneController(dataService,qlikService) {
+                var vm = this;
+                init();
+
+                
+    
+                function init() {
+                }
+            }
+            return {
+                bindings: {},
+                controller: pageOneController,
+                controllerAs: 'cf',
+                templateUrl: 'app/components/page1/page1.component.html'
+            }
+        }
+
+        return pageOne();
+    });
+define( 'topHeader',function () {
+    
+    function topHeader() {
+        topHeaderController.$inject = ['dataService','qlikService'];
+        function topHeaderController(dataService,qlikService) {
+            var vm = this;
+
+            vm.toggleSidebar = toggleSidebar;
+
+            vm.sidebarIn = false;
+
+
+            function toggleSidebar() {
+                vm.sidebarIn = !vm.sidebarIn;
+            }
+
+
+            init();
+            function init() {
+            }
+        }
+        return {
+            bindings: {},
+            controller: topHeaderController,
+            controllerAs: 'th',
+            templateUrl: 'app/components/topHeader/topHeader.component.html'
+        }
+    }
+
+    return topHeader();
 });
