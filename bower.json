@@ -1,0 +1,33 @@
+{
+  "name": "angularQlikStarter",
+  "version": "1.0.0",
+  "description": "Qlik Sense Mashup",
+  "authors": [
+    "Ran Kassovitz - Qlik Consulting"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.7.0",
+    "angular-ui-router": "latest",
+    "jquery": "latest",
+    "intro.js": "~2.5.0",
+    "angular-scroll": "^1.0.2",
+    "angular-animate": "~1.5.9",
+    "angular-aria": "~1.5.9",
+    "promise-polyfill": "^7.1.0",
+    "angular-sanitize": "~1.5.9",
+    "angular-loading-bar": "^0.9.0",
+    "angular-bootstrap": "^2.5.0",
+    "angular-touch": "^1.7.1"
+  },
+  "resolutions": {
+    "angular": "~1.5.9"
+  }
+}
