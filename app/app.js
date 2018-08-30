@@ -16,13 +16,14 @@ require.config({
 
 // bootstrap the app
 require(["js/qlik"], function (qlik) {
-    require(["angular", 'angularRoute', "routes", "pageOne", 'pageTwo','qlikDropdown', 'dataService', 'qlikService'],
+    require(["angular", 'angularRoute', "routes", "pageOne", 'pageTwo','senseObject', 'dataService', 'qlikService'],
         function (angular, uiRoute, routes, pageOne, pageTwo, dataService, qlikService, getObject, qlikDropdown) {
             app = angular.module('mashup-app', ['ui.router']);
             
             app.config(routes);
             app.component('pageOne', pageOne);
             app.component('pageTwo', pageTwo);
+            app.directive('senseObject',senseObject);
             app.service('dataService', dataService);
             app.service('qlikService', qlikService);
             app.run(['qlikService', function (qlikService) {

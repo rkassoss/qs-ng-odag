@@ -73,22 +73,6 @@ gulp.task('directives-js', function () {
         .pipe(gulp.dest(jsDest));
 });
 
-//combine all of the libraries js files
-gulp.task('libraries-js', function () {
-    return gulp.src(['bower_components/angular-cookies/angular-cookies.min.js',
-    'bower_components/angular-resource/angular-resource.min.js',
-    'bower_components/angular-sanitize/angular-sanitize.min.js',
-    // 'bower_components/angular-touch/angular-touch.min.js',
-    'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-    'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-    'bower_components/angular-ui-sortable/sortable.min.js',
-    'bower_components/angular-local-storage/dist/angular-local-storage.min.js',
-    'assets/js/bootstrap.min.js'])
-        .pipe(concat('libraries.min.js'))
-        .pipe(gulp.dest(jsDest));
-});
-
-
 //move fonts
 gulp.task('move-fonts', function() {
     return gulp.src(['assets/fonts/**/*'])
@@ -136,5 +120,5 @@ gulp.task('watch', ['browser-sync'], function () {
 
 //# gulp build-dev
 gulp.task('build-dev', function (callback) {
-    return runSequence('components-js', 'services-js', 'directives-js', 'libraries-js', 'move-fonts', 'move-css', 'minify-css', 'rev', callback);
+    return runSequence('components-js', 'services-js', 'directives-js', 'move-fonts', 'move-css', 'minify-css', 'rev', callback);
 });
