@@ -1,5 +1,5 @@
 # Qlik Sense June 2018 Template
-An AngularJS mashup, compatible with Qlik Sense June 2018 release.
+An AngularJS mashup, compatible with Qlik Sense June 2018 release.  
 Run 'npm install'  
 Run 'bower install'  
 Run 'gulp build-dev'  
