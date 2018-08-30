@@ -5,3 +5,7 @@ body {
   body a {
     color: #0E8FFF;
     font-weight: 500; }
+
+.objectPlaceholder {
+  width: 100%;
+  height: 400px; }

@@ -106,8 +106,8 @@ gulp.task('rev', function () {
 
 //watch all changes in dev, generate dist and reload browsersync
 gulp.task('watch', ['browser-sync'], function () {
-    gulp.watch("scss/**/*.scss", ['sass']);
-    gulp.watch("*.html").on('change', bs.reload);
+    gulp.watch("assets/scss/**/*.scss", ['sass']);
+    gulp.watch("**/*.html").on('change', bs.reload);
     gulp.watch("app/*.js").on('change', bs.reload);
 
 
