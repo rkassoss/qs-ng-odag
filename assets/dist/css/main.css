@@ -1,7 +1,6 @@
 body {
-  background-color: #000841;
-  color: white;
-  font-family: 'Roboto', sans-serif !important; }
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 15px; }
   body a {
     color: #0E8FFF;
     font-weight: 500; }
@@ -10,14 +9,26 @@ body {
   width: 100%;
   height: 400px; }
 
+button, a {
+  -moz-transition: background-color 0.3s, color 0.3s;
+  -o-transition: background-color 0.3s, color 0.3s;
+  -webkit-transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s; }
+
+.clean-btn {
+  background-color: transparent;
+  border: 0;
+  box-shadow: none; }
+
 #sidebarMenu {
   position: fixed;
   right: 0;
-  top: 84px;
+  top: 75px;
   bottom: 0;
   z-index: 999;
-  background-color: #0E8FFF;
-  padding: 30px;
+  width: 300px;
+  background-color: #c2c2c2;
+  padding: 15px;
   -moz-transform: translateX(100%);
   -o-transform: translateX(100%);
   -ms-transform: translateX(100%);
@@ -44,3 +55,22 @@ body {
 
 .panel {
   color: #000841; }
+
+header {
+  background-color: black;
+  color: white;
+  padding: 15px;
+  height: 75px; }
+  header .brand {
+    width: 120px; }
+  header button {
+    font-size: 3rem; }
+    header button:hover {
+      color: #0E8FFF; }
+
+#lastRelaod {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  padding: 15px; }

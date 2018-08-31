@@ -1,3 +1,26 @@
+define( 'pageOne',function () {
+    
+        function pageOne() {
+            pageOneController.$inject = ['dataService','qlikService'];
+            function pageOneController(dataService,qlikService) {
+                var vm = this;
+                init();
+
+                
+    
+                function init() {
+                }
+            }
+            return {
+                bindings: {},
+                controller: pageOneController,
+                controllerAs: 'cf',
+                templateUrl: 'app/components/page1/page1.component.html'
+            }
+        }
+
+        return pageOne();
+    });
 define( 'pageTwo',function () {
 
     function pageTwo() {
@@ -24,29 +47,6 @@ define( 'pageTwo',function () {
 
     return pageTwo();
 });
-define( 'pageOne',function () {
-    
-        function pageOne() {
-            pageOneController.$inject = ['dataService','qlikService'];
-            function pageOneController(dataService,qlikService) {
-                var vm = this;
-                init();
-
-                
-    
-                function init() {
-                }
-            }
-            return {
-                bindings: {},
-                controller: pageOneController,
-                controllerAs: 'cf',
-                templateUrl: 'app/components/page1/page1.component.html'
-            }
-        }
-
-        return pageOne();
-    });
 define( 'topHeader',function () {
     
     function topHeader() {
@@ -63,9 +63,21 @@ define( 'topHeader',function () {
                 vm.sidebarIn = !vm.sidebarIn;
             }
 
+            function dataLastFrom() {
+                qlikService.getApp().getAppLayout(function(layout){
+                    console.log(layout);
+                    vm.relaodTime = layout.qLastReloadTime;
+                });
+            }
+
+            function getFilters() {
+                qlikService.getApp().getObject('nativeFilters','ycppXj');
+            }
 
             init();
             function init() {
+                dataLastFrom();
+                getFilters();
             }
         }
         return {

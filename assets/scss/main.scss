@@ -3,32 +3,32 @@
 
 
 body {
-    background-color: $darkBlue;
-    color: white;
-
-    font-family: 'Roboto', sans-serif !important;
-
+    font-family: 'Roboto', sans-serif !important; font-size: 15px;
     a {
         color: $lightBlue; font-weight: 500;
     }
 }
-
 
 .objectPlaceholder {
     width: 100%;
     height: 400px;
 }
 
-#sidebarMenu {
-    position: fixed; right: 0; top: 84px; bottom: 0;
-    z-index: 999;
-    background-color: $lightBlue;
-    padding: 30px;
 
+button, a {
+    @include transition(background-color .3s, color .3s);
+}
+.clean-btn {
+    background-color: transparent; border: 0; box-shadow: none;
+}
+
+#sidebarMenu {
+    position: fixed; right: 0; top: 75px; bottom: 0;
+    z-index: 999; width: 300px;
+    background-color: #c2c2c2;
+    padding: 15px;
     @include transform(translateX(100%));
     @include transition(transform .3s);
-
-
     ul {
         margin-bottom: 30px;
         li {
@@ -39,13 +39,32 @@ body {
         color: white;
         font-size: 28px; line-height: 38px;
     }
-
     &.slideIn {
         @include transform(translateX(0));
+    }
+
+    #nativeFilters {
+    }
+}
+
+.panel {
+    color: $darkBlue;
+}
+
+header {
+    background-color: black; color: white; padding: 15px; height: 75px;
+    .brand {
+        width: 120px;
+    }
+    button {
+         font-size: 3rem;
+        &:hover {
+            color: $lightBlue;
+        }
     }
 }
 
 
-.panel {
-    color: $darkBlue;
+#lastRelaod {
+    position: fixed; right: 0; bottom: 0; z-index: 1000; padding: 15px;
 }

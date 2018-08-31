@@ -14,9 +14,21 @@ define( 'topHeader',function () {
                 vm.sidebarIn = !vm.sidebarIn;
             }
 
+            function dataLastFrom() {
+                qlikService.getApp().getAppLayout(function(layout){
+                    console.log(layout);
+                    vm.relaodTime = layout.qLastReloadTime;
+                });
+            }
+
+            function getFilters() {
+                qlikService.getApp().getObject('nativeFilters','ycppXj');
+            }
 
             init();
             function init() {
+                dataLastFrom();
+                getFilters();
             }
         }
         return {
