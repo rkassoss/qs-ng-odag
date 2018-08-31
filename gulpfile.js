@@ -18,7 +18,7 @@ var cssDest = 'assets/dist/css';
 var fontsDest = 'assets/dist/fonts';
 var componentsPath = 'app/components/**/*.js';
 var servicesPath = 'app/services/**/*.js';
-var directivesPath = 'app/directives/**/*.js';
+var viewsPath = 'app/views/**/*.js';
 var cssPath = 'assets/css/*.css';
 
 
@@ -64,11 +64,11 @@ gulp.task('services-js', function () {
 });
 
 //combine and minify directives
-gulp.task('directives-js', function () {
-    return gulp.src(['!app/directives/qlik.directive.js', directivesPath])
-        .pipe(concat('directives.js'))
+gulp.task('views-js', function () {
+    return gulp.src(['!app/directives/qlik.directive.js', viewsPath])
+        .pipe(concat('views.js'))
         .pipe(gulp.dest(jsDest))
-        .pipe(rename('directives.min.js'))
+        .pipe(rename('views.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(jsDest));
 });
@@ -113,12 +113,12 @@ gulp.task('watch', ['browser-sync'], function () {
 
     gulp.watch(componentsPath).on('change', function() { runSequence('components-js', 'rev', bs.reload); });
     gulp.watch(servicesPath).on('change', function() { runSequence('services-js', 'rev', bs.reload); });
-    gulp.watch(directivesPath).on('change', function() { runSequence('directives-js', 'rev', bs.reload); });gulp.watch(cssPath).on('change', function() { runSequence('minify-css', 'rev', bs.reload); });
+    gulp.watch(viewsPath).on('change', function() { runSequence('views-js', 'rev', bs.reload); });gulp.watch(cssPath).on('change', function() { runSequence('minify-css', 'rev', bs.reload); });
 
 });
 
 
 //# gulp build-dev
 gulp.task('build-dev', function (callback) {
-    return runSequence('components-js', 'services-js', 'directives-js', 'move-fonts', 'move-css', 'minify-css', 'rev', callback);
+    return runSequence('components-js', 'services-js', 'views-js', 'move-fonts', 'move-css', 'minify-css', 'rev', callback);
 });

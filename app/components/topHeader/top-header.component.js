@@ -29,6 +29,7 @@ define( 'topHeader',function () {
             function init() {
                 dataLastFrom();
                 getFilters();
+                qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
             }
         }
         return {

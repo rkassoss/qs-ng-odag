@@ -5,39 +5,63 @@
         define( 'senseObject',function () {
             
             function senseObject() {
-                senseObjectController.$inject = ['dataService','qlikService'];
-                function senseObjectController(dataService,qlikService) {
+                senseObjectController.$inject = ['dataService','qlikService','$uibModal'];
+                function senseObjectController(dataService,qlikService,$uibModal) {
                     var vm = this;
-
+                    var theObject;
 
                     vm.exportToExcel = exportToExcel;
+                    vm.expand = expand;
 
                     function exportToExcel() {
-                        console.log(vm.table.exportData());
-                        vm.table.exportData().then(function(reply){
+                        vm.model.exportData().then(function(reply){
                             console.log(reply);
                             var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
                             var link = reply.qUrl;
                             window.open(baseUrl+link,'_blank');
                         });
                     }
-                    
+
+                    function expand() {
+                        var modalInstance = $uibModal.open({
+                            animation: true,
+                            component: 'expandModal',
+                            size: 'lg',
+                            resolve: {
+                                qlikId: function () {
+                                    return vm.qlikId;
+                                }
+                            }
+                        });
+                    }
 
 
                     function getQlikObject() {
                         qlikService.getApp()
                         .visualization.get(vm.qlikId).then(function(vis){
                             vis.show(vm.qlikId);
-                            vm.table = vis.model;
+                            theObject = vis;
+                            vm.model = vis.model;
                         });
                     }
 
                     
-                    this.$onInit = function() {
+                    vm.$onInit = function() {
                         setTimeout(function() {
                             getQlikObject();
                         }, 300)
                     }
+
+
+                    vm.$onDestroy = function() {
+                        theObject.close();
+                    }
+
+
+                    vm.$onChanges = function(changes) {
+                        
+                    }
+
                 }
                 return {
                     bindings: {
@@ -45,7 +69,7 @@
                     },
                     controller: senseObjectController,
                     controllerAs: 'so',
-                    templateUrl: '/app/directives/senseObject/senseObject.directive.html'
+                    templateUrl: '/app/components/senseObject/senseObject.directive.html'
                 }
             }
 

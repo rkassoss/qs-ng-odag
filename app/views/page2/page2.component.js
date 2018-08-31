@@ -18,7 +18,7 @@ define( 'pageTwo',function () {
             bindings: {},
             controller: pageTwoController,
             controllerAs: 'cf',
-            templateUrl: 'app/components/page2/page2.component.html'
+            templateUrl: 'app/views/page2/page2.component.html'
         }
     }
 

@@ -15,7 +15,7 @@ define( 'pageOne',function () {
                 bindings: {},
                 controller: pageOneController,
                 controllerAs: 'cf',
-                templateUrl: 'app/components/page1/page1.component.html'
+                templateUrl: 'app/views/page1/page1.component.html'
             }
         }
 

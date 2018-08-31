@@ -1,6 +1,3 @@
-var app;
-
-
 var config = {
     host: 'localhost',
     prefix: '/',
@@ -11,7 +8,7 @@ require.config({
     baseUrl: (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "") + config.prefix + "resources",
     paths: {
         'ui.router': '/bower_components/angular-ui-router/release/angular-ui-router',
-        'ui.bootstrap': '/bower_components/angular-bootstrap/ui-bootstrap-tpls.min'
+        'uibootstrap': 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min',
     }
 });
 
@@ -19,19 +16,20 @@ require.config({
 require(["js/qlik"], function (qlik) {
     require(["angular",
             'ui.router',
-            // 'ui.bootstrap', 
+            'uibootstrap', 
             "routes", 
             "pageOne", 
             'pageTwo',
             'topHeader',
             'senseObject', 
+            'expandModal',
             'dataService', 
             'qlikService'
     ],
-        function (angular, uiRoute, routes, pageOne, pageTwo,topHeader, senseObject, dataService, qlikService) {
+        function (angular, uiRoute, uibootstrap, routes, pageOne, pageTwo,topHeader, senseObject,expandModal, dataService, qlikService) {
             app = angular.module('mashup-app', [
                 'ui.router',
-                // 'ui.bootstrap'
+                'ui.bootstrap'
             ]);
             
             app.config(routes);
@@ -41,6 +39,7 @@ require(["js/qlik"], function (qlik) {
             app.component('topHeader',topHeader);
 
             app.component('senseObject',senseObject);
+            app.component('expandModal',expandModal);
 
             
             app.service('dataService', dataService);
