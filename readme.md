@@ -5,4 +5,4 @@ Run 'bower install'
 Run 'gulp build-dev'  
 Run 'gulp watch'  
 
-It should open your browser with livereload. I am trying to concat all the components, directives and services nicely but I'm still unsure how to add them to the app module in app.js
+It should open your browser with livereload on http://localhost:3000.
