@@ -8,7 +8,7 @@
                 senseObjectController.$inject = ['dataService','qlikService'];
                 function senseObjectController(dataService,qlikService) {
                     var vm = this;
-                    init();
+                    
 
 
                     function getQlikObject() {
@@ -21,11 +21,10 @@
                     }
 
                     
-
-                    function init() {
-
-                        getQlikObject();
-                        
+                    this.$onInit = function() {
+                        setTimeout(function() {
+                            getQlikObject();
+                        }, 300)
                     }
                 }
                 return {

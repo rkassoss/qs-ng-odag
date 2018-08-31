@@ -17,10 +17,21 @@ require.config({
 
 // bootstrap the app
 require(["js/qlik"], function (qlik) {
-    require(["angular", 'ui.router', "routes", "pageOne", 'pageTwo','topHeader','senseObject', 'dataService', 'qlikService'],
+    require(["angular",
+            'ui.router',
+            // 'ui.bootstrap', 
+            "routes", 
+            "pageOne", 
+            'pageTwo',
+            'topHeader',
+            'senseObject', 
+            'dataService', 
+            'qlikService'
+    ],
         function (angular, uiRoute, routes, pageOne, pageTwo,topHeader, senseObject, dataService, qlikService) {
             app = angular.module('mashup-app', [
-                'ui.router'
+                'ui.router',
+                // 'ui.bootstrap'
             ]);
             
             app.config(routes);
