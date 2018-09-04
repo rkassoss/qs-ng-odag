@@ -47,7 +47,7 @@ gulp.task('components-js', function () {
         .pipe(concat('components.js'))
         .pipe(gulp.dest(jsDest))
         .pipe(rename('components.min.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest(jsDest));
 });
 
@@ -57,9 +57,9 @@ gulp.task('services-js', function () {
         .pipe(concat('services.js'))
         .pipe(gulp.dest(jsDest))
         .pipe(rename('services.min.js'))
-        .pipe(uglify().on('error', function(e){
-            console.log(e);
-         }))
+        // .pipe(uglify().on('error', function(e){
+        //     console.log(e);
+        //  }))
         .pipe(gulp.dest(jsDest));
 });
 
@@ -69,7 +69,7 @@ gulp.task('views-js', function () {
         .pipe(concat('views.js'))
         .pipe(gulp.dest(jsDest))
         .pipe(rename('views.min.js'))
-        .pipe(uglify())
+        // .pipe(uglify())
         .pipe(gulp.dest(jsDest));
 });
 

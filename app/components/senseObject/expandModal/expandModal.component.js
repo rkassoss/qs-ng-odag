@@ -6,6 +6,8 @@
         expandModalController.$inject = ['qlikService','$uibModal', '$log', '$document']
         function expandModalController(qlikService, $uibModal, $document){
             var vm = this;
+            var object;
+
             vm.closeModal = closeModal;
             
             function closeModal() {
@@ -14,12 +16,14 @@
             init();
 
             function init(){
-                qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId);
+                qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId).then(function(vis){
+                    object = vis;
+                });
             }
+
             vm.$onDestroy = function() {
-                // destroy object please
                 vm = null;
-                // console.log("Destroying Object");
+                vis.close();
             }
         }
 

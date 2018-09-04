@@ -22,7 +22,12 @@
     <div id="nativeFilters" style="height: 300px;"></div>
 </div>
 <div id="navigation" ng-class="{'slideIn' : th.navigation }">
-        <ul>
+
+        <filter-dropdown field-name="Case Owner"></filter-dropdown>
+
+        <h3>Views:</h3>
+
+        <ul class="nav-links">
                 <li ui-sref-active="active">
                     <a ui-sref="page1">
                         <span>Page1</span>
@@ -38,3 +43,5 @@
 
 
 <div id="lastRelaod">{{ th.relaodTime | date:"MM/dd/yyyy 'at' h:mma" }}  </div>
+
+

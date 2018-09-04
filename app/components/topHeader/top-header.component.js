@@ -21,7 +21,7 @@ define( 'topHeader',function () {
 
             function dataLastFrom() {
                 qlikService.getApp().getAppLayout(function(layout){
-                    console.log(layout);
+                    // console.log(layout);
                     vm.relaodTime = layout.qLastReloadTime;
                 });
             }

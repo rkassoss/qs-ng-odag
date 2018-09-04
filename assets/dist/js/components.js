@@ -1,6 +1,84 @@
 (function () {
     'use strict';
 
+    define('filterDropdown',function() {
+        
+        function filterDropdown() {
+                filterDropdownController.$inject = ["qlikService"];
+                function filterDropdownController(qlikService){
+                    var vm = this;
+                    var objectId;
+
+                    vm.fetchValues = fetchValues;
+                    vm.applySelection = applySelection;
+
+
+                    function applySelection(value) {
+                        console.log(value);
+                        qlikService.getApp().field(vm.fieldName).selectMatch(value);
+                        vm.activeSelection = value;
+                    }
+
+                    function fetchValues() {
+                        qlikService.getApp().createList({
+                            "qDef": {
+                                "qFieldDefs": ["["+ vm.fieldName +"]"],
+                                "qSortCriterias": [{
+                                    "qSortByLoadOrder"  : 0,
+                                    "qSortByAscii" : 1
+                                }]
+                            },
+                            "qAutoSortByState": {
+                                qDisplayNumberOfRows: 1
+                            },
+                            "qInitialDataFetch": [{
+                                qTop : 0,
+                                qLeft : 0,
+                                qHeight : 250,
+                                qWidth : 1
+                            }]
+                        }, function(reply) {
+                            console.log(reply);
+                            objectId = reply.qInfo.qId;
+                            vm.rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
+                        });
+                    }
+
+                
+
+                    vm.$onInit = function() {
+                        fetchValues();
+                    }
+
+
+                    vm.$onDestroy = function() {
+                        console.log('destroy list'+ objectId);
+                        qlikService.getApp().destroySessionObject(objectId);
+                    }
+
+
+                    vm.$onChanges = function(changes) {
+                        
+                    }
+                }
+        
+                return {
+                    bindings: {
+                        fieldName: '@'
+                    },
+                    controller: filterDropdownController,
+                    controllerAs: 'fd',
+                    templateUrl: '/app/components/filterDropdown/filterDropdown.component.html'
+                }
+        }
+
+        return filterDropdown();
+    });
+
+} ());
+(function () {
+    'use strict';
+
 
         define( 'senseObject',function () {
             
@@ -102,7 +180,7 @@ define( 'topHeader',function () {
 
             function dataLastFrom() {
                 qlikService.getApp().getAppLayout(function(layout){
-                    console.log(layout);
+                    // console.log(layout);
                     vm.relaodTime = layout.qLastReloadTime;
                 });
             }
@@ -136,6 +214,8 @@ define( 'topHeader',function () {
         expandModalController.$inject = ['qlikService','$uibModal', '$log', '$document']
         function expandModalController(qlikService, $uibModal, $document){
             var vm = this;
+            var object;
+
             vm.closeModal = closeModal;
             
             function closeModal() {
@@ -144,12 +224,14 @@ define( 'topHeader',function () {
             init();
 
             function init(){
-                qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId);
+                qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId).then(function(vis){
+                    object = vis;
+                });
             }
+
             vm.$onDestroy = function() {
-                // destroy object please
                 vm = null;
-                // console.log("Destroying Object");
+                vis.close();
             }
         }
 

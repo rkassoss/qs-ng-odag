@@ -5,7 +5,6 @@ define( 'pageOne',function () {
             function pageOneController(dataService,qlikService) {
                 var vm = this;
                 init();
-
                 
     
                 function init() {
