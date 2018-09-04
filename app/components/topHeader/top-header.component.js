@@ -6,9 +6,14 @@ define( 'topHeader',function () {
             var vm = this;
 
             vm.toggleSidebar = toggleSidebar;
+            vm.toggleNav = toggleNav;
 
             vm.sidebarIn = false;
+            vm.navigation = false;
 
+            function toggleNav() {
+                vm.navigation = !vm.navigation;
+            }
 
             function toggleSidebar() {
                 vm.sidebarIn = !vm.sidebarIn;

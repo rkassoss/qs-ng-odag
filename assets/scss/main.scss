@@ -21,7 +21,26 @@ button, a {
 .clean-btn {
     background-color: transparent; border: 0; box-shadow: none;
 }
+#navigation {
+    position: fixed; left: 0; top: 75px; bottom: 0; width: 300px;
+    z-index: 999; background-color: #c2c2c2;
+    @include transform(translateX(-100%));
+    @include transition(transform .3s);
 
+    ul {
+        margin: 15px;
+        li {
+            list-style: none;
+            a {
+                font-size: 24px; line-height: 38px;
+            }
+
+        }
+    }
+    &.slideIn {
+        @include transform(translateX(0));
+    }
+}
 #sidebarMenu {
     position: fixed; right: 0; top: 75px; bottom: 0;
     z-index: 999; width: 300px;
@@ -55,6 +74,7 @@ header {
     background-color: black; color: white; padding: 15px; height: 75px;
     .brand {
         width: 120px;
+        margin: 10px auto;
     }
     button {
          font-size: 3rem;

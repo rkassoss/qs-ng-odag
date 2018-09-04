@@ -1,7 +1,10 @@
 <header>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-2">
+                    <button class="clean-btn" ng-click="th.toggleNav()"><i class="fa fa-bars"></i></button>
+            </div>  
+            <div class="col-md-8">
                 <div class="brand">
                         <img src="/assets/images/lra_logo.png" class="img-responsive" />
                 </div>
@@ -17,6 +20,20 @@
 <div id="CurrentSelections" style="height:65px;"></div>
 <div id="sidebarMenu" class="left-slide-menu" ng-class="{'slideIn' : th.sidebarIn }">
     <div id="nativeFilters" style="height: 300px;"></div>
+</div>
+<div id="navigation" ng-class="{'slideIn' : th.navigation }">
+        <ul>
+                <li ui-sref-active="active">
+                    <a ui-sref="page1">
+                        <span>Page1</span>
+                    </a>
+                </li>
+                <li ui-sref-active="active">
+                    <a ui-sref="page2">
+                        <span>Page2</span>
+                    </a>
+                </li>
+            </ul>
 </div>
 
 

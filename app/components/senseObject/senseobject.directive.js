@@ -14,12 +14,13 @@
                     vm.expand = expand;
 
                     function exportToExcel() {
-                        vm.model.exportData().then(function(reply){
-                            console.log(reply);
-                            var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
-                            var link = reply.qUrl;
-                            window.open(baseUrl+link,'_blank');
-                        });
+                        vm.model.exportData()
+                            .then(function(reply){
+                                console.log(reply);
+                                var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
+                                var link = reply.qUrl;
+                                window.open(baseUrl+link,'_blank');
+                            });
                     }
 
                     function expand() {
@@ -39,6 +40,7 @@
                     function getQlikObject() {
                         qlikService.getApp()
                         .visualization.get(vm.qlikId).then(function(vis){
+                            console.log(vis);
                             vis.show(vm.qlikId);
                             theObject = vis;
                             vm.model = vis.model;
@@ -54,6 +56,7 @@
 
 
                     vm.$onDestroy = function() {
+                        console.log('destroy');
                         theObject.close();
                     }
 

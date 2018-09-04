@@ -20,6 +20,37 @@ button, a {
   border: 0;
   box-shadow: none; }
 
+#navigation {
+  position: fixed;
+  left: 0;
+  top: 75px;
+  bottom: 0;
+  width: 300px;
+  z-index: 999;
+  background-color: #c2c2c2;
+  -moz-transform: translateX(-100%);
+  -o-transform: translateX(-100%);
+  -ms-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  -moz-transition: transform 0.3s;
+  -o-transition: transform 0.3s;
+  -webkit-transition: transform 0.3s;
+  transition: transform 0.3s; }
+  #navigation ul {
+    margin: 15px; }
+    #navigation ul li {
+      list-style: none; }
+      #navigation ul li a {
+        font-size: 24px;
+        line-height: 38px; }
+  #navigation.slideIn {
+    -moz-transform: translateX(0);
+    -o-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+
 #sidebarMenu {
   position: fixed;
   right: 0;
@@ -62,7 +93,8 @@ header {
   padding: 15px;
   height: 75px; }
   header .brand {
-    width: 120px; }
+    width: 120px;
+    margin: 10px auto; }
   header button {
     font-size: 3rem; }
     header button:hover {
