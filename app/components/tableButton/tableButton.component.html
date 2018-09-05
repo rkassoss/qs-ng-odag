@@ -1,0 +1,20 @@
+<div class="table-wrap">
+        <button ng-click="tb.revealTable()" class="btn btn-primary toggle-table">{{tb.buttonText}}</button>
+        <div uib-collapse="tb.isCollapsed">
+                <div class="panel">
+                        <div class="panel-header">
+                                <div class="row">
+                                        <div class="col-xs-9">
+                                            <h3>{{tb.title}}</h3>
+                                        </div>
+                                        <div class="col-xs-3 text-right">
+                                                <button class="btn btn-default chart-tool" ng-click="tb.exportToExcel()"><i class="fa fa-download"></i></button>
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="panel-body">
+                                <div class="objectPlaceholder" id="{{tb.tableId}}" ng-class="{'animateOut': tb.animateNow}"></div>
+                        </div>
+                </div>
+        </div>
+</div>

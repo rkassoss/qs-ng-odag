@@ -118,7 +118,8 @@ ul {
 
 .panel {
   border: 1px solid #b9b9b9;
-  padding: 1rem; }
+  padding: 1rem;
+  margin-bottom: 30px; }
   .panel .panel-header h3 {
     -webkit-text-overflow: ellipsis;
     text-overflow: ellipsis;
@@ -196,3 +197,7 @@ button, a {
     line-height: 1.42857143;
     color: #333;
     white-space: nowrap; }
+
+.table-wrap button.toggle-table {
+  display: block;
+  margin: 0 auto 30px; }

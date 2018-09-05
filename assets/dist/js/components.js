@@ -42,61 +42,6 @@
     
 
 } ());
-define( 'topHeader',function () {
-    
-    function topHeader() {
-        topHeaderController.$inject = ['dataService','qlikService'];
-        function topHeaderController(dataService,qlikService) {
-            var vm = this;
-
-            vm.toggleSidebar = toggleSidebar;
-            vm.toggleNav = toggleNav;
-
-            vm.sidebarIn = false;
-            vm.navigation = false;
-
-            function toggleNav() {
-                vm.navigation = !vm.navigation;
-            }
-
-            function toggleSidebar() {
-                vm.sidebarIn = !vm.sidebarIn;
-            }
-
-            function dataLastFrom() {
-                qlikService.getApp().getAppLayout(function(layout){
-                    // console.log(layout);
-                    vm.relaodTime = layout.qLastReloadTime;
-                });
-            }
-
-            function getFilters() {
-                qlikService.getApp().getObject('nativeFilters','ycppXj').then(function(reply){
-                    console.log(reply);
-                    reply.layout.showTitles = false;
-                    reply.Validated.bind(function(){
-                        reply.layout.showTitles = false;
-                    });
-                });
-            }
-
-            init();
-            function init() {
-                dataLastFrom();
-                getFilters();
-                qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
-            }
-        }
-        return {
-            bindings: {},
-            controller: topHeaderController,
-            controllerAs: 'th',
-            templateUrl: 'app/components/topHeader/topHeader.component.html'
-        }
-    }
-
-    return topHeader();
-});
 (function () {
     'use strict';
 
@@ -258,6 +203,137 @@ define( 'topHeader',function () {
             return senseObject();
         });
 } ());
+(function () {
+    'use strict';
+
+    define('tableButton', function(){
+        function tableButton() {
+            tableButtonController.$inject = ['qlikService'];
+            function tableButtonController(qlikService){
+                var vm = this;
+                vm.exportToExcel = exportToExcel;
+                
+                vm.isCollapsed =vm.animateNow = true;
+                var tableObject;
+                vm.revealTable = revealTable;
+
+                function exportToExcel() {
+                    tableObject.model.exportData()
+                        .then(function(reply){
+                            console.log(reply);
+                            var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
+                            var link = reply.qUrl;
+                            window.open(baseUrl+link,'_blank');
+                        });
+                }
+
+
+
+                function getQlikTable(qlikId) {
+                    qlikService.getApp().visualization.get(qlikId).then(function(table){
+                        console.log(table);
+                        vm.title = table.model.layout.title;
+                        table.show(vm.tableId);
+                        tableObject = table;
+                    });
+                }
+
+                function revealTable() {
+                    vm.isCollapsed = !vm.isCollapsed;
+                    console.log(vm.isCollapsed);
+                    if (!vm.isCollapsed) {
+                        getQlikTable(vm.tableId);
+                        setTimeout(function() {
+                            vm.animateNow = false;
+                        }, 300)
+                    } else {
+                        tableObject.close();
+                        vm.animateNow = true;
+                    }
+                }
+
+
+                vm.$onInit = function() {
+
+                }
+
+                vm.$onDestroy = function() {
+                    tableObject.close();
+                }
+            }
+    
+            return {
+                bindings: {
+                    tableId: '@',
+                    buttonText: '@'
+                },
+                controller: tableButtonController,
+                controllerAs: 'tb',
+                templateUrl: '/app/components/tableButton/tableButton.component.html'
+            }
+        }
+        return tableButton();
+    });
+
+
+    
+
+} ());
+define( 'topHeader',function () {
+    
+    function topHeader() {
+        topHeaderController.$inject = ['dataService','qlikService'];
+        function topHeaderController(dataService,qlikService) {
+            var vm = this;
+
+            vm.toggleSidebar = toggleSidebar;
+            vm.toggleNav = toggleNav;
+
+            vm.sidebarIn = false;
+            vm.navigation = false;
+
+            function toggleNav() {
+                vm.navigation = !vm.navigation;
+            }
+
+            function toggleSidebar() {
+                vm.sidebarIn = !vm.sidebarIn;
+            }
+
+            function dataLastFrom() {
+                qlikService.getApp().getAppLayout(function(layout){
+                    // console.log(layout);
+                    vm.relaodTime = layout.qLastReloadTime;
+                });
+            }
+
+            function getFilters() {
+                qlikService.getApp().getObject('nativeFilters','ycppXj').then(function(reply){
+                    console.log(reply);
+                    reply.layout.showTitles = false;
+                    reply.Validated.bind(function(){
+                        reply.layout.showTitles = false;
+                    });
+                });
+            }
+
+            init();
+            function init() {
+                dataLastFrom();
+                getFilters();
+                qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
+            }
+        }
+        return {
+            bindings: {},
+            controller: topHeaderController,
+            controllerAs: 'th',
+            templateUrl: 'app/components/topHeader/topHeader.component.html'
+        }
+    }
+
+    return topHeader();
+});
 (function () {
     'use strict';
 
