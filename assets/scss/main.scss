@@ -19,6 +19,14 @@ ul {
 .panel {
     border: 1px solid #b9b9b9;
     padding: 1rem;
+    .panel-header {
+        h3 {
+            -webkit-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
     .chart-tool {
         background-color: #d3d3d3; box-shadow: none;
         padding: 10px;
@@ -27,7 +35,17 @@ ul {
 
 .objectPlaceholder {
     width: 100%;
-    height: 400px;
+    height: 500px;
+    article.qv-object {
+        header.qv-object-header {
+            display: none;
+        }
+    }
+}
+
+.kpiObject {
+    width: 100%;
+    height: 200px;
 }
 
 
@@ -58,8 +76,12 @@ button, a {
 
     .nav-links {
         li {
+            &.active {
+                a { font-weight: 700; color: rgb(24, 5, 196) }
+            }
             a {
                 font-size: 24px; line-height: 38px;
+                
             }
         }
     }
@@ -112,5 +134,6 @@ header {
 
 
 #lastRelaod {
+    background-color: white;
     position: fixed; right: 0; bottom: 0; z-index: 1000; padding: 15px;
 }

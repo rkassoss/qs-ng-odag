@@ -1,8 +1,7 @@
 define( 'pageOne',function () {
     
         function pageOne() {
-            pageOneController.$inject = ['dataService','qlikService'];
-            function pageOneController(dataService,qlikService) {
+            function pageOneController() {
                 var vm = this;
                 init();
                 
@@ -20,6 +19,28 @@ define( 'pageOne',function () {
 
         return pageOne();
     });
+define('pageThree', function(){
+    function pageThree() {
+
+        function pageThreeController(){
+            var vm = this;
+            
+            init();
+
+            function init(){
+
+            }
+        }
+
+        return {
+            bindings: {},
+            controller: pageThreeController,
+            controllerAs: 'p3',
+            templateUrl: '/app/views/page3/page3.component.html'
+        }
+    }
+    return pageThree();
+});
 define( 'pageTwo',function () {
 
     function pageTwo() {
