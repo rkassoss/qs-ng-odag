@@ -56,20 +56,20 @@ header {
     h3 {
         color: white;
     }
-    ul {
-        margin-bottom: 30px;
-        li {
-            list-style: none;
-        }
-    }
-    li a {
-        color: white;
-        font-size: 28px; line-height: 38px;
-    }
     &.slideIn {
         @include transform(translateX(0));
     }
 
-    #nativeFilters {
+    .custom-dropdown {
+        width: 100%;
+        .dropdown-toggle {
+            width: 100%; display: block; text-align: left;
+        }
+        .dropdown-menu {
+            max-height: 500px; overflow: auto;
+            li a {
+                color: black;
+            }
+        }
     }
 }

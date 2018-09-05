@@ -82,20 +82,23 @@ header {
   transition: transform 0.3s; }
   #sidebarMenu h3 {
     color: white; }
-  #sidebarMenu ul {
-    margin-bottom: 30px; }
-    #sidebarMenu ul li {
-      list-style: none; }
-  #sidebarMenu li a {
-    color: white;
-    font-size: 28px;
-    line-height: 38px; }
   #sidebarMenu.slideIn {
     -moz-transform: translateX(0);
     -o-transform: translateX(0);
     -ms-transform: translateX(0);
     -webkit-transform: translateX(0);
     transform: translateX(0); }
+  #sidebarMenu .custom-dropdown {
+    width: 100%; }
+    #sidebarMenu .custom-dropdown .dropdown-toggle {
+      width: 100%;
+      display: block;
+      text-align: left; }
+    #sidebarMenu .custom-dropdown .dropdown-menu {
+      max-height: 500px;
+      overflow: auto; }
+      #sidebarMenu .custom-dropdown .dropdown-menu li a {
+        color: black; }
 
 body {
   font-family: 'Roboto', sans-serif !important;
