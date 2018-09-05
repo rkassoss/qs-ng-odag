@@ -13,6 +13,11 @@ ul {
 .panel {
   border: 1px solid #b9b9b9;
   padding: 1rem; }
+  .panel .panel-header h3 {
+    -webkit-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap; }
   .panel .chart-tool {
     background-color: #d3d3d3;
     box-shadow: none;
@@ -20,7 +25,13 @@ ul {
 
 .objectPlaceholder {
   width: 100%;
-  height: 400px; }
+  height: 500px; }
+  .objectPlaceholder article.qv-object header.qv-object-header {
+    display: none; }
+
+.kpiObject {
+  width: 100%;
+  height: 200px; }
 
 button, a {
   -moz-transition: background-color 0.3s, color 0.3s;
@@ -57,6 +68,9 @@ button, a {
   -o-transition: transform 0.3s;
   -webkit-transition: transform 0.3s;
   transition: transform 0.3s; }
+  #navigation .nav-links li.active a {
+    font-weight: 700;
+    color: #1805c4; }
   #navigation .nav-links li a {
     font-size: 24px;
     line-height: 38px; }
@@ -117,6 +131,7 @@ header {
       color: #0E8FFF; }
 
 #lastRelaod {
+  background-color: white;
   position: fixed;
   right: 0;
   bottom: 0;

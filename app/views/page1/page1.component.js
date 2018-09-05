@@ -1,8 +1,7 @@
 define( 'pageOne',function () {
     
         function pageOne() {
-            pageOneController.$inject = ['dataService','qlikService'];
-            function pageOneController(dataService,qlikService) {
+            function pageOneController() {
                 var vm = this;
                 init();
                 

@@ -30,14 +30,17 @@ require(["js/qlik"], function (qlik) {
             "routes", 
             "pageOne", 
             'pageTwo',
+            'pageThree',
             'topHeader',
             'senseObject', 
+            'simpleObject',
             'filterDropdown',
+            'dropdownSearch',
             'expandModal',
             'dataService', 
             'qlikService'
     ],
-        function (angular, uiRoute, uibootstrap, routes, pageOne, pageTwo,topHeader, senseObject,filterDropdown, expandModal, dataService, qlikService) {
+        function (angular, uiRoute, uibootstrap, routes, pageOne, pageTwo,pageThree,topHeader, senseObject, simpleObject, filterDropdown,dropdownSearch, expandModal, dataService, qlikService) {
             app = angular.module('mashup-app', [
                 'ui.router',
                 'ui.bootstrap'
@@ -45,15 +48,18 @@ require(["js/qlik"], function (qlik) {
             
             app.config(routes);
             app.component('pageOne', pageOne);
-            
             app.component('pageTwo', pageTwo);
+            app.component('pageThree', pageThree);
+
             app.component('topHeader',topHeader);
 
             app.component('senseObject',senseObject);
+            app.component('simpleObject',simpleObject);
             app.component('expandModal',expandModal);
 
 
             app.component('filterDropdown', filterDropdown);
+            app.component('dropdownSearch',dropdownSearch);
 
             
             app.service('dataService', dataService);

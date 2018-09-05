@@ -11,6 +11,10 @@ define('routes',function(){
             url: '/page2',
             template: '<page-two></page-two>',
           })
+          .state('page3', {
+              url: '/page3',
+              template:'<page-three></page-three>'
+          })
         $urlRouterProvider.otherwise('/page1');
     }
     routeConfig.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];

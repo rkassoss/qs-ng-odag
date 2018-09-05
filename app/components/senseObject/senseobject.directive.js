@@ -41,6 +41,8 @@
                         qlikService.getApp()
                         .visualization.get(vm.qlikId).then(function(vis){
                             console.log(vis);
+                            vm.title = vis.model.layout.title;
+                            vis.model.layout.showTitles = false;
                             vis.show(vm.qlikId);
                             theObject = vis;
                             vm.model = vis.model;

@@ -1,0 +1,10 @@
+<div class="dropdown-list-search-container">
+    <input type="text" class="form-control" placeholder="Search List" ng-change="$ctrl.searchFilterList()" ng-model="$ctrl.searchText" name="searchFilterList" />
+    <!-- jQuery -->
+    <!-- <div class="qs-search-results"></div> -->
+
+    <!-- AngularJS -->
+    <ul class="search-results" ng-repeat="match in $ctrl.matches track by $index">
+      <li ng-click="$ctrl.selectField(match)">{{match}}</li>
+    </ul>
+</div>
