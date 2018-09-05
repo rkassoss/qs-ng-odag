@@ -40,7 +40,7 @@ require(["js/qlik"], function (qlik) {
             'dataService', 
             'qlikService'
     ],
-        function (angular, uiRoute, uibootstrap, routes, pageOne, pageTwo,pageThree,topHeader, senseObject, simpleObject, filterDropdown,dropdownSearch, expandModal, dataService, qlikService) {
+        function (angular, uiRoute, uibootstrap, routes, pageOne, pageTwo, pageThree, topHeader, senseObject, simpleObject, filterDropdown,dropdownSearch, expandModal, dataService, qlikService) {
             app = angular.module('mashup-app', [
                 'ui.router',
                 'ui.bootstrap'
