@@ -1,9 +1,13 @@
 @import 'variables';
 @import 'mixins';
-
+@import 'header';
 
 body {
     font-family: 'Roboto', sans-serif !important; font-size: 15px;
+    background-image: url('/assets/images/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     a {
         color: $lightBlue; font-weight: 500;
     }
@@ -36,16 +40,27 @@ ul {
 .objectPlaceholder {
     width: 100%;
     height: 500px;
+    @include transition(opacity 1s);
+    opacity: 1;
+
+
     article.qv-object {
         header.qv-object-header {
             display: none;
         }
+    }
+
+    &.animateOut {
+        opacity: 0;
     }
 }
 
 .kpiObject {
     width: 100%;
     height: 200px;
+    .qv-object-content-container .measure-title {
+        color: white;
+    }
 }
 
 
@@ -67,73 +82,42 @@ button, a {
 .clean-btn {
     background-color: transparent; border: 0; box-shadow: none;
 }
-#navigation {
-    position: fixed; left: 0; top: 75px; bottom: 0; width: 300px;
-    padding: 15px;
-    z-index: 999; background-color: #c2c2c2;
-    @include transform(translateX(-100%));
-    @include transition(transform .3s);
 
-    .nav-links {
-        li {
-            &.active {
-                a { font-weight: 700; color: rgb(24, 5, 196) }
-            }
-            a {
-                font-size: 24px; line-height: 38px;
-                
-            }
-        }
-    }
-    &.slideIn {
-        @include transform(translateX(0));
-    }
-}
-#sidebarMenu {
-    position: fixed; right: 0; top: 75px; bottom: 0;
-    z-index: 999; width: 300px;
-    background-color: #c2c2c2;
-    padding: 15px;
-    @include transform(translateX(100%));
-    @include transition(transform .3s);
-    ul {
-        margin-bottom: 30px;
-        li {
-            list-style: none;
-        }
-    }
-    li a {
-        color: white;
-        font-size: 28px; line-height: 38px;
-    }
-    &.slideIn {
-        @include transform(translateX(0));
-    }
-
-    #nativeFilters {
-    }
-}
 
 .panel {
     color: $darkBlue;
 }
 
-header {
-    background-color: black; color: white; padding: 15px; height: 75px;
-    .brand {
-        width: 120px;
-        margin: 10px auto;
-    }
-    button {
-         font-size: 3rem;
-        &:hover {
-            color: $lightBlue;
-        }
-    }
-}
 
 
-#lastRelaod {
-    background-color: white;
-    position: fixed; right: 0; bottom: 0; z-index: 1000; padding: 15px;
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    >li>a {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+    }
 }

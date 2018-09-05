@@ -9,6 +9,7 @@
         <dropdown-search qlik-field="{{fd.fieldName}}"></dropdown-search>
 
         <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                
                 <li ng-repeat="row in fd.rows"><a href ng-click="fd.applySelection(row.qText)">{{row.qText}}</a></li>
         </ul>
 </div>

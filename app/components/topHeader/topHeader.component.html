@@ -19,16 +19,14 @@
 </header>
 <div id="CurrentSelections" style="height:65px;"></div>
 <div id="sidebarMenu" class="left-slide-menu" ng-class="{'slideIn' : th.sidebarIn }">
+    <h3>Native Filters</h3>
     <div id="nativeFilters" style="height: 300px;"></div>
+    <hr>
+    <h3>Custom Dropdowns</h3>
+    <filter-dropdown field-name="Case Owner"></filter-dropdown>
+    <filter-dropdown field-name="Priority"></filter-dropdown>
 </div>
 <div id="navigation" ng-class="{'slideIn' : th.navigation }">
-
-        <filter-dropdown field-name="Case Owner"></filter-dropdown>
-
-
-        <filter-dropdown field-name="Priority"></filter-dropdown>
-
-        <h3>Views:</h3>
 
         <ul class="nav-links">
                 <li ui-sref-active="active">

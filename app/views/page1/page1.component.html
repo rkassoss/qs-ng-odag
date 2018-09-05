@@ -22,3 +22,13 @@
                 <sense-object qlik-id="PAppmU"></sense-object>
         </div>
 </div>
+
+<!-- <table-button table-id="" button-text=""></table-button> -->
+
+<div class="table-wrap text-center">
+                <button ng-click="po.revealTable()" class="btn btn-primary">Show Details Table</button>
+                <div uib-collapse="po.isCollapsed">
+                        <div class="objectPlaceholder" id="qlikTable" ng-class="{'animateOut': po.animateNow}"></div>
+                        <!-- <sense-object qlik-id="rJFbvG"></sense-object> -->
+                </div>
+</div>
