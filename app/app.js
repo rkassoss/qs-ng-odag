@@ -1,18 +1,18 @@
-// var config = {
-//     host: 'localhost',
-//     prefix: '/',
-//     port: 4848,
-//     isSecure: false
-// };
-// var appId = 'Helpdesk Management.qvf';
+var config = {
+     host: 'localhost',
+     prefix: '/',
+     port: 4848,
+     isSecure: false
+ };
+var appId = 'Helpdesk Management.qvf';
 
-var config = { //June 2018 QS
-    host: 'qmi-qs-ticket',
-    prefix: '/',
-    port: 443,
-    isSecure: true
-};
-var appId = '3f18afbc-9d50-433f-8ca2-888abd50b9ac';
+//var config = { //June 2018 QS
+//    host: 'qmi-qs-ticket',
+//    prefix: '/',
+//    port: 443,
+//    isSecure: true
+//};
+//var appId = '3f18afbc-9d50-433f-8ca2-888abd50b9ac';
 
 require.config({
     baseUrl: (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "") + config.prefix + "resources",
