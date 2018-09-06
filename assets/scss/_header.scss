@@ -1,0 +1,75 @@
+header {
+    background-color: #333; color: white; padding: 15px; height: 75px;
+    .brand {
+        width: 120px;
+        margin: 10px auto;
+    }
+    button {
+         font-size: 3rem;
+        &:hover {
+            color: $yellow;
+        }
+    }
+}
+
+
+#lastRelaod {
+    background-color: white;
+    position: fixed; right: 0; bottom: 0; z-index: 1000; padding: 15px;
+}
+
+
+#navigation {
+    position: fixed; left: 0; top: 75px; bottom: 0; width: 300px;
+    z-index: 999; background-color: black;
+    @include transform(translateX(-100%));
+    @include transition(transform .3s);
+
+    .nav-links {
+        li {
+            margin: 0; padding: 0;
+            &.active {
+                a { font-weight: 700; background-color: #333; }
+            }
+            a {
+                display: block; padding: 15px;
+                font-size: 24px; line-height: 38px; color: white;
+                @include transition(background-color .3s, color .3s);
+                text-decoration: none;
+                &:hover {
+                    background-color: #333;
+                }
+            }
+        }
+    }
+    &.slideIn {
+        @include transform(translateX(0));
+    }
+}
+#sidebarMenu {
+    position: fixed; right: 0; top: 75px; bottom: 0;
+    z-index: 999; width: 300px;
+    background-color: black;
+    padding: 15px;
+    @include transform(translateX(100%));
+    @include transition(transform .3s);
+    h3 {
+        color: white;
+    }
+    &.slideIn {
+        @include transform(translateX(0));
+    }
+
+    .custom-dropdown {
+        width: 100%;
+        .dropdown-toggle {
+            width: 100%; display: block; text-align: left;
+        }
+        .dropdown-menu {
+            max-height: 500px; overflow: auto;
+            li a {
+                color: black;
+            }
+        }
+    }
+}

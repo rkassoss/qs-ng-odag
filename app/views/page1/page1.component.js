@@ -1,10 +1,12 @@
 define( 'pageOne',function () {
     
         function pageOne() {
-            function pageOneController() {
+            pageOneController.$inject = ['qlikService'];
+            function pageOneController(qlikService) {
                 var vm = this;
-                init();
                 
+                init();
+
     
                 function init() {
                 }
@@ -12,7 +14,7 @@ define( 'pageOne',function () {
             return {
                 bindings: {},
                 controller: pageOneController,
-                controllerAs: 'cf',
+                controllerAs: 'po',
                 templateUrl: 'app/views/page1/page1.component.html'
             }
         }

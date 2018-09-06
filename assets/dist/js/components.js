@@ -1,6 +1,53 @@
 (function () {
     'use strict';
 
+<<<<<<< HEAD
+=======
+    define('simpleObject',function(){
+        function simpleObject() {
+            simpleObjectController.$inject = ['qlikService'];
+            function simpleObjectController(qlikService){
+                var vm = this;
+                var object;
+
+                function getKpi() {
+                    qlikService.getApp().getObject(vm.objectId,vm.objectId).then(function(vis){
+                        object = vis;
+                    });
+                }
+                
+                vm.$onInit = function() {
+                    setTimeout(function(){
+                        getKpi()
+                    },300);
+                }
+
+                vm.$onDestroy = function() {
+                    object.close();
+                }
+            }
+    
+            return {
+                bindings: {
+                    objectId: '@'
+                },
+                controller: simpleObjectController,
+                controllerAs: 'so',
+                templateUrl: '/app/components/simpleObject/simpleObject.component.html'
+            }
+        }
+
+        return simpleObject();
+    });
+
+
+    
+
+} ());
+(function () {
+    'use strict';
+
+>>>>>>> 58fe6c1adb314daa4c991fbb3fd30552059d5cab
     define('filterDropdown',function() {
         
         function filterDropdown() {
@@ -162,6 +209,7 @@
 (function () {
     'use strict';
 
+<<<<<<< HEAD
     define('simpleObject',function(){
         function simpleObject() {
             simpleObjectController.$inject = ['qlikService'];
@@ -175,28 +223,75 @@
                     });
                 }
                 
+=======
+    define('tableButton', function(){
+        function tableButton() {
+            tableButtonController.$inject = ['qlikService'];
+            function tableButtonController(qlikService){
+                var vm = this;
+                vm.exportToExcel = exportToExcel;
+                
+                vm.isCollapsed =vm.animateNow = true;
+                var tableObject;
+                vm.revealTable = revealTable;
+
+                function exportToExcel() {
+                    tableObject.model.exportData()
+                        .then(function(reply){
+                            console.log(reply);
+                            var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
+                            var link = reply.qUrl;
+                            window.open(baseUrl+link,'_blank');
+                        });
+                }
+
+
+
+                function getQlikTable(qlikId) {
+                    qlikService.getApp().visualization.get(qlikId).then(function(table){
+                        console.log(table);
+                        vm.title = table.model.layout.title;
+                        table.show(vm.tableId);
+                        tableObject = table;
+                    });
+                }
+
+                function revealTable() {
+                    vm.isCollapsed = !vm.isCollapsed;
+                    console.log(vm.isCollapsed);
+                    if (!vm.isCollapsed) {
+                        getQlikTable(vm.tableId);
+                        setTimeout(function() {
+                            vm.animateNow = false;
+                        }, 300)
+                    } else {
+                        tableObject.close();
+                        vm.animateNow = true;
+                    }
+                }
+
+
+>>>>>>> 58fe6c1adb314daa4c991fbb3fd30552059d5cab
                 vm.$onInit = function() {
-                    setTimeout(function(){
-                        getKpi()
-                    },300);
+
                 }
 
                 vm.$onDestroy = function() {
-                    object.close();
+                    tableObject.close();
                 }
             }
     
             return {
                 bindings: {
-                    objectId: '@'
+                    tableId: '@',
+                    buttonText: '@'
                 },
-                controller: simpleObjectController,
-                controllerAs: 'so',
-                templateUrl: '/app/components/simpleObject/simpleObject.component.html'
+                controller: tableButtonController,
+                controllerAs: 'tb',
+                templateUrl: '/app/components/tableButton/tableButton.component.html'
             }
         }
-
-        return simpleObject();
+        return tableButton();
     });
 
 
@@ -232,7 +327,13 @@ define( 'topHeader',function () {
             }
 
             function getFilters() {
-                qlikService.getApp().getObject('nativeFilters','ycppXj');
+                qlikService.getApp().getObject('nativeFilters','ycppXj').then(function(reply){
+                    console.log(reply);
+                    reply.layout.showTitles = false;
+                    reply.Validated.bind(function(){
+                        reply.layout.showTitles = false;
+                    });
+                });
             }
 
             init();

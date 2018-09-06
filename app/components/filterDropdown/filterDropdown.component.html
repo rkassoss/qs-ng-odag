@@ -1,14 +1,15 @@
 
 <!-- Simple dropdown -->
-<div class="btn-group" uib-dropdown on-toggle="toggled(open)">
+<div class="btn-group custom-dropdown" uib-dropdown on-toggle="toggled(open)">
         <button type="button" class="btn btn-default" id="simple-dropdown" uib-dropdown-toggle>
                 {{fd.fieldName}} <span class="caret"></span>
-                {{fd.activeSelection}}
+                <!-- {{fd.activeSelection}} -->
         </button>
 
         <dropdown-search qlik-field="{{fd.fieldName}}"></dropdown-search>
 
         <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="simple-dropdown">
+                
                 <li ng-repeat="row in fd.rows"><a href ng-click="fd.applySelection(row.qText)">{{row.qText}}</a></li>
         </ul>
 </div>

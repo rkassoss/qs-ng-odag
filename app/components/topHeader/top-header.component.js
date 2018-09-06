@@ -27,7 +27,13 @@ define( 'topHeader',function () {
             }
 
             function getFilters() {
-                qlikService.getApp().getObject('nativeFilters','ycppXj');
+                qlikService.getApp().getObject('nativeFilters','ycppXj').then(function(reply){
+                    console.log(reply);
+                    reply.layout.showTitles = false;
+                    reply.Validated.bind(function(){
+                        reply.layout.showTitles = false;
+                    });
+                });
             }
 
             init();
