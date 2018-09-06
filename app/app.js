@@ -12,7 +12,7 @@ var config = { //June 2018 QS
     port: 443,
     isSecure: true
 };
-var appId = '3f18afbc-9d50-433f-8ca2-888abd50b9ac';
+var appId = 'a402221a-8ec7-4f9f-8748-6560bb115a0b';
 
 require.config({
     baseUrl: (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "") + config.prefix + "resources",

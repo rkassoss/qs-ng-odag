@@ -1,0 +1,126 @@
+
+body {
+    font-family: 'Roboto', sans-serif !important; font-size: 15px;
+    background-image: url('/assets/images/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    a {
+        color: $lightBlue; font-weight: 500;
+    }
+}
+
+ul {
+    margin: 0;
+    li {
+        list-style: none;
+    }
+}
+
+.panel {
+    border: 1px solid #b9b9b9;
+    padding: 1rem; margin-bottom: 30px;
+    .panel-header {
+        h3 {
+            -webkit-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+    }
+    .chart-tool {
+        background-color: #d3d3d3; box-shadow: none;
+        padding: 10px;
+    }
+}
+
+.objectPlaceholder {
+    width: 100%;
+    height: 500px;
+    @include transition(opacity 1s);
+    opacity: 1;
+
+
+    article.qv-object {
+        header.qv-object-header {
+            display: none;
+        }
+    }
+
+    &.animateOut {
+        opacity: 0;
+    }
+}
+
+.kpiObject {
+    width: 100%;
+    height: 200px;
+}
+
+
+button, a {
+    @include transition(background-color .3s, color .3s);
+}
+
+
+.modal-lg {
+    width: 90%;
+}
+
+.modal-body {
+    .objectPlaceholder {
+        height: 600px;
+    }
+}
+
+.clean-btn {
+    background-color: transparent; border: 0; box-shadow: none;
+}
+
+
+.panel {
+    color: $darkBlue;
+}
+
+
+
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    >li>a {
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        white-space: nowrap;
+    }
+}
+
+
+
+.table-wrap {
+    button.toggle-table {
+        display: block;
+        margin: 0 auto 30px;
+    }
+}
