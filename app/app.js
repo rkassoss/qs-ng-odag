@@ -1,18 +1,29 @@
-var config = {
-     host: 'localhost',
-     prefix: '/',
-     port: 4848,
-     isSecure: false
- };
-var appId = 'Helpdesk Management.qvf';
+// var config = {
+//      host: 'localhost',
+//      prefix: '/',
+//      port: 4848,
+//      isSecure: false
+//  };
+// var appId = 'Helpdesk Management.qvf';
 
-//var config = { //June 2018 QS
-//    host: 'qmi-qs-ticket',
-//    prefix: '/',
-//    port: 443,
-//    isSecure: true
-//};
-//var appId = '3f18afbc-9d50-433f-8ca2-888abd50b9ac';
+var config = { // Ran K - June 2018 QS
+   host: 'qmi-qs-ticket',
+   prefix: '/',
+   port: 443,
+   isSecure: true
+};
+var appId = '9e7ee2b6-87d6-4a54-a61e-239cad9e5e19';
+
+
+// var config = { // TrueView Server - November 2017 Patch 3
+//     host: '',
+//     prefix: '/',
+//     port: 443,
+//     isSecure: true
+//  };
+//  var appId = '';
+
+
 
 require.config({
     baseUrl: (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "") + config.prefix + "resources",
@@ -28,9 +39,8 @@ require(["js/qlik"], function (qlik) {
             'ui.router',
             'uibootstrap',
             "routes", 
-            "pageOne", 
-            'pageTwo',
-            'pageThree',
+            'dashboard',
+            'reloadTime',
             'topHeader',
             'senseObject', 
             'simpleObject',
@@ -41,16 +51,16 @@ require(["js/qlik"], function (qlik) {
             'dataService', 
             'qlikService'
     ],
-        function (angular, uiRoute, uibootstrap, routes, pageOne, pageTwo,pageThree,topHeader, senseObject, simpleObject, tableButton, filterDropdown,dropdownSearch, expandModal, dataService, qlikService) {
+        function (angular, uiRoute, uibootstrap, routes,dashboard, reloadTime,topHeader, senseObject, simpleObject, tableButton, filterDropdown,dropdownSearch, expandModal, dataService, qlikService) {
             app = angular.module('mashup-app', [
                 'ui.router',
                 'ui.bootstrap'
             ]);
             
             app.config(routes);
-            app.component('pageOne', pageOne);
-            app.component('pageTwo', pageTwo);
-            app.component('pageThree', pageThree);
+            app.component('dashboard',dashboard);
+
+            app.component('reloadTime',reloadTime);
 
             app.component('topHeader',topHeader);
 

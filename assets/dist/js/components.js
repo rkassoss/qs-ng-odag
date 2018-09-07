@@ -1,6 +1,40 @@
 (function () {
     'use strict';
 
+    define('reloadTime',function(){
+        function reloadTime() {
+            reloadTimeController.$inject = ['qlikService'];
+            function reloadTimeController(qlikService){
+                var vm = this;
+    
+                function dataLastFrom() {
+                    qlikService.getApp().getAppLayout(function(layout){
+                        // console.log(layout);
+                        vm.relaodTime = layout.qLastReloadTime;
+                    });
+                }
+                
+                init();
+    
+                function init(){
+                    dataLastFrom();
+                }
+            }
+    
+            return {
+                bindings: {},
+                controller: reloadTimeController,
+                controllerAs: 'rt',
+                templateUrl: '/app/components/reloadTime/reloadTime.component.html'
+            }
+        }
+        return reloadTime();
+    });
+
+} ());
+(function () {
+    'use strict';
+
     define('filterDropdown',function() {
         
         function filterDropdown() {
@@ -188,7 +222,8 @@
     
             return {
                 bindings: {
-                    objectId: '@'
+                    objectId: '@',
+                    objectClass: '@'
                 },
                 controller: simpleObjectController,
                 controllerAs: 'so',
@@ -203,61 +238,6 @@
     
 
 } ());
-define( 'topHeader',function () {
-    
-    function topHeader() {
-        topHeaderController.$inject = ['dataService','qlikService'];
-        function topHeaderController(dataService,qlikService) {
-            var vm = this;
-
-            vm.toggleSidebar = toggleSidebar;
-            vm.toggleNav = toggleNav;
-
-            vm.sidebarIn = false;
-            vm.navigation = false;
-
-            function toggleNav() {
-                vm.navigation = !vm.navigation;
-            }
-
-            function toggleSidebar() {
-                vm.sidebarIn = !vm.sidebarIn;
-            }
-
-            function dataLastFrom() {
-                qlikService.getApp().getAppLayout(function(layout){
-                    // console.log(layout);
-                    vm.relaodTime = layout.qLastReloadTime;
-                });
-            }
-
-            function getFilters() {
-                qlikService.getApp().getObject('nativeFilters','ycppXj').then(function(reply){
-                    console.log(reply);
-                    reply.layout.showTitles = false;
-                    reply.Validated.bind(function(){
-                        reply.layout.showTitles = false;
-                    });
-                });
-            }
-
-            init();
-            function init() {
-                dataLastFrom();
-                getFilters();
-                qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
-            }
-        }
-        return {
-            bindings: {},
-            controller: topHeaderController,
-            controllerAs: 'th',
-            templateUrl: 'app/components/topHeader/topHeader.component.html'
-        }
-    }
-
-    return topHeader();
-});
 (function () {
     'use strict';
 
@@ -334,6 +314,43 @@ define( 'topHeader',function () {
     
 
 } ());
+define( 'topHeader',function () {
+    
+    function topHeader() {
+        topHeaderController.$inject = ['dataService','qlikService'];
+        function topHeaderController(dataService,qlikService) {
+            var vm = this;
+
+            vm.toggleSidebar = toggleSidebar;
+            vm.toggleNav = toggleNav;
+
+            vm.sidebarIn = false;
+            vm.navigation = false;
+
+            function toggleNav() {
+                vm.navigation = !vm.navigation;
+            }
+
+            function toggleSidebar() {
+                vm.sidebarIn = !vm.sidebarIn;
+            }
+
+            
+            init();
+            function init() {
+                qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
+            }
+        }
+        return {
+            bindings: {},
+            controller: topHeaderController,
+            controllerAs: 'th',
+            templateUrl: 'app/components/topHeader/topHeader.component.html'
+        }
+    }
+
+    return topHeader();
+});
 (function () {
     'use strict';
 

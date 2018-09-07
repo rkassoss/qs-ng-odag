@@ -19,27 +19,9 @@ define( 'topHeader',function () {
                 vm.sidebarIn = !vm.sidebarIn;
             }
 
-            function dataLastFrom() {
-                qlikService.getApp().getAppLayout(function(layout){
-                    // console.log(layout);
-                    vm.relaodTime = layout.qLastReloadTime;
-                });
-            }
-
-            function getFilters() {
-                qlikService.getApp().getObject('nativeFilters','ycppXj').then(function(reply){
-                    console.log(reply);
-                    reply.layout.showTitles = false;
-                    reply.Validated.bind(function(){
-                        reply.layout.showTitles = false;
-                    });
-                });
-            }
-
+            
             init();
             function init() {
-                dataLastFrom();
-                getFilters();
                 qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
             }
         }

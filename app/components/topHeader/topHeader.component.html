@@ -1,33 +1,31 @@
-<header>
+<header class="site-header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-2">
-                    <button class="clean-btn" ng-click="th.toggleNav()"><i class="fa fa-bars"></i></button>
+            <div class="col-xs-3">
+                    <!-- <button class="clean-btn" ng-click="th.toggleNav()"><i class="fa fa-bars"></i></button> -->
+
+                    <div class="brand">
+                        <img src="/assets/images/IBM logo.svg" class="img-responsive" />
+                    </div>
             </div>  
-            <div class="col-xs-8">
-                <div class="brand">
-                        <img src="/assets/images/lra_logo.png" class="img-responsive" />
-                </div>
-            </div>
-            <div class="col-xs-2 text-right">
+            
+            <div class="col-xs-9 text-right">
                 
-                <button class="clean-btn" ng-click="th.toggleSidebar()"><i class="fa fa-filter"></i></button>
+                <!-- <button class="btn-clean" ng-click="th.toggleSidebar()"><i class="fa fa-filter"></i></button> -->
+
+                <reload-time></reload-time>
             </div>
         </div>
     </div>
     
 </header>
 <div id="CurrentSelections"></div>
-<div id="sidebarMenu" class="left-slide-menu" ng-class="{'slideIn' : th.sidebarIn }">
-    <h3>Native Filters</h3>
-    <div id="nativeFilters" style="height: 300px;"></div>
-    <hr>
+<!-- <div id="sidebarMenu" class="left-slide-menu" ng-class="{'slideIn' : th.sidebarIn }">
     <h3>Custom Dropdowns</h3>
     <filter-dropdown field-name="Case Owner"></filter-dropdown>
     <filter-dropdown field-name="Priority"></filter-dropdown>
-</div>
-<div id="navigation" ng-class="{'slideIn' : th.navigation }">
-
+</div> -->
+<!-- <div id="navigation" ng-class="{'slideIn' : th.navigation }">
         <ul class="nav-links">
                 <li ui-sref-active="active">
                     <a ui-sref="page1">
@@ -45,9 +43,9 @@
                     </a>
                 </li>
         </ul>
-</div>
+</div> -->
 
 
-<div id="lastRelaod">{{ th.relaodTime | date:"MM/dd/yyyy 'at' h:mma" }}  </div>
+
 
 

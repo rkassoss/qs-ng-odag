@@ -22,6 +22,7 @@ var viewsPath = 'app/views/**/*.js';
 var cssPath = 'assets/css/*.css';
 
 
+//browser sync
 gulp.task('browser-sync', ['sass'], function() {
     bs.init({
         server: {
@@ -39,15 +40,15 @@ gulp.task('sass', function () {
                 .pipe(bs.reload({stream: true}));
 });
 
-
-
 //combine and minify components
 gulp.task('components-js', function () {
     return gulp.src(componentsPath)
         .pipe(concat('components.js'))
         .pipe(gulp.dest(jsDest))
         .pipe(rename('components.min.js'))
-        // .pipe(uglify())
+        .pipe(uglify().on('error', function(e){
+            console.log(e);
+         }))
         .pipe(gulp.dest(jsDest));
 });
 
@@ -57,9 +58,9 @@ gulp.task('services-js', function () {
         .pipe(concat('services.js'))
         .pipe(gulp.dest(jsDest))
         .pipe(rename('services.min.js'))
-        // .pipe(uglify().on('error', function(e){
-        //     console.log(e);
-        //  }))
+        .pipe(uglify().on('error', function(e){
+            console.log(e);
+         }))
         .pipe(gulp.dest(jsDest));
 });
 
@@ -69,7 +70,9 @@ gulp.task('views-js', function () {
         .pipe(concat('views.js'))
         .pipe(gulp.dest(jsDest))
         .pipe(rename('views.min.js'))
-        // .pipe(uglify())
+        .pipe(uglify().on('error', function(e){
+            console.log(e);
+         }))
         .pipe(gulp.dest(jsDest));
 });
 

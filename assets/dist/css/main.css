@@ -1,23 +1,15 @@
-header {
+header.site-header {
   background-color: #333;
   color: white;
-  padding: 15px;
+  padding: 15px 0;
   height: 75px; }
-  header .brand {
+  header.site-header .brand {
     width: 120px;
-    margin: 10px auto; }
-  header button {
+    margin: 0; }
+  header.site-header button {
     font-size: 3rem; }
-    header button:hover {
+    header.site-header button:hover {
       color: #FFA000; }
-
-#lastRelaod {
-  background-color: white;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  z-index: 1000;
-  padding: 15px; }
 
 #CurrentSelections {
   margin-bottom: 30px; }
@@ -106,10 +98,7 @@ header {
 body {
   font-family: 'Roboto', sans-serif !important;
   font-size: 15px;
-  background-image: url("/assets/images/bg.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed; }
+  background-color: #f4f4f4; }
   body a {
     color: #0651D7;
     font-weight: 500; }
@@ -120,18 +109,15 @@ ul {
     list-style: none; }
 
 .panel {
-  border: 1px solid #b9b9b9;
+  border: 0;
   padding: 1rem;
-  margin-bottom: 30px; }
+  margin-bottom: 30px;
+  box-shadow: 6px 5px 11px rgba(228, 228, 228, 0.5); }
   .panel .panel-header h3 {
     -webkit-text-overflow: ellipsis;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap; }
-  .panel .chart-tool {
-    background-color: #d3d3d3;
-    box-shadow: none;
-    padding: 10px; }
 
 .objectPlaceholder {
   width: 100%;
@@ -146,9 +132,13 @@ ul {
   .objectPlaceholder.animateOut {
     opacity: 0; }
 
-.kpiObject {
+.simpleObject {
   width: 100%;
-  height: 200px; }
+  height: 300px; }
+  .simpleObject.kpiObject {
+    height: 200px; }
+  .simpleObject.filterObject {
+    height: 40px; }
 
 button, a {
   -moz-transition: background-color 0.3s, color 0.3s;
@@ -162,10 +152,18 @@ button, a {
 .modal-body .objectPlaceholder {
   height: 600px; }
 
-.clean-btn {
+.btn-clean {
   background-color: transparent;
   border: 0;
   box-shadow: none; }
+
+.btn-chart {
+  background-color: #f4f4f4;
+  border: 0;
+  box-shadow: none; }
+  .btn-chart:hover {
+    background-color: #5b91ee;
+    color: white; }
 
 .panel {
   color: #000841; }

@@ -1,8 +1,9 @@
-header {
-    background-color: #333; color: white; padding: 15px; height: 75px;
+header.site-header {
+    background-color: #333; color: white; 
+    padding: 15px 0; height: 75px;
     .brand {
         width: 120px;
-        margin: 10px auto;
+        margin: 0;
     }
     button {
          font-size: 3rem;
@@ -10,12 +11,6 @@ header {
             color: $yellow;
         }
     }
-}
-
-
-#lastRelaod {
-    background-color: white;
-    position: fixed; right: 0; bottom: 0; z-index: 1000; padding: 15px;
 }
 
 #CurrentSelections {

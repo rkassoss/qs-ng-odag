@@ -27,7 +27,8 @@
     
             return {
                 bindings: {
-                    objectId: '@'
+                    objectId: '@',
+                    objectClass: '@'
                 },
                 controller: simpleObjectController,
                 controllerAs: 'so',
