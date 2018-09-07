@@ -19,6 +19,9 @@ header {
   z-index: 1000;
   padding: 15px; }
 
+#CurrentSelections {
+  margin-bottom: 30px; }
+
 #navigation {
   position: fixed;
   left: 0;
@@ -146,8 +149,6 @@ ul {
 .kpiObject {
   width: 100%;
   height: 200px; }
-  .kpiObject .qv-object-content-container .measure-title {
-    color: white; }
 
 button, a {
   -moz-transition: background-color 0.3s, color 0.3s;
@@ -201,3 +202,9 @@ button, a {
 .table-wrap button.toggle-table {
   display: block;
   margin: 0 auto 30px; }
+
+@media (max-width: 767px) {
+  .kpiObject {
+    height: 100px; }
+  .objectPlaceholder {
+    height: 250px; } }
