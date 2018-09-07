@@ -1,3 +1,33 @@
+@font-face {
+  font-family: QlikView Sans;
+  src: url(/assets/fonts/qlik/qlikview-sans.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+
+@font-face {
+  font-family: QlikView Sans;
+  src: url(/assets/fonts/qlik/qlikview-sans-bold.ttf) format("truetype");
+  font-weight: 700;
+  font-style: normal; }
+
+@font-face {
+  font-family: QlikView Sans;
+  src: url(/assets/fonts/qlik/qlikview-sans-italic.ttf) format("truetype");
+  font-weight: 400;
+  font-style: italic; }
+
+@font-face {
+  font-family: QlikView Sans;
+  src: url(/assets/fonts/qlik/qlikview-sans-italic.ttf) format("truetype");
+  font-weight: 700;
+  font-style: italic; }
+
+@font-face {
+  font-family: LUI icons;
+  src: url(/assets/fonts/qlik/lui-icons.woff) format("woff"), url(/assets/fonts/qlik/lui-icons.ttf) format("truetype");
+  font-weight: 400;
+  font-style: normal; }
+
 header.site-header {
   background-color: #333;
   color: white;
