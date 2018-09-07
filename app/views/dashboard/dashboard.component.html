@@ -1,10 +1,23 @@
-<div class="row">
-
+<div class="row margin-bottom">
     <div class="col-md-2">
             <simple-object object-class="filterObject" object-id="ucvaSJw"></simple-object>
     </div>
     <div class="col-md-2">
             <simple-object object-class="filterObject" object-id="sjXxhLZ"></simple-object>
+    </div>
+    <div class="col-md-4">
+        <h4>IBM Point of Contact:</h4>
+            <div ng-repeat="contact in dash.ibmContacts">
+                    <label>Name: </label>{{contact.user}}; <label>Title: </label>{{contact.title}}<br>
+                    <label>Email: </label>{{contact.email}}
+                </div>
+    </div>
+    <div class="col-md-4">
+        <h4>Deloitte point of Contact:</h4>
+            <div ng-repeat="contact in dash.delContacts">
+                    <label>Name: </label>{{contact.user}}; <label>Title: </label>{{contact.title}}<br>
+                    <label>Email: </label>{{contact.email}}
+                </div>
     </div>
 </div>
 
