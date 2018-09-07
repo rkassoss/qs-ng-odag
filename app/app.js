@@ -30,6 +30,13 @@ require.config({
     paths: {
         'ui.router': '/bower_components/angular-ui-router/release/angular-ui-router',
         'uibootstrap': 'https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min',
+    },
+    config: {
+        text: {
+            useXhr: function (url, protocol, hostname, port) {
+                return true;
+            }
+        }
     }
 });
 
@@ -55,6 +62,13 @@ require(["js/qlik"], function (qlik) {
             app = angular.module('mashup-app', [
                 'ui.router',
                 'ui.bootstrap'
+            ]).config(['$compileProvider',
+            function( $compileProvider ) {   
+              $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
+              $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:application\//);
+              $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|cust-scheme):/);
+              $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
+            }
             ]);
             
             app.config(routes);
