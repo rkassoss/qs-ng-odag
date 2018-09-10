@@ -4,6 +4,11 @@ body {
     background-color: #f4f4f4;
     a {
         color: $lightBlue; font-weight: 500;
+        @include transition(color .3s);
+        text-decoration: none;
+        &:hover {
+            text-decoration: none; 
+        } 
     }
 }
 
@@ -21,7 +26,9 @@ ul {
     border: 0;
     padding: 1rem; margin-bottom: 30px;
     box-shadow: 6px 5px 11px rgba(228, 228, 228, 0.5);
+    position: relative;
     .panel-header {
+        color: $darkBlue;
         h3 {
             -webkit-text-overflow: ellipsis;
             text-overflow: ellipsis;
@@ -29,11 +36,21 @@ ul {
             white-space: nowrap;
         }
     }
+    .chart-icons {
+        opacity: 0; @include transition(opacity .3s);
+        position: absolute; top: 0; right: 0;
+    }
+    &:hover {
+        .chart-icons {
+            opacity: 1;
+        }
+    }
 }
+
+
 
 .objectPlaceholder {
     width: 100%;
-    height: 500px;
     @include transition(opacity 1s);
     opacity: 1;
 
@@ -60,6 +77,17 @@ ul {
     }
 }
 
+
+.docs {
+    height: 500px; overflow-y: scroll;
+    a {
+        display: block; padding: 15px; background-color: #dddddd; border-bottom: 1px solid #f4f4f4;
+        @include transition(background-color .3s);
+        &:hover {
+            background-color: rgb(137, 194, 247);
+        }
+    }
+}
 
 
 
@@ -91,22 +119,25 @@ button, a {
 }
 
 
-.panel {
-    color: $darkBlue;
+
+
+
+
+.dropdown-list-search-container {
+    position: relative;
+    .btn-clean {
+        position: absolute; top: 10px; right: 10px;
+    }
 }
-
-
-
-
 .search-results {
+    max-height: 0; opacity: 0;
+    @include transition(max-height .3s, opacity .3s);
     position: absolute;
     top: 100%;
-    left: 0;
+    left: 0; right: 0;
     z-index: 1000;
     float: left;
     min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
     font-size: 14px;
     text-align: left;
     list-style: none;
@@ -120,12 +151,15 @@ button, a {
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
     >li>a {
         display: block;
-        padding: 3px 20px;
+        padding: 10px;
         clear: both;
         font-weight: 400;
         line-height: 1.42857143;
         color: #333;
         white-space: nowrap;
+    }
+    &.show {
+        opacity: 1; max-height: 500px;
     }
 }
 
@@ -135,5 +169,16 @@ button, a {
     button.toggle-table {
         display: block;
         margin: 0 auto 30px;
+    }
+}
+
+.contacts {
+    display: flex;
+    margin-left: -15px; margin-right: -15px;
+}
+.contact-item {
+    padding-right: 30px;
+    label {
+        display: block;
     }
 }

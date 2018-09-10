@@ -10,11 +10,22 @@
 
 // sm
 @media (min-width:768px) {
-
+    .kpiObject {
+        height: 100px;
+    }
+    .objectPlaceholder {
+        height: 350px;
+    }
 }
 
 // md
 @media (min-width:992px) {
+    .kpiObject {
+        height: 200px;
+    }
+    .objectPlaceholder {
+        height: 400px;
+    }
 
 }
 

@@ -17,13 +17,15 @@
 
             function init(){
                 qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId).then(function(vis){
+                    console.log(vis);
                     object = vis;
+                    vm.title = vis.layout.title;
                 });
             }
 
             vm.$onDestroy = function() {
                 vm = null;
-                vis.close();
+                object.close();
             }
         }
 

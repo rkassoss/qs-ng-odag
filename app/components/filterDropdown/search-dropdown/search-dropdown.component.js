@@ -8,11 +8,18 @@
                   var vm = this;
                   vm.matches = [];
                   vm.searchFilterList = searchFilterList;
+                  vm.showSearch = false;
 
                   vm.selectField = selectField;
+                  vm.closeSearch = closeSearch;
 
                   function selectField(match) {
                         qlikService.getApp().field(vm.qlikField).selectMatch(match);
+                        vm.showSearch = false;
+                  }
+
+                  function closeSearch() {
+                    vm.showSearch = false;
                   }
       
       
@@ -21,13 +28,14 @@
                     // console.log(vm.qlikField);
 
                     vm.matches = [];
+                    vm.showSearch = true;
       
                         // Use value of input field as search term in searchResults method
                         qlikService.getApp().searchResults([vm.searchText],
                                 {qOffset: 0, qCount: 100},
-                                {qSearchFields: [vm.qlikField], qContext: 'Cleared'},
+                                {qSearchFields: [vm.qlikField], qContext: 'CurrentSelections'},
                                 function(reply) {
-                                    console.log(reply);
+                                    // console.log(reply);
                                       //assign searchGroupArray of results to variable named searchResults for readability
                                       var searchResults = reply.qResult.qSearchGroupArray;
                                       //loop through results and add to dom
@@ -39,7 +47,7 @@
                                                       });
                                               });
                                       });
-                                      // console.log(vm.matches);
+                                      console.log(vm.matches);
                               });
       
                   }

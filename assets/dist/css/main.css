@@ -131,7 +131,14 @@ body {
   background-color: #f4f4f4; }
   body a {
     color: #0651D7;
-    font-weight: 500; }
+    font-weight: 500;
+    -moz-transition: color 0.3s;
+    -o-transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+    text-decoration: none; }
+    body a:hover {
+      text-decoration: none; }
 
 ul {
   margin: 0; }
@@ -145,16 +152,29 @@ ul {
   border: 0;
   padding: 1rem;
   margin-bottom: 30px;
-  box-shadow: 6px 5px 11px rgba(228, 228, 228, 0.5); }
-  .panel .panel-header h3 {
-    -webkit-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap; }
+  box-shadow: 6px 5px 11px rgba(228, 228, 228, 0.5);
+  position: relative; }
+  .panel .panel-header {
+    color: #000841; }
+    .panel .panel-header h3 {
+      -webkit-text-overflow: ellipsis;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap; }
+  .panel .chart-icons {
+    opacity: 0;
+    -moz-transition: opacity 0.3s;
+    -o-transition: opacity 0.3s;
+    -webkit-transition: opacity 0.3s;
+    transition: opacity 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0; }
+  .panel:hover .chart-icons {
+    opacity: 1; }
 
 .objectPlaceholder {
   width: 100%;
-  height: 500px;
   -moz-transition: opacity 1s;
   -o-transition: opacity 1s;
   -webkit-transition: opacity 1s;
@@ -172,6 +192,21 @@ ul {
     height: 200px; }
   .simpleObject.filterObject {
     height: 40px; }
+
+.docs {
+  height: 500px;
+  overflow-y: scroll; }
+  .docs a {
+    display: block;
+    padding: 15px;
+    background-color: #dddddd;
+    border-bottom: 1px solid #f4f4f4;
+    -moz-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s; }
+    .docs a:hover {
+      background-color: #89c2f7; }
 
 button, a {
   -moz-transition: background-color 0.3s, color 0.3s;
@@ -198,18 +233,27 @@ button, a {
     background-color: #5b91ee;
     color: white; }
 
-.panel {
-  color: #000841; }
+.dropdown-list-search-container {
+  position: relative; }
+  .dropdown-list-search-container .btn-clean {
+    position: absolute;
+    top: 10px;
+    right: 10px; }
 
 .search-results {
+  max-height: 0;
+  opacity: 0;
+  -moz-transition: max-height 0.3s, opacity 0.3s;
+  -o-transition: max-height 0.3s, opacity 0.3s;
+  -webkit-transition: max-height 0.3s, opacity 0.3s;
+  transition: max-height 0.3s, opacity 0.3s;
   position: absolute;
   top: 100%;
   left: 0;
+  right: 0;
   z-index: 1000;
   float: left;
   min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
   font-size: 14px;
   text-align: left;
   list-style: none;
@@ -223,19 +267,44 @@ button, a {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175); }
   .search-results > li > a {
     display: block;
-    padding: 3px 20px;
+    padding: 10px;
     clear: both;
     font-weight: 400;
     line-height: 1.42857143;
     color: #333;
     white-space: nowrap; }
+  .search-results.show {
+    opacity: 1;
+    max-height: 500px; }
 
 .table-wrap button.toggle-table {
   display: block;
   margin: 0 auto 30px; }
+
+.contacts {
+  display: flex;
+  margin-left: -15px;
+  margin-right: -15px; }
+
+.contact-item {
+  padding-right: 30px; }
+  .contact-item label {
+    display: block; }
 
 @media (max-width: 767px) {
   .kpiObject {
     height: 100px; }
   .objectPlaceholder {
     height: 250px; } }
+
+@media (min-width: 768px) {
+  .kpiObject {
+    height: 100px; }
+  .objectPlaceholder {
+    height: 350px; } }
+
+@media (min-width: 992px) {
+  .kpiObject {
+    height: 200px; }
+  .objectPlaceholder {
+    height: 400px; } }

@@ -113,6 +113,51 @@
 (function () {
     'use strict';
 
+    define('simpleObject',function(){
+        function simpleObject() {
+            simpleObjectController.$inject = ['qlikService'];
+            function simpleObjectController(qlikService){
+                var vm = this;
+                var object;
+
+                function getKpi() {
+                    qlikService.getApp().getObject(vm.objectId,vm.objectId).then(function(vis){
+                        object = vis;
+                    });
+                }
+                
+                vm.$onInit = function() {
+                    setTimeout(function(){
+                        getKpi()
+                    },300);
+                }
+
+                vm.$onDestroy = function() {
+                    object.close();
+                }
+            }
+    
+            return {
+                bindings: {
+                    objectId: '@',
+                    objectClass: '@'
+                },
+                controller: simpleObjectController,
+                controllerAs: 'so',
+                templateUrl: '/app/components/simpleObject/simpleObject.component.html'
+            }
+        }
+
+        return simpleObject();
+    });
+
+
+    
+
+} ());
+(function () {
+    'use strict';
+
 
         define( 'senseObject',function () {
             
@@ -196,47 +241,75 @@
 (function () {
     'use strict';
 
-    define('simpleObject',function(){
-        function simpleObject() {
-            simpleObjectController.$inject = ['qlikService'];
-            function simpleObjectController(qlikService){
+    define('simpleTable', function(){
+        function simpleTable() {
+            simpleTableController.$inject = ['qlikService','currentSelectionsService'];
+            function simpleTableController(qlikService, currentSelectionsService){
                 var vm = this;
-                var object;
-
-                function getKpi() {
-                    qlikService.getApp().getObject(vm.objectId,vm.objectId).then(function(vis){
-                        object = vis;
+                vm.currentSelectionsService = currentSelectionsService;
+    
+                function getContacts(field1,field2, field3) {
+                    qlikService.getApp().createCube({
+                        qDimensions : [{
+                            qDef : {
+                                qFieldDefs : [field1]
+                            }
+                        }, {
+                            qDef : {
+                                qFieldDefs : [field2]
+                            }
+                        }, {
+                            qDef : {
+                                qFieldDefs : [field3]
+                            }
+                        }],
+                        qMeasures : [{
+                            qDef : {
+                                qDef : "1"
+                            }
+                        }],
+                        qInitialDataFetch : [{
+                            qTop : 0,
+                            qLeft : 0,
+                            qHeight : 1,
+                            qWidth : 3
+                        }]
+                    }, function(reply) {
+                        console.log(reply);
+                        vm.contacts = [];
+                        $.each(reply.qHyperCube.qDataPages[0].qMatrix, function(key, value) {
+                                vm.contacts.push({
+                                    'user' : value[0].qText,
+                                    'title' : value[1].qText,
+                                    'email' : value[2].qText
+                                });
+                        });
                     });
                 }
-                
-                vm.$onInit = function() {
-                    setTimeout(function(){
-                        getKpi()
-                    },300);
-                }
-
-                vm.$onDestroy = function() {
-                    object.close();
+    
+                init();
+    
+                function init(){
+                    currentSelectionsService.getCurrentSelections();
+    
+                    getContacts(vm.userField,vm.titleField,vm.emailField);
                 }
             }
     
             return {
                 bindings: {
-                    objectId: '@',
-                    objectClass: '@'
+                    userField : '@',
+                    titleField : '@',
+                    emailField : '@',
+                    title : '@'
                 },
-                controller: simpleObjectController,
-                controllerAs: 'so',
-                templateUrl: '/app/components/simpleObject/simpleObject.component.html'
+                controller: simpleTableController,
+                controllerAs: 'st',
+                templateUrl : '/app/components/simpleTable/simpleTable.component.html'
             }
         }
-
-        return simpleObject();
+        return simpleTable();
     });
-
-
-    
-
 } ());
 (function () {
     'use strict';
@@ -361,11 +434,18 @@ define( 'topHeader',function () {
                   var vm = this;
                   vm.matches = [];
                   vm.searchFilterList = searchFilterList;
+                  vm.showSearch = false;
 
                   vm.selectField = selectField;
+                  vm.closeSearch = closeSearch;
 
                   function selectField(match) {
                         qlikService.getApp().field(vm.qlikField).selectMatch(match);
+                        vm.showSearch = false;
+                  }
+
+                  function closeSearch() {
+                    vm.showSearch = false;
                   }
       
       
@@ -374,13 +454,14 @@ define( 'topHeader',function () {
                     // console.log(vm.qlikField);
 
                     vm.matches = [];
+                    vm.showSearch = true;
       
                         // Use value of input field as search term in searchResults method
                         qlikService.getApp().searchResults([vm.searchText],
                                 {qOffset: 0, qCount: 100},
-                                {qSearchFields: [vm.qlikField], qContext: 'Cleared'},
+                                {qSearchFields: [vm.qlikField], qContext: 'CurrentSelections'},
                                 function(reply) {
-                                    console.log(reply);
+                                    // console.log(reply);
                                       //assign searchGroupArray of results to variable named searchResults for readability
                                       var searchResults = reply.qResult.qSearchGroupArray;
                                       //loop through results and add to dom
@@ -392,7 +473,7 @@ define( 'topHeader',function () {
                                                       });
                                               });
                                       });
-                                      // console.log(vm.matches);
+                                      console.log(vm.matches);
                               });
       
                   }
@@ -439,13 +520,15 @@ define( 'topHeader',function () {
 
             function init(){
                 qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId).then(function(vis){
+                    console.log(vis);
                     object = vis;
+                    vm.title = vis.layout.title;
                 });
             }
 
             vm.$onDestroy = function() {
                 vm = null;
-                vis.close();
+                object.close();
             }
         }
 
