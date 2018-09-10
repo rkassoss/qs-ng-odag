@@ -13,12 +13,14 @@ define( 'topHeader',function () {
 
             function toggleNav() {
                 vm.navigation = !vm.navigation;
+                console.log(vm.navigation);
+                $('#viewWrap').toggleClass('move');
+                qlikObject.resize();
             }
 
             function toggleSidebar() {
                 vm.sidebarIn = !vm.sidebarIn;
             }
-
             
             init();
             function init() {

@@ -113,6 +113,97 @@
 (function () {
     'use strict';
 
+
+        define( 'senseObject',function () {
+            
+            function senseObject() {
+                senseObjectController.$inject = ['dataService','qlikService','$uibModal'];
+                function senseObjectController(dataService,qlikService,$uibModal) {
+                    var vm = this;
+                    var theObject;
+
+                    vm.exportToExcel = exportToExcel;
+                    vm.expand = expand;
+
+                   
+
+                    function exportToExcel() {
+                        vm.model.exportData()
+                            .then(function(reply){
+                                console.log(reply);
+                                var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
+                                var link = reply.qUrl;
+                                window.open(baseUrl+link,'_blank');
+                            });
+                    }
+
+                    function expand() {
+                        var modalInstance = $uibModal.open({
+                            animation: true,
+                            component: 'expandModal',
+                            size: 'lg',
+                            resolve: {
+                                qlikId: function () {
+                                    return vm.qlikId;
+                                }
+                            }
+                        });
+                    }
+
+
+                    function getQlikObject() {
+                        qlikService.getApp()
+                        .visualization.get(vm.qlikId).then(function(vis){
+                            // console.log(vis);
+                            if(!vm.qlikTitle){
+                                vm.title = vis.model.layout.title;
+                            } else {
+                                vm.title = vm.qlikTitle;
+                            }
+                           
+                            vis.model.layout.showTitles = false;
+                            vis.show(vm.qlikId);
+                            theObject = vis;
+                            vm.model = vis.model;
+                        });
+                    }
+
+                    
+                    vm.$onInit = function() {
+                        setTimeout(function() {
+                            getQlikObject();
+                        }, 300)
+                    }
+
+
+                    vm.$onDestroy = function() {
+                        console.log('destroy');
+                        theObject.close();
+                    }
+
+
+                    vm.$onChanges = function(changes) {
+                        
+                    }
+
+                }
+                return {
+                    bindings: {
+                        qlikId: '@',
+                        qlikTitle: '@'
+                    },
+                    controller: senseObjectController,
+                    controllerAs: 'so',
+                    templateUrl: '/app/components/senseObject/senseObject.directive.html'
+                }
+            }
+
+            return senseObject();
+        });
+} ());
+(function () {
+    'use strict';
+
     define('simpleObject',function(){
         function simpleObject() {
             simpleObjectController.$inject = ['qlikService'];
@@ -158,95 +249,14 @@
 (function () {
     'use strict';
 
-
-        define( 'senseObject',function () {
-            
-            function senseObject() {
-                senseObjectController.$inject = ['dataService','qlikService','$uibModal'];
-                function senseObjectController(dataService,qlikService,$uibModal) {
-                    var vm = this;
-                    var theObject;
-
-                    vm.exportToExcel = exportToExcel;
-                    vm.expand = expand;
-
-                    function exportToExcel() {
-                        vm.model.exportData()
-                            .then(function(reply){
-                                console.log(reply);
-                                var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
-                                var link = reply.qUrl;
-                                window.open(baseUrl+link,'_blank');
-                            });
-                    }
-
-                    function expand() {
-                        var modalInstance = $uibModal.open({
-                            animation: true,
-                            component: 'expandModal',
-                            size: 'lg',
-                            resolve: {
-                                qlikId: function () {
-                                    return vm.qlikId;
-                                }
-                            }
-                        });
-                    }
-
-
-                    function getQlikObject() {
-                        qlikService.getApp()
-                        .visualization.get(vm.qlikId).then(function(vis){
-                            console.log(vis);
-                            vm.title = vis.model.layout.title;
-                            vis.model.layout.showTitles = false;
-                            vis.show(vm.qlikId);
-                            theObject = vis;
-                            vm.model = vis.model;
-                        });
-                    }
-
-                    
-                    vm.$onInit = function() {
-                        setTimeout(function() {
-                            getQlikObject();
-                        }, 300)
-                    }
-
-
-                    vm.$onDestroy = function() {
-                        console.log('destroy');
-                        theObject.close();
-                    }
-
-
-                    vm.$onChanges = function(changes) {
-                        
-                    }
-
-                }
-                return {
-                    bindings: {
-                        qlikId: '@'
-                    },
-                    controller: senseObjectController,
-                    controllerAs: 'so',
-                    templateUrl: '/app/components/senseObject/senseObject.directive.html'
-                }
-            }
-
-            return senseObject();
-        });
-} ());
-(function () {
-    'use strict';
-
     define('simpleTable', function(){
         function simpleTable() {
             simpleTableController.$inject = ['qlikService','currentSelectionsService'];
             function simpleTableController(qlikService, currentSelectionsService){
                 var vm = this;
                 vm.currentSelectionsService = currentSelectionsService;
+
+                var sessionObjectId;
     
                 function getContacts(field1,field2, field3) {
                     qlikService.getApp().createCube({
@@ -276,6 +286,7 @@
                         }]
                     }, function(reply) {
                         console.log(reply);
+                        sessionObjectId = reply.qInfo.qId;
                         vm.contacts = [];
                         $.each(reply.qHyperCube.qDataPages[0].qMatrix, function(key, value) {
                                 vm.contacts.push({
@@ -293,6 +304,10 @@
                     currentSelectionsService.getCurrentSelections();
     
                     getContacts(vm.userField,vm.titleField,vm.emailField);
+                }
+
+                vm.$onDestroy = function() {
+                    console.log("Destroy obejct:"+sessionObjectId);
                 }
             }
     
@@ -402,12 +417,14 @@ define( 'topHeader',function () {
 
             function toggleNav() {
                 vm.navigation = !vm.navigation;
+                console.log(vm.navigation);
+                $('#viewWrap').toggleClass('move');
+                qlikObject.resize();
             }
 
             function toggleSidebar() {
                 vm.sidebarIn = !vm.sidebarIn;
             }
-
             
             init();
             function init() {
@@ -427,6 +444,50 @@ define( 'topHeader',function () {
 (function () {
     'use strict';
 
+    define('expandModal', expandModal());
+    function expandModal() {
+        expandModalController.$inject = ['qlikService','$uibModal', '$log', '$document']
+        function expandModalController(qlikService, $uibModal, $document){
+            var vm = this;
+            var object;
+
+            vm.closeModal = closeModal;
+            
+            function closeModal() {
+                vm.dismiss({$value: 'cancel'});  
+            }
+            init();
+
+            function init(){
+                qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId).then(function(vis){
+                    console.log(vis);
+                    object = vis;
+                    vm.title = vis.layout.title;
+                });
+            }
+
+            vm.$onDestroy = function() {
+                vm = null;
+                object.close();
+            }
+        }
+
+        return {
+            bindings: {
+                resolve: '<',
+                close: '&',
+                dismiss: '&'
+            },
+            controller: expandModalController,
+            controllerAs: 'em',
+            templateUrl: 'app/components/senseObject/expandModal/expandModal.component.html'
+        }
+    }
+
+} ());
+(function () {
+    'use strict';
+
     define('dropdownSearch',function(){
         function dropdownSearch() {
             dropdownSearchController.$inject = ['qlikService'];
@@ -438,6 +499,10 @@ define( 'topHeader',function () {
 
                   vm.selectField = selectField;
                   vm.closeSearch = closeSearch;
+
+                  if(!vm.searchPlaceholder) {
+                    vm.searchPlaceholder = 'Search list...';
+                  }
 
                   function selectField(match) {
                         qlikService.getApp().field(vm.qlikField).selectMatch(match);
@@ -485,7 +550,8 @@ define( 'topHeader',function () {
       
               return {
                   bindings: {
-                    qlikField: '@'
+                    qlikField: '@',
+                    searchPlaceholder: '@'
                   },
                   controller: dropdownSearchController,
                   controllerAs: '$ctrl',
@@ -498,50 +564,5 @@ define( 'topHeader',function () {
     })
 
 
-
-} ());
-
-(function () {
-    'use strict';
-
-    define('expandModal', expandModal());
-    function expandModal() {
-        expandModalController.$inject = ['qlikService','$uibModal', '$log', '$document']
-        function expandModalController(qlikService, $uibModal, $document){
-            var vm = this;
-            var object;
-
-            vm.closeModal = closeModal;
-            
-            function closeModal() {
-                vm.dismiss({$value: 'cancel'});  
-            }
-            init();
-
-            function init(){
-                qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId).then(function(vis){
-                    console.log(vis);
-                    object = vis;
-                    vm.title = vis.layout.title;
-                });
-            }
-
-            vm.$onDestroy = function() {
-                vm = null;
-                object.close();
-            }
-        }
-
-        return {
-            bindings: {
-                resolve: '<',
-                close: '&',
-                dismiss: '&'
-            },
-            controller: expandModalController,
-            controllerAs: 'em',
-            templateUrl: 'app/components/senseObject/expandModal/expandModal.component.html'
-        }
-    }
 
 } ());

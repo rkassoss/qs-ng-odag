@@ -13,6 +13,10 @@
                   vm.selectField = selectField;
                   vm.closeSearch = closeSearch;
 
+                  if(!vm.searchPlaceholder) {
+                    vm.searchPlaceholder = 'Search list...';
+                  }
+
                   function selectField(match) {
                         qlikService.getApp().field(vm.qlikField).selectMatch(match);
                         vm.showSearch = false;
@@ -59,7 +63,8 @@
       
               return {
                   bindings: {
-                    qlikField: '@'
+                    qlikField: '@',
+                    searchPlaceholder: '@'
                   },
                   controller: dropdownSearchController,
                   controllerAs: '$ctrl',

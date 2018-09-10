@@ -1,26 +1,22 @@
 header.site-header {
-    background-color: #333; color: white; 
-    padding: 15px 0; height: 75px;
+    background-color: white;
+    padding: 15px 0;
     .brand {
-        width: 120px;
+        width: 100px;
         margin: 0;
     }
     button {
          font-size: 3rem;
         &:hover {
-            color: $yellow;
+            color: $ibmBlue;
         }
     }
 }
 
-#CurrentSelections {
-    margin-bottom: 30px;
-}
-
 #navigation {
-    position: fixed; left: 0; top: 75px; bottom: 0; width: 300px;
+    position: fixed; right: 0; top: 73px; bottom: 0; width: 300px;
     z-index: 999; background-color: black;
-    @include transform(translateX(-100%));
+    @include transform(translateX(100%));
     @include transition(transform .3s);
 
     .nav-links {
@@ -68,6 +64,46 @@ header.site-header {
             li a {
                 color: black;
             }
+        }
+    }
+}
+
+#lastRelaod {
+    display: inline-block;
+    border-right: 3px solid $darkBlue;
+    padding-right: 15px;
+    margin-right: 30px;
+}
+
+.hamburger {
+    display: inline-block;
+    cursor: pointer;
+    width: 32px;
+    margin: auto;
+
+    .bar {
+        display: block;
+        width: 32px;
+        height: 3px;
+        background-color: black;
+        margin: 5px auto;
+        @include transition(transform .3s, width .3s, background-color .3s);
+    }
+      
+    &.active :first-child{
+        transform:
+          rotate(45deg)
+          translate(6px, 6px);
+    }
+    &.active :nth-child(2){width: 0;}
+    &.active :last-child{
+        transform:
+          rotate(-45deg)
+          translate(5px, -5px);
+    }
+    &:hover {
+        .bar {
+            background-color: $ibmBlue;
         }
     }
 }

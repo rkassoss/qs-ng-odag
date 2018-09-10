@@ -1,7 +1,6 @@
 define('qlikService', function () {
 
     function qlikService() {
-
         var service = this;
         var app;
         var qlik;

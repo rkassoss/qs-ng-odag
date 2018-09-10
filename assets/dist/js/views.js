@@ -7,10 +7,6 @@
             function dashboardController(qlikService, currentSelectionsService){
                 var vm = this;
                 vm.currentSelectionsService = currentSelectionsService;
-
-    
-
-
                 function getDocs() {
                     qlikService.getApp().createCube({
                         qDimensions : [{
@@ -93,6 +89,28 @@ define( 'pageOne',function () {
 
         return pageOne();
     });
+define('pageThree', function(){
+    function pageThree() {
+
+        function pageThreeController(){
+            var vm = this;
+            
+            init();
+
+            function init(){
+
+            }
+        }
+
+        return {
+            bindings: {},
+            controller: pageThreeController,
+            controllerAs: 'p3',
+            templateUrl: '/app/views/page3/page3.component.html'
+        }
+    }
+    return pageThree();
+});
 define( 'pageTwo',function () {
 
     function pageTwo() {
@@ -118,26 +136,4 @@ define( 'pageTwo',function () {
     }
 
     return pageTwo();
-});
-define('pageThree', function(){
-    function pageThree() {
-
-        function pageThreeController(){
-            var vm = this;
-            
-            init();
-
-            function init(){
-
-            }
-        }
-
-        return {
-            bindings: {},
-            controller: pageThreeController,
-            controllerAs: 'p3',
-            templateUrl: '/app/views/page3/page3.component.html'
-        }
-    }
-    return pageThree();
 });

@@ -1,3 +1,5 @@
+var qlikObject;
+
 // var config = {
 //      host: 'localhost',
 //      prefix: '/',
@@ -61,6 +63,7 @@ require(["js/qlik"], function (qlik) {
             'currentSelectionsService'
     ],
         function (angular, uiRoute, uibootstrap, routes,dashboard, reloadTime,topHeader, senseObject, simpleObject, tableButton, filterDropdown,dropdownSearch,simpleTable, expandModal, dataService, qlikService,currentSelectionsService) {
+
             app = angular.module('mashup-app', [
                 'ui.router',
                 'ui.bootstrap'
@@ -70,6 +73,7 @@ require(["js/qlik"], function (qlik) {
               $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:application\//);
               $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|cust-scheme):/);
               $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|file|blob):|data:image\//);
+              $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
             }
             ]);
             
@@ -99,6 +103,7 @@ require(["js/qlik"], function (qlik) {
 
             app.run(['qlikService', function (qlikService) {
                 qlikService.openApp(qlik, appId, config);
+                qlikObject = qlik;
             }]);
             angular.bootstrap(document, ["qlik-angular", "mashup-app"]);
         }

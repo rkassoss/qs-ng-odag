@@ -2,18 +2,19 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-3">
-                    <!-- <button class="clean-btn" ng-click="th.toggleNav()"><i class="fa fa-bars"></i></button> -->
-
                     <div class="brand">
-                        <img src="/assets/images/IBM logo.svg" class="img-responsive" />
+                        <img src="/assets/images/IBM-Logo.png" class="img-responsive" />
                     </div>
             </div>  
-            
-            <div class="col-xs-9 text-right">
                 
-                <!-- <button class="btn-clean" ng-click="th.toggleSidebar()"><i class="fa fa-filter"></i></button> -->
-
+            <div class="col-xs-9 text-right">
                 <reload-time></reload-time>
+                <!-- <button class="btn-clean" ng-click="th.toggleSidebar()"><i class="fa fa-filter"></i></button> -->
+                    <div class="hamburger" ng-class="{'active': th.navigation }" ng-click="th.toggleNav()">
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                        <span class="bar"></span>
+                    </div>
             </div>
         </div>
     </div>
@@ -25,7 +26,7 @@
     <filter-dropdown field-name="Case Owner"></filter-dropdown>
     <filter-dropdown field-name="Priority"></filter-dropdown>
 </div> -->
-<!-- <div id="navigation" ng-class="{'slideIn' : th.navigation }">
+<div id="navigation" ng-class="{'slideIn' : th.navigation }">
         <ul class="nav-links">
                 <li ui-sref-active="active">
                     <a ui-sref="page1">
@@ -43,9 +44,4 @@
                     </a>
                 </li>
         </ul>
-</div> -->
-
-
-
-
-
+</div>

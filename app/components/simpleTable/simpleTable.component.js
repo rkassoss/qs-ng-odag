@@ -7,6 +7,8 @@
             function simpleTableController(qlikService, currentSelectionsService){
                 var vm = this;
                 vm.currentSelectionsService = currentSelectionsService;
+
+                var sessionObjectId;
     
                 function getContacts(field1,field2, field3) {
                     qlikService.getApp().createCube({
@@ -36,6 +38,7 @@
                         }]
                     }, function(reply) {
                         console.log(reply);
+                        sessionObjectId = reply.qInfo.qId;
                         vm.contacts = [];
                         $.each(reply.qHyperCube.qDataPages[0].qMatrix, function(key, value) {
                                 vm.contacts.push({
@@ -53,6 +56,10 @@
                     currentSelectionsService.getCurrentSelections();
     
                     getContacts(vm.userField,vm.titleField,vm.emailField);
+                }
+
+                vm.$onDestroy = function() {
+                    console.log("Destroy obejct:"+sessionObjectId);
                 }
             }
     

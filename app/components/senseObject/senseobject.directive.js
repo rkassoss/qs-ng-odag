@@ -13,6 +13,8 @@
                     vm.exportToExcel = exportToExcel;
                     vm.expand = expand;
 
+                   
+
                     function exportToExcel() {
                         vm.model.exportData()
                             .then(function(reply){
@@ -40,8 +42,13 @@
                     function getQlikObject() {
                         qlikService.getApp()
                         .visualization.get(vm.qlikId).then(function(vis){
-                            console.log(vis);
-                            vm.title = vis.model.layout.title;
+                            // console.log(vis);
+                            if(!vm.qlikTitle){
+                                vm.title = vis.model.layout.title;
+                            } else {
+                                vm.title = vm.qlikTitle;
+                            }
+                           
                             vis.model.layout.showTitles = false;
                             vis.show(vm.qlikId);
                             theObject = vis;
@@ -70,7 +77,8 @@
                 }
                 return {
                     bindings: {
-                        qlikId: '@'
+                        qlikId: '@',
+                        qlikTitle: '@'
                     },
                     controller: senseObjectController,
                     controllerAs: 'so',

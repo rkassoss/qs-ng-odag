@@ -1,23 +1,23 @@
-<div class="panel">
-    <div class="panel-header">
-            <h3>{{st.title}}</h3>
-    </div>
-    <div ng-if="st.currentSelectionsService.numberOfSelections">
+<div class="panel panel-contact">
+        <i class="fa fa-user"></i>
+        <div class="panel-header">
+                <h3>{{st.title}}</h3>
+        </div>
         <div class="panel-body">
-                <div ng-repeat="contact in st.contacts" class="contacts">
-                        <div class="contact-item">
-                                <label>Name: </label>{{contact.user}}
-                        </div>
-                        <div class="contact-item">
-                                <label>Title: </label>{{contact.title}}
-                        </div>
-                        <div class="contact-item">
-                                <label>Email: </label>{{contact.email}}
+                <div ng-if="st.currentSelectionsService.numberOfSelections">
+
+                        <div ng-repeat="contact in st.contacts" class="contacts">
+                                <div class="contact-name">
+                                {{contact.user}} - {{contact.title}}
+                                </div>
+                                <div>
+                                <i class="fa fa-envelope"></i>
+                                <a ng-href="mailto:{{contact.email}}" target="_blank">{{contact.email}}</a>
+                                </div>
                         </div>
                 </div>
+                <div ng-if="!st.currentSelectionsService.numberOfSelections">
+                        <h4>Make selections to find the relevant point of contact</h4>
+                </div>
         </div>
-    </div>  
-    <div ng-if="!st.currentSelectionsService.numberOfSelections">
-        <h4>Make selections to find the relevant point of contacts</h4>
-    </div>
 </div>

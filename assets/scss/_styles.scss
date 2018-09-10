@@ -3,12 +3,20 @@ body {
     font-family: 'Roboto', sans-serif !important; font-size: 15px;
     background-color: #f4f4f4;
     a {
-        color: $lightBlue; font-weight: 500;
+        color: $ibmBlue; font-weight: 500;
         @include transition(color .3s);
         text-decoration: none;
         &:hover {
             text-decoration: none; 
         } 
+    }
+}
+
+#viewWrap {
+    @include transition(margin-right .3s);
+    margin-right: 0;
+    &.move {
+        margin-right: 300px;
     }
 }
 
@@ -23,12 +31,11 @@ ul {
     margin-bottom: 30px;
 }
 .panel {
-    border: 0;
-    padding: 1rem; margin-bottom: 30px;
+    border: 0; margin-bottom: 30px;
     box-shadow: 6px 5px 11px rgba(228, 228, 228, 0.5);
     position: relative;
     .panel-header {
-        color: $darkBlue;
+        color: $darkBlue; padding: 15px 15px 0;
         h3 {
             -webkit-text-overflow: ellipsis;
             text-overflow: ellipsis;
@@ -53,14 +60,11 @@ ul {
     width: 100%;
     @include transition(opacity 1s);
     opacity: 1;
-
-
     article.qv-object {
         header.qv-object-header {
             display: none;
         }
     }
-
     &.animateOut {
         opacity: 0;
     }
@@ -73,23 +77,49 @@ ul {
         height: 200px;
     }
     &.filterObject {
-        height: 40px;
+        height: 35px;
     }
+}
+
+.form-control {
+    border: 1px solid #f2f2f2; padding: 15px; height: auto;
+
 }
 
 
 .docs {
-    height: 500px; overflow-y: scroll;
+    overflow-y: scroll; max-height: 300px;
     a {
-        display: block; padding: 15px; background-color: #dddddd; border-bottom: 1px solid #f4f4f4;
+        display: block; padding: 15px; background-color: white; border-bottom: 1px solid rgb(199, 199, 199);
+        border: 1px solid #f2f2f2;
         @include transition(background-color .3s);
+        position: relative;
         &:hover {
-            background-color: rgb(137, 194, 247);
+            background-color: #f4f4f4;
+        }
+        .fa {
+            position: absolute; right: 15px; top: 18px;
         }
     }
 }
 
 
+.panel-contact {
+    position: relative;
+    background-color: $darkBlue; color: white;
+    .fa-user {
+        position: absolute; right: 0; font-size: 180px; opacity: .25;
+    }
+    h3 {
+        color: white;
+    }
+    .contact-name {
+        font-size: 18px;
+    }
+    a {
+        font-weight: bold; color: white;
+    }
+}
 
 button, a {
     @include transition(background-color .3s, color .3s);
@@ -118,15 +148,22 @@ button, a {
 
 }
 
+.filtersRow {
+    background-color: $darkBlue; padding: 15px 0px; margin-bottom: 30px;
+}
 
-
-
+#CurrentSelections {
+    .buttons-end {
+        display: none;
+    }   
+}
 
 
 .dropdown-list-search-container {
     position: relative;
     .btn-clean {
-        position: absolute; top: 10px; right: 10px;
+        position: absolute; top: 18px; right: 10px;
+        color: #999;
     }
 }
 .search-results {
@@ -169,16 +206,5 @@ button, a {
     button.toggle-table {
         display: block;
         margin: 0 auto 30px;
-    }
-}
-
-.contacts {
-    display: flex;
-    margin-left: -15px; margin-right: -15px;
-}
-.contact-item {
-    padding-right: 30px;
-    label {
-        display: block;
     }
 }

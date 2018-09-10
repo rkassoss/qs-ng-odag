@@ -7,10 +7,6 @@
             function dashboardController(qlikService, currentSelectionsService){
                 var vm = this;
                 vm.currentSelectionsService = currentSelectionsService;
-
-    
-
-
                 function getDocs() {
                     qlikService.getApp().createCube({
                         qDimensions : [{
