@@ -16,12 +16,12 @@ var appId = '9e7ee2b6-87d6-4a54-a61e-239cad9e5e19';
 
 
 // var config = { // TrueView Server - November 2017 Patch 3
-//     host: '',
+//     host: 'strueview-analytics.deloitte.com',
 //     prefix: '/',
 //     port: 443,
 //     isSecure: true
 //  };
-//  var appId = '';
+//  var appId = '84fed9d2-a13d-4b9b-9d32-017b63e68330';
 
 
 
