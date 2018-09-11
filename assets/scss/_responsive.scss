@@ -14,10 +14,33 @@
     }
     #viewWrap {
         padding-top: 235px;
+        &.move {
+            margin-right: 0;
+
+        }
     }
     #lastRelaod {
         font-size: 14px; 
         margin-right: 15px;
+        display: none;
+    }
+    #navigation {
+        #lastRelaod {
+            display: block;
+        }
+    }
+    .hamburger {
+        margin-top: 20px;
+    }
+}
+
+// xxs
+@media (max-width:380px) {
+    #navigation {
+        width: 250px;
+        .nav-links li a {
+            font-size: 18px; line-height: 24px;
+        }
     }
 }
 
