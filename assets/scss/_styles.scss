@@ -15,6 +15,7 @@ body {
 #viewWrap {
     @include transition(margin-right .3s);
     margin-right: 0;
+    padding-top: 205px;
     &.move {
         margin-right: 300px;
     }
@@ -149,10 +150,12 @@ button, a {
 }
 
 .filtersRow {
-    background-color: $darkBlue; padding: 15px 0px; margin-bottom: 30px;
+    position: fixed; top: 108px; left: 0; right: 0; z-index: 10;
+    background-color: $darkBlue; padding: 15px; margin-bottom: 30px;
 }
 
 #CurrentSelections {
+    position: fixed; top: 71px; left: 0; right: 0; z-index: 10;
     .buttons-end {
         display: none;
     }   

@@ -1,4 +1,5 @@
 header.site-header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
     background-color: white;
     padding: 15px 0;
     .brand {
@@ -107,3 +108,14 @@ header.site-header {
         }
     }
 }
+
+.lui-popover-container, .lui-dialog-container  {
+    position: fixed !important;
+    z-index: 9999;
+    top: 158px !important;
+
+    .lui-popover__arrow {
+        display: none !important;
+   
+    }
+ }
