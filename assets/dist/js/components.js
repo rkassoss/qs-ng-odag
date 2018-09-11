@@ -1,6 +1,40 @@
 (function () {
     'use strict';
 
+    define('reloadTime',function(){
+        function reloadTime() {
+            reloadTimeController.$inject = ['qlikService'];
+            function reloadTimeController(qlikService){
+                var vm = this;
+    
+                function dataLastFrom() {
+                    qlikService.getApp().getAppLayout(function(layout){
+                        // console.log(layout);
+                        vm.relaodTime = layout.qLastReloadTime;
+                    });
+                }
+                
+                init();
+    
+                function init(){
+                    dataLastFrom();
+                }
+            }
+    
+            return {
+                bindings: {},
+                controller: reloadTimeController,
+                controllerAs: 'rt',
+                templateUrl: '/app/components/reloadTime/reloadTime.component.html'
+            }
+        }
+        return reloadTime();
+    });
+
+} ());
+(function () {
+    'use strict';
+
     define('filterDropdown',function() {
         
         function filterDropdown() {
@@ -79,35 +113,46 @@
 (function () {
     'use strict';
 
-    define('reloadTime',function(){
-        function reloadTime() {
-            reloadTimeController.$inject = ['qlikService'];
-            function reloadTimeController(qlikService){
+    define('simpleObject',function(){
+        function simpleObject() {
+            simpleObjectController.$inject = ['qlikService'];
+            function simpleObjectController(qlikService){
                 var vm = this;
-    
-                function dataLastFrom() {
-                    qlikService.getApp().getAppLayout(function(layout){
-                        // console.log(layout);
-                        vm.relaodTime = layout.qLastReloadTime;
+                var object;
+
+                function getKpi() {
+                    qlikService.getApp().getObject(vm.objectId,vm.objectId).then(function(vis){
+                        object = vis;
                     });
                 }
                 
-                init();
-    
-                function init(){
-                    dataLastFrom();
+                vm.$onInit = function() {
+                    setTimeout(function(){
+                        getKpi()
+                    },300);
+                }
+
+                vm.$onDestroy = function() {
+                    object.close();
                 }
             }
     
             return {
-                bindings: {},
-                controller: reloadTimeController,
-                controllerAs: 'rt',
-                templateUrl: '/app/components/reloadTime/reloadTime.component.html'
+                bindings: {
+                    objectId: '@',
+                    objectClass: '@'
+                },
+                controller: simpleObjectController,
+                controllerAs: 'so',
+                templateUrl: '/app/components/simpleObject/simpleObject.component.html'
             }
         }
-        return reloadTime();
+
+        return simpleObject();
     });
+
+
+    
 
 } ());
 (function () {
@@ -200,51 +245,6 @@
 
             return senseObject();
         });
-} ());
-(function () {
-    'use strict';
-
-    define('simpleObject',function(){
-        function simpleObject() {
-            simpleObjectController.$inject = ['qlikService'];
-            function simpleObjectController(qlikService){
-                var vm = this;
-                var object;
-
-                function getKpi() {
-                    qlikService.getApp().getObject(vm.objectId,vm.objectId).then(function(vis){
-                        object = vis;
-                    });
-                }
-                
-                vm.$onInit = function() {
-                    setTimeout(function(){
-                        getKpi()
-                    },300);
-                }
-
-                vm.$onDestroy = function() {
-                    object.close();
-                }
-            }
-    
-            return {
-                bindings: {
-                    objectId: '@',
-                    objectClass: '@'
-                },
-                controller: simpleObjectController,
-                controllerAs: 'so',
-                templateUrl: '/app/components/simpleObject/simpleObject.component.html'
-            }
-        }
-
-        return simpleObject();
-    });
-
-
-    
-
 } ());
 (function () {
     'use strict';
@@ -444,50 +444,6 @@ define( 'topHeader',function () {
 (function () {
     'use strict';
 
-    define('expandModal', expandModal());
-    function expandModal() {
-        expandModalController.$inject = ['qlikService','$uibModal', '$log', '$document']
-        function expandModalController(qlikService, $uibModal, $document){
-            var vm = this;
-            var object;
-
-            vm.closeModal = closeModal;
-            
-            function closeModal() {
-                vm.dismiss({$value: 'cancel'});  
-            }
-            init();
-
-            function init(){
-                qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId).then(function(vis){
-                    console.log(vis);
-                    object = vis;
-                    vm.title = vis.layout.title;
-                });
-            }
-
-            vm.$onDestroy = function() {
-                vm = null;
-                object.close();
-            }
-        }
-
-        return {
-            bindings: {
-                resolve: '<',
-                close: '&',
-                dismiss: '&'
-            },
-            controller: expandModalController,
-            controllerAs: 'em',
-            templateUrl: 'app/components/senseObject/expandModal/expandModal.component.html'
-        }
-    }
-
-} ());
-(function () {
-    'use strict';
-
     define('dropdownSearch',function(){
         function dropdownSearch() {
             dropdownSearchController.$inject = ['qlikService'];
@@ -496,6 +452,8 @@ define( 'topHeader',function () {
                   vm.matches = [];
                   vm.searchFilterList = searchFilterList;
                   vm.showSearch = false;
+                  vm.searchText = '';
+                  
 
                   vm.selectField = selectField;
                   vm.closeSearch = closeSearch;
@@ -511,6 +469,7 @@ define( 'topHeader',function () {
 
                   function closeSearch() {
                     vm.showSearch = false;
+                    vm.searchText = '';
                   }
       
       
@@ -564,5 +523,50 @@ define( 'topHeader',function () {
     })
 
 
+
+} ());
+
+(function () {
+    'use strict';
+
+    define('expandModal', expandModal());
+    function expandModal() {
+        expandModalController.$inject = ['qlikService','$uibModal', '$log', '$document']
+        function expandModalController(qlikService, $uibModal, $document){
+            var vm = this;
+            var object;
+
+            vm.closeModal = closeModal;
+            
+            function closeModal() {
+                vm.dismiss({$value: 'cancel'});  
+            }
+            init();
+
+            function init(){
+                qlikService.getApp().getObject(document.getElementById('modal_object'),vm.resolve.qlikId).then(function(vis){
+                    console.log(vis);
+                    object = vis;
+                    vm.title = vis.layout.title;
+                });
+            }
+
+            vm.$onDestroy = function() {
+                vm = null;
+                object.close();
+            }
+        }
+
+        return {
+            bindings: {
+                resolve: '<',
+                close: '&',
+                dismiss: '&'
+            },
+            controller: expandModalController,
+            controllerAs: 'em',
+            templateUrl: 'app/components/senseObject/expandModal/expandModal.component.html'
+        }
+    }
 
 } ());

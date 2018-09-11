@@ -15,7 +15,7 @@ body {
 #viewWrap {
     @include transition(margin-right .3s);
     margin-right: 0;
-    padding-top: 205px;
+    padding-top: 200px;
     &.move {
         margin-right: 300px;
     }
@@ -82,24 +82,22 @@ ul {
     }
 }
 
-.form-control {
-    border: 1px solid #f2f2f2; padding: 15px; height: auto;
-
-}
-
 
 .docs {
     overflow-y: scroll; max-height: 300px;
+    border: 1px solid #f2f2f2;
+    border-radius: 4px;
     a {
-        display: block; padding: 15px; background-color: white; border-bottom: 1px solid rgb(199, 199, 199);
-        border: 1px solid #f2f2f2;
+        display: block; padding: 15px; background-color: white; 
+        border-bottom: 1px solid #f2f2f2;
+        
         @include transition(background-color .3s);
         position: relative;
         &:hover {
             background-color: #f4f4f4;
         }
         .fa {
-            position: absolute; right: 15px; top: 18px;
+            position: absolute; right: 0; top: 18px;
         }
     }
 }
@@ -107,7 +105,7 @@ ul {
 
 .panel-contact {
     position: relative;
-    background-color: $darkBlue; color: white;
+    background-color: $ibmBlue; color: white;
     .fa-user {
         position: absolute; right: 0; font-size: 180px; opacity: .25;
     }
@@ -149,18 +147,6 @@ button, a {
 
 }
 
-.filtersRow {
-    position: fixed; top: 108px; left: 0; right: 0; z-index: 10;
-    background-color: $darkBlue; padding: 15px; margin-bottom: 30px;
-}
-
-#CurrentSelections {
-    position: fixed; top: 71px; left: 0; right: 0; z-index: 10;
-    .buttons-end {
-        display: none;
-    }   
-}
-
 
 .dropdown-list-search-container {
     position: relative;
@@ -168,9 +154,22 @@ button, a {
         position: absolute; top: 18px; right: 10px;
         color: #999;
     }
+    .form-control {
+        
+        padding: 15px;
+        height: auto;
+        border-radius: 4px;
+        font-size: 18px;line-height: 24px;
+        margin-bottom: 15px;
+        &.active {
+            border-color: $darkBlue;
+            border-radius: 4px 4px 0 0;
+            border-bottom: 1px solid;
+        }
+    }
 }
 .search-results {
-    max-height: 0; opacity: 0;
+    max-height: 0; opacity: 0; overflow: hidden;
     @include transition(max-height .3s, opacity .3s);
     position: absolute;
     top: 100%;
@@ -181,22 +180,35 @@ button, a {
     font-size: 14px;
     text-align: left;
     list-style: none;
-    background-color: #fff;
     -webkit-background-clip: padding-box;
     background-clip: padding-box;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 4px;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
+
+    border: 1px solid $darkBlue;
+    border-radius: 0 0 4px 4px;
+
+    
+    border-top: 0;
     >li>a {
         display: block;
         padding: 10px;
         clear: both;
         font-weight: 400;
         line-height: 1.42857143;
-        color: #333;
         white-space: nowrap;
+        background-color: white;
+        border-bottom: 1px solid #e6e6e6;
+        color: #333;
+
+        @include transition(background-color .3s);
+
+        &:hover {
+            background-color: lighten($ibmBlue, 35%);
+        }
+    }
+    li:last-of-type a {
+        border-radius: 0 0 4px 4px;
     }
     &.show {
         opacity: 1; max-height: 500px;

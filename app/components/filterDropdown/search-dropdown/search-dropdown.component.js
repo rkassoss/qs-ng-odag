@@ -9,6 +9,8 @@
                   vm.matches = [];
                   vm.searchFilterList = searchFilterList;
                   vm.showSearch = false;
+                  vm.searchText = '';
+                  
 
                   vm.selectField = selectField;
                   vm.closeSearch = closeSearch;
@@ -24,6 +26,7 @@
 
                   function closeSearch() {
                     vm.showSearch = false;
+                    vm.searchText = '';
                   }
       
       
