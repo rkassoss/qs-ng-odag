@@ -6,6 +6,7 @@
             docListController.$inject = ['qlikService'];
             function docListController(qlikService){
                 var vm = this;
+                var objectId;
                 
                 init();
 
@@ -36,6 +37,7 @@
                     }, function(reply) {
                         // console.log(reply);
                         vm.docs = [];
+                        objectId = reply.qInfo.qId;
                         $.each(reply.qHyperCube.qDataPages[0].qMatrix, function(key, value) {
                             if(!value[0].qIsNull && !value[1].qIsNull){
                                 vm.docs.push({
@@ -43,7 +45,6 @@
                                     'url' : value[1].qText
                                 });
                             }
-                                
                         });
                         // console.log(vm.docs);
                     });
@@ -52,7 +53,11 @@
                 function init(){
                     getDocs();
                     console.log('init');
-    
+                }
+
+
+                vm.$onDestroy = function(){
+                    console.log("Destroy object: "+objectId);
                 }
             }
     
@@ -264,7 +269,10 @@
                 return {
                     bindings: {
                         qlikId: '@',
-                        qlikTitle: '@'
+                        qlikTitle: '@',
+                        objectClass: '@',
+                        externalUrl: '@',
+                        linkLabel: '@'
                     },
                     controller: senseObjectController,
                     controllerAs: 'so',
@@ -479,15 +487,28 @@
 define( 'topHeader',function () {
     
     function topHeader() {
-        topHeaderController.$inject = ['dataService','qlikService'];
-        function topHeaderController(dataService,qlikService) {
+        topHeaderController.$inject = ['dataService','qlikService','currentSelectionsService','$transitions'];
+        function topHeaderController(dataService,qlikService, currentSelectionsService, $transitions) {
             var vm = this;
 
             vm.toggleSidebar = toggleSidebar;
             vm.toggleNav = toggleNav;
 
+            vm.currentSelectionsService = currentSelectionsService;
+
             vm.sidebarIn = false;
             vm.navigation = false;
+
+            vm.pageTitle = 'Review Status';
+
+            $transitions.onSuccess({}, function(transition) {
+                vm.pageTitle = transition.to().title;
+                console.log(
+                    "Successful Transition from " + transition.from().title +
+                    " to " + transition.to().title
+                );
+            });
+
 
             function toggleNav() {
                 vm.navigation = !vm.navigation;
@@ -503,6 +524,7 @@ define( 'topHeader',function () {
             init();
             function init() {
                 qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
+                currentSelectionsService.getCurrentSelections();
             }
         }
         return {

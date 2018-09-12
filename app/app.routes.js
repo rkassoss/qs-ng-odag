@@ -3,15 +3,17 @@ define('routes',function(){
     function routeConfig($locationProvider, $stateProvider, $urlRouterProvider){
        
         $stateProvider
-        .state('dashboard', {
-            url: '/dashboard',
-            template: '<dashboard></dashboard>'
+        .state('review-status', {
+            url: '/review-status',
+            template: '<page-two></page-two>',
+            title: 'Review Status'
         })
-        .state('page2', {
-          url: '/page2',
-          template: '<page-two></page-two>',
+        .state('another-view', {
+          url: '/another-view',
+          template: '<dashboard></dashboard>',
+          title: 'Another View'
         })
-        $urlRouterProvider.otherwise('/dashboard');
+        $urlRouterProvider.otherwise('/review-status');
     }
     routeConfig.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
     return routeConfig;

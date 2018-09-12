@@ -61,6 +61,12 @@
     }
     .objectPlaceholder {
         height: 400px;
+        &.halfHeight {
+            height: 250px;
+        }
+        &.quarterHeight {
+            height: 100px;
+        }
     }
 
 }

@@ -1,13 +1,14 @@
 <header class="site-header">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-3">
+            <div class="col-xs-4">
                     <div class="brand">
-                        <img src="/assets/images/IBM-Logo.png" class="img-responsive" />
+                        <img src="/assets/images/IBM-Logo.png" />
+                        <span class="view-title">{{th.pageTitle}}<span ng-if="th.currentSelectionsService.noOfSel === 1"> for {{th.currentSelectionsService.clientName}}</span>
                     </div>
             </div>  
                 
-            <div class="col-xs-9 text-right">
+            <div class="col-xs-8 text-right">
                 <reload-time></reload-time>
                 <!-- <button class="btn-clean" ng-click="th.toggleSidebar()"><i class="fa fa-filter"></i></button> -->
                     <div class="hamburger" ng-class="{'active': th.navigation }" ng-click="th.toggleNav()">
@@ -27,6 +28,9 @@
         <div class="col-md-2">
                 <simple-object object-class="filterObject" object-id="sjXxhLZ"></simple-object>
         </div>
+        <div class="col-md-2 col-md-offset-6">
+                <a ng-href="https://strueview2.deloitte.com/#/my-inspections/selfAssessment/inspections" target="_blank" class="btn btn-primary">Data Submission Portal <i class="fa fa-external-link"></i></a>
+        </div>
     </div>
     
 </header>
@@ -39,12 +43,12 @@
 <div id="navigation" ng-class="{'slideIn' : th.navigation }">
         <ul class="nav-links">
                 <li ui-sref-active="active">
-                    <a ui-sref="dashboard">
-                        <span>Dashboard</span>
+                    <a ui-sref="review-status">
+                        <span>Review Status</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
-                    <a ui-sref="page2">
+                    <a ui-sref="another-view">
                         <span>Another View</span>
                     </a>
                 </li>

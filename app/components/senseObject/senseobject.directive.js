@@ -78,7 +78,10 @@
                 return {
                     bindings: {
                         qlikId: '@',
-                        qlikTitle: '@'
+                        qlikTitle: '@',
+                        objectClass: '@',
+                        externalUrl: '@',
+                        linkLabel: '@'
                     },
                     controller: senseObjectController,
                     controllerAs: 'so',

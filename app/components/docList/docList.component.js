@@ -6,6 +6,7 @@
             docListController.$inject = ['qlikService'];
             function docListController(qlikService){
                 var vm = this;
+                var objectId;
                 
                 init();
 
@@ -36,6 +37,7 @@
                     }, function(reply) {
                         // console.log(reply);
                         vm.docs = [];
+                        objectId = reply.qInfo.qId;
                         $.each(reply.qHyperCube.qDataPages[0].qMatrix, function(key, value) {
                             if(!value[0].qIsNull && !value[1].qIsNull){
                                 vm.docs.push({
@@ -43,7 +45,6 @@
                                     'url' : value[1].qText
                                 });
                             }
-                                
                         });
                         // console.log(vm.docs);
                     });
@@ -52,7 +53,11 @@
                 function init(){
                     getDocs();
                     console.log('init');
-    
+                }
+
+
+                vm.$onDestroy = function(){
+                    console.log("Destroy object: "+objectId);
                 }
             }
     

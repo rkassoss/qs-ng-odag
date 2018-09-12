@@ -1,12 +1,20 @@
 <div div class="panel">
-        <div class="chart-icons text-right">
-                <button class="btn btn-chart" ng-click="so.exportToExcel()"><i class="fa fa-download"></i></button>
-                <button class="btn btn-chart hidden-xs" ng-click="so.expand()"><i class="fa fa-expand"></i></button>
-        </div>
+
     <div class="panel-header">
                 <h4>{{so.title}}</h4>
     </div>
         <div class="panel-body viz-panel-body">
-            <div class="objectPlaceholder" id="{{so.qlikId}}"></div>
+            <div class="objectPlaceholder {{so.objectClass}}" id="{{so.qlikId}}"></div>
+        </div>
+
+        <div class="chart-icons text-right">
+            <div class="left-btns">
+                    <button class="btn btn-chart" ng-click="so.exportToExcel()"><i class="fa fa-download"></i></button>
+                    <button class="btn btn-chart hidden-xs" ng-click="so.expand()"><i class="fa fa-expand"></i></button>
+            </div>
+                
+            <div class="chart-cta pull-right" ng-if="so.externalUrl">
+                    <a ng-href="{{so.externalUrl}}" target="_blank" class="btn btn-primary">{{so.linkLabel}} <i class="fa fa-external-link"></i></a>
+            </div>
         </div>
 </div>

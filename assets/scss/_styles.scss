@@ -12,12 +12,26 @@ body {
     }
 }
 
+.btn {
+    @include transition(background-color .3s);
+}
+
+.btn-primary {
+    background-color: $ibmBlue; color: white; border: 0; box-shadow: 0;
+    .fa {
+        margin-left: 10px;
+    }
+    &:hover {
+        background-color: darken($ibmBlue, 10%);
+    }
+}
+
 #viewWrap {
     @include transition(margin-right .3s);
     margin-right: 0;
     padding-top: 200px;
     &.move {
-        margin-right: 300px;
+        margin-right: 250px;
     }
 }
 
@@ -31,6 +45,7 @@ ul {
 .margin-bottom {
     margin-bottom: 30px;
 }
+
 .panel {
     border: 0; margin-bottom: 30px;
     box-shadow: 6px 5px 11px rgba(228, 228, 228, 0.5);
@@ -45,12 +60,18 @@ ul {
         }
     }
     .chart-icons {
-        opacity: 0; @include transition(opacity .3s);
-        position: absolute; top: 0; right: 0;
+        position: absolute; bottom: 0; left: 0; right: 0;
+        .left-btns {
+           float: left;
+        }
+    }
+    .btn-chart {
+        @include opacity(0);
+        @include transition(opacity .3s);
     }
     &:hover {
-        .chart-icons {
-            opacity: 1;
+        .btn-chart {
+            @include opacity(1);
         }
     }
 }
@@ -60,14 +81,15 @@ ul {
 .objectPlaceholder {
     width: 100%;
     @include transition(opacity 1s);
-    opacity: 1;
+    @include opacity(1);
+    margin-bottom: 30px;
     article.qv-object {
         header.qv-object-header {
             display: none;
         }
     }
     &.animateOut {
-        opacity: 0;
+        @include opacity(0);
     }
 }
 
@@ -119,11 +141,11 @@ button, a {
 }
 
 .btn-chart {
-    background-color: #f4f4f4; border: 0;box-shadow: none;
+    background-color: transparent; border: 0; box-shadow: none;
+    @include transition(font-size .3s);
     &:hover {
-        background-color: $ibmBlue; color: white;
+        color: $ibmBlue;
     }
-
 }
 
 
