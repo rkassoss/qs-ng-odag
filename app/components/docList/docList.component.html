@@ -1,0 +1,18 @@
+<div class="panel">
+        <div class="panel-header">
+                <h4>Review Documents</h4>
+        </div>
+        <div class="panel-body">
+                <div class="objectPlaceholder">
+                        <dropdown-search search-placeholder="Search document" qlik-field="NAME"></dropdown-search>
+                        <div class="docs">
+                            <ul>
+                                <li ng-repeat="row in dl.docs">
+                                        <a href="{{row.url}}" target="_blank">{{row.docname}} <i class="fa fa-file-pdf-o"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+        </div>
+            
+    </div>

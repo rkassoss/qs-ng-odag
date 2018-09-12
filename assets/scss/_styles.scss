@@ -82,27 +82,6 @@ ul {
     }
 }
 
-
-.docs {
-    overflow-y: scroll; max-height: 300px;
-    border: 1px solid #f2f2f2;
-    border-radius: 4px;
-    a {
-        display: block; padding: 15px; background-color: white; 
-        border-bottom: 1px solid #f2f2f2;
-        
-        @include transition(background-color .3s);
-        position: relative;
-        &:hover {
-            background-color: #f4f4f4;
-        }
-        .fa {
-            position: absolute; right: 0; top: 18px;
-        }
-    }
-}
-
-
 .panel-contact {
     position: relative;
     background-color: $ibmBlue; color: white;
@@ -150,17 +129,20 @@ button, a {
 
 .dropdown-list-search-container {
     position: relative;
+    .fa-search {
+        position: absolute; left: 15px; top: 18px;
+        color: #555;
+    }
     .btn-clean {
-        position: absolute; top: 18px; right: 10px;
+        position: absolute; top: 18px; right: 15px;
         color: #999;
     }
     .form-control {
-        
         padding: 15px;
         height: auto;
         border-radius: 4px;
-        font-size: 18px;line-height: 24px;
-        margin-bottom: 15px;
+        font-size: 18px;line-height: 24px; font-style: italic;
+        margin-bottom: 15px; padding-left: 45px;
         &.active {
             border-color: $darkBlue;
             border-radius: 4px 4px 0 0;
@@ -215,6 +197,25 @@ button, a {
     }
 }
 
+
+.docs {
+    overflow-y: scroll; max-height: 300px;
+    border: 1px solid #f2f2f2;
+    border-radius: 4px;
+    a {
+        display: block; padding: 15px; background-color: white; 
+        border-bottom: 1px solid #f2f2f2;
+        
+        @include transition(background-color .3s);
+        position: relative;
+        &:hover {
+            background-color: #f4f4f4;
+        }
+        .fa {
+            position: absolute; right: 5px; top: 18px;
+        }
+    }
+}
 
 
 .table-wrap {

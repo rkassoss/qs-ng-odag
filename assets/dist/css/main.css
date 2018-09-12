@@ -218,28 +218,6 @@ ul {
   .simpleObject.filterObject {
     height: 35px; }
 
-.docs {
-  overflow-y: scroll;
-  max-height: 300px;
-  border: 1px solid #f2f2f2;
-  border-radius: 4px; }
-  .docs a {
-    display: block;
-    padding: 15px;
-    background-color: white;
-    border-bottom: 1px solid #f2f2f2;
-    -moz-transition: background-color 0.3s;
-    -o-transition: background-color 0.3s;
-    -webkit-transition: background-color 0.3s;
-    transition: background-color 0.3s;
-    position: relative; }
-    .docs a:hover {
-      background-color: #f4f4f4; }
-    .docs a .fa {
-      position: absolute;
-      right: 0;
-      top: 18px; }
-
 .panel-contact {
   position: relative;
   background-color: #0869ff;
@@ -284,10 +262,15 @@ button, a {
 
 .dropdown-list-search-container {
   position: relative; }
+  .dropdown-list-search-container .fa-search {
+    position: absolute;
+    left: 15px;
+    top: 18px;
+    color: #555; }
   .dropdown-list-search-container .btn-clean {
     position: absolute;
     top: 18px;
-    right: 10px;
+    right: 15px;
     color: #999; }
   .dropdown-list-search-container .form-control {
     padding: 15px;
@@ -295,7 +278,9 @@ button, a {
     border-radius: 4px;
     font-size: 18px;
     line-height: 24px;
-    margin-bottom: 15px; }
+    font-style: italic;
+    margin-bottom: 15px;
+    padding-left: 45px; }
     .dropdown-list-search-container .form-control.active {
       border-color: #041974;
       border-radius: 4px 4px 0 0;
@@ -347,6 +332,28 @@ button, a {
   .search-results.show {
     opacity: 1;
     max-height: 500px; }
+
+.docs {
+  overflow-y: scroll;
+  max-height: 300px;
+  border: 1px solid #f2f2f2;
+  border-radius: 4px; }
+  .docs a {
+    display: block;
+    padding: 15px;
+    background-color: white;
+    border-bottom: 1px solid #f2f2f2;
+    -moz-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    position: relative; }
+    .docs a:hover {
+      background-color: #f4f4f4; }
+    .docs a .fa {
+      position: absolute;
+      right: 5px;
+      top: 18px; }
 
 .table-wrap button.toggle-table {
   display: block;
