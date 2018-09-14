@@ -16,8 +16,11 @@
         padding-top: 235px;
         &.move {
             margin-right: 0;
-
         }
+        &.shift {
+            margin-left: 0;
+        }
+
     }
     #lastRelaod {
         font-size: 14px; 

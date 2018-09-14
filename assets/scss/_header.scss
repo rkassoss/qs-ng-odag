@@ -13,7 +13,7 @@ header.site-header {
         }
     }
     button {
-         font-size: 3rem;
+         font-size: 18px;
         &:hover {
             color: $ibmBlue;
         }
@@ -24,6 +24,11 @@ header.site-header {
     background-color: $darkBlue; padding: 15px;
     .btn-primary {
         width: 100%;
+    }
+    .fa {
+        margin-left: 10px;
+
+
     }
 }
 
@@ -70,6 +75,40 @@ header.site-header {
         font-size: 16px;
     }
 }
+
+
+#sidebarMenu {
+    position: fixed; left: 0; top: 171px; bottom: 0; width: 250px;
+    z-index: 999; background-color: black;
+    @include transform(translateX(-100%));
+    @include transition(transform .3s);
+    h3 {
+        color: white;
+    }
+    .filter {
+        li {
+            margin: 0y; padding: 0; 
+            &.nativeFilters {
+                margin-bottom: 15px;
+            }
+        }
+    }
+    &.slideIn {
+        @include transform(translateX(0));
+    }
+    .custom-dropdown {
+        width: 100%;
+        .dropdown-toggle {
+            width: 100%; display: block; text-align: left;
+        }
+        .dropdown-menu {
+            max-height: 500px; overflow: auto;
+            li a {
+                color: black;
+            }
+        }
+    }
+ }
 // #sidebarMenu {
 //     position: fixed; right: 0; top: 67px; bottom: 0;
 //     z-index: 999; width: 300px;

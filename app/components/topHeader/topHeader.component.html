@@ -23,10 +23,10 @@
     <div id="CurrentSelections"></div>
     <div class="row filtersRow">
         <div class="col-md-2">
-                <simple-object object-class="filterObject" object-id="ucvaSJw"></simple-object>
+            <button class="btn btn-secondary" ng-click="th.toggleSidebar()">Filter<i class="fa fa-filter"></i></button>
         </div>
         <div class="col-md-2">
-                <simple-object object-class="filterObject" object-id="sjXxhLZ"></simple-object>
+                <button class="btn btn-secondary">Current Selections</button>
         </div>
         <div class="col-md-2 col-md-offset-6">
                 <a ng-href="https://strueview2.deloitte.com/#/my-inspections/selfAssessment/inspections" target="_blank" class="btn btn-primary">Data Submission Portal <i class="fa fa-external-link"></i></a>
@@ -44,14 +44,26 @@
         <ul class="nav-links">
                 <li ui-sref-active="active">
                     <a ui-sref="review-status">
-                        <span>Review Status</span>
+                        <span><i class="fa fa-edit"></i>Review Status</span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="another-view">
-                        <span>Another View</span>
+                        <span><i class="fa fa-eye"></i>Another View</span>
                     </a>
                 </li>
         </ul>
         <reload-time></reload-time>
 </div>
+
+<div id="sidebarMenu" ng-class="{'slideIn' : th.sidebarIn }">
+    <ul class="filter">
+        <h3></h3>
+        <li class="nativeFilters">
+            <filter-dropdown field-name="Unit_Name"></filter-dropdown>
+        </li>
+        <li class="nativeFilters">
+            <filter-dropdown field-name="Evaluation_type"></filter-dropdown> 
+        </li>
+    </ul>
+</div> 
