@@ -7,4 +7,4 @@ Run 'gulp watch'
 
 It should open your browser with livereload on http://localhost:3000.
 
-The mashup uses the demo app "Helpdesk Management.qvf".
+The mashup uses the demo app "IBM ESL Customer MASHUP v0.0.0".

@@ -4,31 +4,23 @@
             <div class="col-xs-4">
                     <div class="brand">
                         <img src="/assets/images/IBM-Logo.png" />
-                        <span class="view-title">{{th.pageTitle}}<span ng-if="th.currentSelectionsService.noOfSel === 1"> for {{th.currentSelectionsService.clientName}}</span>
+                        <span class="view-title">Name of the App - {{th.pageTitle}}<span ng-if="th.currentSelectionsService.noOfSel === 1"> for {{th.currentSelectionsService.clientName}}</span>
                     </div>
             </div>  
                 
             <div class="col-xs-8 text-right">
                 <reload-time></reload-time>
                 <!-- <button class="btn-clean" ng-click="th.toggleSidebar()"><i class="fa fa-filter"></i></button> -->
-                    <div class="hamburger" ng-class="{'active': th.navigation }" ng-click="th.toggleNav()">
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                        <span class="bar"></span>
-                    </div>
+
+                <button class="btn-clean" ng-click="th.toggleSidebar()"><i class="fa fa-filter fa-2x"></i></button>
+                    
             </div>
         </div>
     </div>
 
     <div id="CurrentSelections"></div>
     <div class="row filtersRow">
-        <div class="col-md-2">
-            <button class="btn btn-secondary" ng-click="th.toggleSidebar()">Filter<i class="fa fa-filter"></i></button>
-        </div>
-        <div class="col-md-2">
-                <button class="btn btn-secondary">Current Selections</button>
-        </div>
-        <div class="col-md-2 col-md-offset-6">
+        <div class="col-md-2 col-md-offset-10">
                 <a ng-href="https://strueview2.deloitte.com/#/my-inspections/selfAssessment/inspections" target="_blank" class="btn btn-primary">Data Submission Portal <i class="fa fa-external-link"></i></a>
         </div>
     </div>
@@ -41,29 +33,34 @@
     <filter-dropdown field-name="Priority"></filter-dropdown>
 </div> -->
 <div id="navigation" ng-class="{'slideIn' : th.navigation }">
+        <div class="hamburger" ng-class="{'active': th.navigation }" ng-click="th.toggleNav()">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+        </div>
         <ul class="nav-links">
                 <li ui-sref-active="active">
                     <a ui-sref="review-status">
-                        <span><i class="fa fa-edit"></i>Review Status</span>
+                        <span><i class="fa fa-edit"></i><span class="nav-label">Review Status</span></span>
                     </a>
                 </li>
                 <li ui-sref-active="active">
                     <a ui-sref="another-view">
-                        <span><i class="fa fa-eye"></i>Another View</span>
+                        <span><i class="fa fa-eye"></i><span class="nav-label">Another View</span></span>
                     </a>
                 </li>
         </ul>
         <reload-time></reload-time>
 </div>
 
-<div id="sidebarMenu" ng-class="{'slideIn' : th.sidebarIn }">
+<div id="filters" ng-class="{'slideIn' : th.sidebarIn }">
     <ul class="filter">
         <h3></h3>
-        <li class="nativeFilters">
+        <li class="">
             <filter-dropdown field-name="Unit_Name"></filter-dropdown>
         </li>
-        <li class="nativeFilters">
-            <filter-dropdown field-name="Evaluation_type"></filter-dropdown> 
+        <li class="">
+            <filter-dropdown field-name="Evaluation_Type"></filter-dropdown> 
         </li>
     </ul>
 </div> 

@@ -9,6 +9,8 @@
                     var vm = this;
                     var objectId;
 
+                    vm.openDropdown = false;
+
                     vm.fetchValues = fetchValues;
                     vm.applySelection = applySelection;
 
@@ -20,9 +22,10 @@
                     }
 
                     function fetchValues() {
+                        console.log(vm.fieldName);
                         qlikService.getApp().createList({
                             "qDef": {
-                                "qFieldDefs": ["["+ vm.fieldName +"]"],
+                                "qFieldDefs": [vm.fieldName],
                                 "qSortCriterias": [{
                                     "qSortByLoadOrder"  : 0,
                                     "qSortByAscii" : 1
@@ -38,7 +41,7 @@
                                 qWidth : 1
                             }]
                         }, function(reply) {
-                            console.log(reply);
+                            console.log(reply.qListObject.qDataPages);
                             objectId = reply.qInfo.qId;
                             vm.rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
                         });

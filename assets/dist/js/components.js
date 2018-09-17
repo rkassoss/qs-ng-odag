@@ -9,6 +9,8 @@
                     var vm = this;
                     var objectId;
 
+                    vm.openDropdown = false;
+
                     vm.fetchValues = fetchValues;
                     vm.applySelection = applySelection;
 
@@ -20,9 +22,10 @@
                     }
 
                     function fetchValues() {
+                        console.log(vm.fieldName);
                         qlikService.getApp().createList({
                             "qDef": {
-                                "qFieldDefs": ["["+ vm.fieldName +"]"],
+                                "qFieldDefs": [vm.fieldName],
                                 "qSortCriterias": [{
                                     "qSortByLoadOrder"  : 0,
                                     "qSortByAscii" : 1
@@ -38,7 +41,7 @@
                                 qWidth : 1
                             }]
                         }, function(reply) {
-                            console.log(reply);
+                            console.log(reply.qListObject.qDataPages);
                             objectId = reply.qInfo.qId;
                             vm.rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
                         });
@@ -74,85 +77,6 @@
 
         return filterDropdown();
     });
-
-} ());
-(function () {
-    'use strict';
-
-    define('docList',function(){
-        function docList() {
-            docListController.$inject = ['qlikService'];
-            function docListController(qlikService){
-                var vm = this;
-                var objectId;
-                
-                init();
-
-                console.log('in');
-
-                function getDocs() {
-                    qlikService.getApp().createCube({
-                        qDimensions : [{
-                            qDef : {
-                                qFieldDefs : ["NAME"]
-                            }
-                        }, {
-                            qDef : {
-                                qFieldDefs : ["URL"]
-                            }
-                        }],
-                        qMeasures : [{
-                            qDef : {
-                                qDef : "1"
-                            }
-                        }],
-                        qInitialDataFetch : [{
-                            qTop : 0,
-                            qLeft : 0,
-                            qHeight : 100,
-                            qWidth : 2
-                        }]
-                    }, function(reply) {
-                        // console.log(reply);
-                        vm.docs = [];
-                        objectId = reply.qInfo.qId;
-                        $.each(reply.qHyperCube.qDataPages[0].qMatrix, function(key, value) {
-                            if(!value[0].qIsNull && !value[1].qIsNull){
-                                vm.docs.push({
-                                    'docname' : value[0].qText,
-                                    'url' : value[1].qText
-                                });
-                            }
-                        });
-                        // console.log(vm.docs);
-                    });
-                }
-    
-                function init(){
-                    getDocs();
-                    console.log('init');
-                }
-
-
-                vm.$onDestroy = function(){
-                    console.log("Destroy object: "+objectId);
-                }
-            }
-    
-            return {
-                bindings: {},
-                controller: docListController,
-                controllerAs: 'dl',
-                templateUrl: '/app/components/docList/docList.component.html'
-            }
-        }
-
-        return docList();
-        
-    });
-
-
-    
 
 } ());
 (function () {
@@ -537,6 +461,85 @@ define( 'topHeader',function () {
 
     return topHeader();
 });
+(function () {
+    'use strict';
+
+    define('docList',function(){
+        function docList() {
+            docListController.$inject = ['qlikService'];
+            function docListController(qlikService){
+                var vm = this;
+                var objectId;
+                
+                init();
+
+                console.log('in');
+
+                function getDocs() {
+                    qlikService.getApp().createCube({
+                        qDimensions : [{
+                            qDef : {
+                                qFieldDefs : ["NAME"]
+                            }
+                        }, {
+                            qDef : {
+                                qFieldDefs : ["URL"]
+                            }
+                        }],
+                        qMeasures : [{
+                            qDef : {
+                                qDef : "1"
+                            }
+                        }],
+                        qInitialDataFetch : [{
+                            qTop : 0,
+                            qLeft : 0,
+                            qHeight : 100,
+                            qWidth : 2
+                        }]
+                    }, function(reply) {
+                        // console.log(reply);
+                        vm.docs = [];
+                        objectId = reply.qInfo.qId;
+                        $.each(reply.qHyperCube.qDataPages[0].qMatrix, function(key, value) {
+                            if(!value[0].qIsNull && !value[1].qIsNull){
+                                vm.docs.push({
+                                    'docname' : value[0].qText,
+                                    'url' : value[1].qText
+                                });
+                            }
+                        });
+                        // console.log(vm.docs);
+                    });
+                }
+    
+                function init(){
+                    getDocs();
+                    console.log('init');
+                }
+
+
+                vm.$onDestroy = function(){
+                    console.log("Destroy object: "+objectId);
+                }
+            }
+    
+            return {
+                bindings: {},
+                controller: docListController,
+                controllerAs: 'dl',
+                templateUrl: '/app/components/docList/docList.component.html'
+            }
+        }
+
+        return docList();
+        
+    });
+
+
+    
+
+} ());
 (function () {
     'use strict';
 

@@ -27,11 +27,11 @@ body {
 }
 
 #viewWrap {
-    @include transition(margin-right .3s);
-    margin-right: 0;
+    @include transition(margin-left .3s);
+    margin-left: 65px;
     padding-top: 200px;
     &.move {
-        margin-right: 250px;
+        margin-left: 250px;
     }
 }
 
@@ -152,19 +152,17 @@ button, a {
 .dropdown-list-search-container {
     position: relative;
     .fa-search {
-        position: absolute; left: 15px; top: 18px;
+        position: absolute; left: 15px; top:5px;
         color: #555;
     }
     .btn-clean {
-        position: absolute; top: 18px; right: 15px;
-        color: #999;
+        position: absolute; top: 7px; right: 15px;
+        color: rgb(190, 190, 190);
     }
     .form-control {
-        padding: 15px;
-        //height: auto;
         border-radius: 4px;
-        font-size: 18px;line-height: 24px; font-style: italic;
-        margin-bottom: 15px; padding-left: 45px;
+       font-style: italic;
+        margin-bottom: 15px; 
         &.active {
             border-color: $darkBlue;
             border-radius: 4px 4px 0 0;
