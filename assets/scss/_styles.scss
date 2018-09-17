@@ -29,7 +29,7 @@ body {
 #viewWrap {
     @include transition(margin-left .3s);
     margin-left: 65px;
-    padding-top: 200px;
+    padding-top: 160px;
     &.move {
         margin-left: 250px;
     }

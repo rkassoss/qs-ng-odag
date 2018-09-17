@@ -1,26 +1,45 @@
 <header class="site-header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4">
-                    <div class="brand">
-                        <img src="/assets/images/IBM-Logo.png" />
-                        <span class="view-title">Name of the App - {{th.pageTitle}}<span ng-if="th.currentSelectionsService.noOfSel === 1"> for {{th.currentSelectionsService.clientName}}</span>
-                    </div>
-            </div>  
+    <div class="topbar">
+        <div class="brand">
+            <img class="img-responsive" src="/assets/images/IBM-Logo.png" />
+        </div>
                 
-            <div class="col-xs-8 text-right">
-                <reload-time></reload-time>
-                <!-- <button class="btn-clean" ng-click="th.toggleSidebar()"><i class="fa fa-filter"></i></button> -->
+        <div class="actions">
+                <div class="custom-currentS-wrap" ng-mouseover="showS=true" ng-mouseleave="showS=false">
+                        <button type="button" class="btn-clean selButton">Current Selections <i class="fa fa-angle-down"></i><span class="badge" ng-if="th.currentSelectionsService.numberOfSelections">{{th.currentSelectionsService.numberOfSelections}}</span></button>
+                        <div class="currentS" ng-show="showS && th.currentSelectionsService.numberOfSelections">
+                            <ul>
+                                <li ng-repeat="selection in th.currentSelectionsService.selections">
+                                    <span class="theField">{{selection.qField}}</span><span class="theSel">{{selection.qSelected}}</span>
+                                <button ng-click="th.currentSelectionsService.clearSelection(selection.qField)" class="btn-clean btn-close"><i class="fa fa-close" ></i></button>
+                                </li>
 
-                <button class="btn-clean" ng-click="th.toggleSidebar()"><i class="fa fa-filter fa-2x"></i></button>
-                    
-            </div>
+                                <li class="text-center"><button class="btn-clean" ng-click="th.currentSelectionsService.clearAll()"><i class="fa fa-refresh"></i>Clear All Selections</button></li>
+                            </ul>
+                        </div>
+                </div>
+                <button type="button" class="btn-clean" ng-click="th.toggleSidebar()">Filters <i class="fa fa-filter"></i></button>
         </div>
     </div>
 
-    <div id="CurrentSelections"></div>
-    <div class="row filtersRow">
-        <div class="col-md-2 col-md-offset-10">
+    <!-- Using custom, current selections instead -->
+    <!-- <div id="CurrentSelections"></div> -->
+
+    <div class="blueRow">
+        <div id="appTitle">
+            {{th.appTitle}}
+        </div>
+        <div class="page-title">{{th.pageTitle}}</div>
+        <div class="clientName" ng-if="th.currentSelectionsService.noOfSel === 1"> 
+            for {{th.currentSelectionsService.clientName}}
+        </div>
+
+        <div id="lastRelaod">
+            Status as of:
+            {{ th.relaodTime | date:"MM/dd/yyyy 'at' h:mma" }}
+        </div>
+
+        <div class="externalLink">
                 <a ng-href="https://strueview2.deloitte.com/#/my-inspections/selfAssessment/inspections" target="_blank" class="btn btn-primary">Data Submission Portal <i class="fa fa-external-link"></i></a>
         </div>
     </div>

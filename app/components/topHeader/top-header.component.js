@@ -37,8 +37,13 @@ define( 'topHeader',function () {
             
             init();
             function init() {
-                qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
+                // qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
                 currentSelectionsService.getCurrentSelections();
+                qlikService.getApp().getAppLayout(function(layout){
+                    console.log(layout);
+                    vm.relaodTime = layout.qLastReloadTime;
+                    vm.appTitle = layout.qTitle;
+                });
             }
         }
         return {

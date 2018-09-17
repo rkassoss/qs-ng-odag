@@ -2,49 +2,110 @@ header.site-header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 10;
     background-color: white;
     box-shadow: 1px 1px 10px;
+    .topbar {
+        padding: 15px;
+        @include flexbox(); align-items: baseline; justify-content: space-between;
+    }
     .brand {
-        margin: 15px 0;
-        @include flexbox();
-        align-items: flex-end;
-        img {
-            max-width: 90px;
-        }
-        span {
-            font-size: 16px;
-            line-height: 16px;
-            border-left: 3px solid;
-            padding-left: 10px;
-            margin-left: 30px;
-        }
+        max-width: 80px;
     }
     button {
-         font-size: 18px;
+        font-size: 18px;
         &:hover {
             color: $ibmBlue;
         }
     }
 }
 
-.filtersRow {
-    background-color: $darkBlue; padding: 15px;
+.blueRow {
+    background-color: $darkBlue; color: white; padding: 15px;
+    @include flexbox(); align-items: center;
     .btn-primary {
-        width: 100%;
+        max-width: 320px; float: right;
     }
     .fa {
         margin-left: 10px;
-
-
+    }
+    .externalLink {
+        flex: 1;
     }
 }
 
-#CurrentSelections {
-    .buttons-end {
-        display: none;
-    }   
+// #CurrentSelections {
+//     .buttons-end {
+//         display: none;
+//     }   
+// }
+
+.custom-currentS-wrap {
+    display: inline-block; position: relative;
+    .currentS {
+        position: absolute;
+        z-index: 999;
+        top: 0;
+        right: 15px;
+        width: 400px;
+        max-height: 400px;
+        background-color: transparent;
+        padding: 40px 15px 15px 15px;
+        ul {
+            background-color: white; width: 100%; text-align: left;
+            position: relative; border-radius: 4px 0 4px 4px;
+            box-shadow: 1px 1px 10px;
+            li {
+                list-style: none; display: block; position: relative;
+                border-bottom: 1px solid #fafafa; padding: 15px;
+                .theField {
+                    background-color: $ibmBlue; color: rgb(233, 233, 233);
+                    font-size: 14px; padding: 5px; 
+                }
+                .theSel {
+                    display: block; margin-top: 5px;
+                }
+                .btn-close {
+                    position: absolute; right: 15px; top: 15px; font-size: 18px; color: #999;
+                    &:hover {
+                        color: #333;
+                    }
+                }
+                &:nth-of-type(even) {
+                    background-color: rgb(238, 238, 238);
+                }
+                &:first-of-type {
+                    border-radius: 4px 4px 0 0;
+                }
+                &:last-of-type {
+                    border-radius: 0 0 4px 4px;
+                    .fa {
+                        margin-right: 10px;
+                    }
+                }
+            }
+
+            &:before {
+                position: absolute;
+                top: -6px;
+                right: 0px;
+                display: inline-block !important;
+                border-right: 7px solid transparent;
+                border-bottom: 7px solid white;
+                border-left: 7px solid transparent;
+                content: '';
+            }
+        }
+    }
+}
+
+.selButton {
+    position: relative; margin-right: 30px;
+    .badge {
+        position: absolute; right: -5px; top: -15px;
+        background-color: $ibmBlue;
+    }
 }
 
 #navigation {
-    position: fixed; left: 0; top: 63px; bottom: 0; width: 50px;
+    position: fixed; left: 0; top: 128px; bottom: 0; width: 50px;
 
     z-index: 999; background-color: black;
     // @include transform(translateX(-100%));
@@ -52,21 +113,22 @@ header.site-header {
 
     .nav-links {
         li {
-            margin: 0; padding: 0;
+            margin: 0; padding: 0; overflow: hidden;
             &.active {
-                a { font-weight: 700; background-color: rgba($ibmBlue,.2); }
+                a { background-color: rgb(114, 114, 114); }
             }
             a {
+                white-space: nowrap;
                 display: block; padding: 15px;
-                font-size: 18px; line-height: 32px; color: white;
+                font-size: 22px; line-height: 32px; color: white;
                 @include transition(background-color .3s, color .3s);
                 text-decoration: none;
                 .nav-label {
-                    display: none; margin-left: 15px;
+                    margin-left: 15px;
                 }
 
                 &:hover {
-                    background-color: #333;
+                    background-color: rgb(36, 36, 36);
                 }
             }
         }
@@ -74,13 +136,6 @@ header.site-header {
     &.slideIn {
         // @include transform(translateX(0));
         width: 250px;
-        .nav-links {
-            li {
-                a .nav-label {
-                    display: inline-block;
-                }
-            }
-        }
     }
     #lastRelaod {
         display: none;
@@ -96,7 +151,7 @@ header.site-header {
 
 
 #filters {
-    position: fixed; right: 0; top: 63px; bottom: 0; width: 250px;
+    position: fixed; right: 0; top: 128px; bottom: 0; width: 250px;
     z-index: 999; background-color: black;
     padding: 15px;
     @include transform(translateX(100%));
@@ -105,7 +160,7 @@ header.site-header {
         color: white;
     }
     .filter {
-        li {
+        > li {
             margin: 0; padding: 0; 
             margin-bottom: 15px;
         }
@@ -121,11 +176,18 @@ header.site-header {
                     position: absolute; right: 15px; top: 10px;
                 }
         }
-        .dropdown-menu {
+        .dropdown {
             max-height: 0; overflow: auto; display: block; margin: 0;
-            padding: 0; right: 0;
+            padding: 0; right: 0; top: 34px; left: 0; position: absolute; 
+            z-index: 9999;
+            background: white;  border-radius: 4px;
+            @include transition(max-height .3s);
             li a {
-                color: black;
+                color: black; padding: 5px 10px; display: block;
+                @include transition(background-color .3s);
+                &:hover {
+                    background-color: rgb(223, 223, 223);
+                }
             }
             &.open {
                 max-height: 500px;
@@ -133,12 +195,11 @@ header.site-header {
         }
     }
  }
-
-#lastRelaod {
+ #lastRelaod {
     display: inline-block;
-    border-right: 3px solid $darkBlue;
-    padding-right: 15px;
-    margin-right: 30px; margin-top: 15px;
+    border-left: 3px solid $darkBlue;
+    padding-left: 15px;
+    margin-left: 30px;
 }
 
 .hamburger {

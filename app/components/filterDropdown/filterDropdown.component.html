@@ -7,7 +7,7 @@
         </button>
         
 
-        <ul class="dropdown-menu" aria-labelledby="simple-dropdown" ng-class="{'open': fd.openDropdown}">
+        <ul class="dropdown" aria-labelledby="simple-dropdown" ng-class="{'open': fd.openDropdown}">
                 <dropdown-search qlik-field="{{fd.fieldName}}"></dropdown-search>
                 <li ng-repeat="row in fd.rows"><a href ng-click="fd.applySelection(row.qText)">{{row.qText}}</a></li>
         </ul>

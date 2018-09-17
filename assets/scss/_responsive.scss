@@ -54,6 +54,12 @@
     }
     .objectPlaceholder {
         height: 350px;
+        &.halfHeight {
+            height: 210px;
+        }
+        &.quarterHeight {
+            height: 70px;
+        }
     }
 }
 
@@ -62,16 +68,6 @@
     .kpiObject {
         height: 200px;
     }
-    .objectPlaceholder {
-        height: 400px;
-        &.halfHeight {
-            height: 250px;
-        }
-        &.quarterHeight {
-            height: 100px;
-        }
-    }
-
 }
 
 // lg

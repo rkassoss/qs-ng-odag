@@ -122,7 +122,6 @@ require(["js/qlik"], function (qlik) {
             "routes", 
             'dashboard',
             'pageTwo',
-            'reloadTime',
             'topHeader',
             'senseObject', 
             'simpleObject',
@@ -136,7 +135,7 @@ require(["js/qlik"], function (qlik) {
             'qlikService',
             'currentSelectionsService'
     ],
-        function (angular, uiRoute, uibootstrap, routes,dashboard,pageTwo, reloadTime,topHeader, senseObject, simpleObject,docList, tableButton, filterDropdown,dropdownSearch,simpleTable, expandModal, dataService, qlikService,currentSelectionsService) {
+        function (angular, uiRoute, uibootstrap, routes,dashboard,pageTwo,topHeader, senseObject, simpleObject,docList, tableButton, filterDropdown,dropdownSearch,simpleTable, expandModal, dataService, qlikService,currentSelectionsService) {
 
             app = angular.module('mashup-app', [
                 'ui.router',
@@ -154,8 +153,6 @@ require(["js/qlik"], function (qlik) {
             app.config(routes);
             app.component('dashboard',dashboard);
             app.component('pageTwo',pageTwo);
-
-            app.component('reloadTime',reloadTime);
 
             app.component('topHeader',topHeader);
 

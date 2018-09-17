@@ -6,6 +6,8 @@ define('currentSelectionsService', function () {
         var service = this;
 
         service.getCurrentSelections = getCurrentSelections;
+        service.clearSelection = clearSelection;
+        service.clearAll = clearAll;
 
         function getCurrentSelections() {
             var _numberOfSelections, _selections;
@@ -31,7 +33,17 @@ define('currentSelectionsService', function () {
 
                 });
         }
+
+        function clearSelection(qField) {
+            console.log(qField);
+            qlikService.getApp().field(qField).clear();
+            service.currentSelection = "";
+        }
         
+        function clearAll(state) {
+            qlikService.getApp().clearAll(state);
+        }
+
 
     }
 
