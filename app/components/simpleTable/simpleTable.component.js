@@ -8,7 +8,7 @@
                 var vm = this;
                 vm.currentSelectionsService = currentSelectionsService;
 
-                var sessionObjectId;
+                var objectId;
     
                 function getContacts(field1,field2, field3) {
                     qlikService.getApp().createCube({
@@ -37,15 +37,17 @@
                             qWidth : 3
                         }]
                     }, function(reply) {
-                        console.log(reply);
-                        sessionObjectId = reply.qInfo.qId;
+                        // console.log(reply);
+                        objectId = reply.qInfo.qId;
                         vm.contacts = [];
                         $.each(reply.qHyperCube.qDataPages[0].qMatrix, function(key, value) {
+                            if(!value[2].qIsNull){
                                 vm.contacts.push({
                                     'user' : value[0].qText,
                                     'title' : value[1].qText,
                                     'email' : value[2].qText
                                 });
+                            }
                         });
                     });
                 }
@@ -59,7 +61,8 @@
                 }
 
                 vm.$onDestroy = function() {
-                    console.log("Destroy obejct:"+sessionObjectId);
+                    console.log("Destroy obejct:"+objectId);
+                    qlikService.getApp().destroySessionObject(objectId);
                 }
             }
     

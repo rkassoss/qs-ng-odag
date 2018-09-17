@@ -3,6 +3,15 @@
         <div class="brand">
             <img class="img-responsive" src="/assets/images/IBM-Logo.png" />
         </div>
+        <div id="appTitle">
+                <strong>App:</strong> {{th.appTitle}}
+        </div>
+        
+
+        <div id="lastRelaod">
+                <strong>Status as of:</strong>
+                {{ th.relaodTime | date:"MM/dd/yyyy 'at' h:mma" }}
+        </div>
                 
         <div class="actions">
                 <div class="custom-currentS-wrap" ng-mouseover="showS=true" ng-mouseleave="showS=false">
@@ -26,17 +35,9 @@
     <!-- <div id="CurrentSelections"></div> -->
 
     <div class="blueRow">
-        <div id="appTitle">
-            {{th.appTitle}}
-        </div>
-        <div class="page-title">{{th.pageTitle}}</div>
+        <div class="page-title"><strong>Page: </strong>{{th.pageTitle}}</div>
         <div class="clientName" ng-if="th.currentSelectionsService.noOfSel === 1"> 
-            for {{th.currentSelectionsService.clientName}}
-        </div>
-
-        <div id="lastRelaod">
-            Status as of:
-            {{ th.relaodTime | date:"MM/dd/yyyy 'at' h:mma" }}
+            <strong>Client: </strong>{{th.currentSelectionsService.clientName}}
         </div>
 
         <div class="externalLink">
@@ -76,10 +77,12 @@
     <ul class="filter">
         <h3></h3>
         <li class="">
-            <filter-dropdown field-name="Unit_Name"></filter-dropdown>
+            <!-- <filter-dropdown field-name="Unit_Name" field-label="Select a Customer"></filter-dropdown> -->
+            <simple-object object-id="ucvaSJw" object-class="filterObject"></simple-object>
         </li>
         <li class="">
-            <filter-dropdown field-name="Evaluation_Type"></filter-dropdown> 
+            <!-- <filter-dropdown field-name="Evaluation_Type" field-label="Select a Review Type"></filter-dropdown>  -->
+            <simple-object object-id="sjXxhLZ" object-class="filterObject"></simple-object>
         </li>
     </ul>
 </div> 

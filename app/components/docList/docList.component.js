@@ -10,8 +10,6 @@
                 
                 init();
 
-                console.log('in');
-
                 function getDocs() {
                     qlikService.getApp().createCube({
                         qDimensions : [{
@@ -52,12 +50,12 @@
     
                 function init(){
                     getDocs();
-                    console.log('init');
                 }
 
 
                 vm.$onDestroy = function(){
                     console.log("Destroy object: "+objectId);
+                    qlikService.getApp().destroySessionObject(objectId);
                 }
             }
     

@@ -1,14 +1,18 @@
 
 <!-- Simple dropdown -->
 <div class="custom-dropdown" >
-        <button type="button" class="btn btn-default" id="simple-dropdown" ng-click="fd.openDropdown = !fd.openDropdown">
-                {{fd.fieldName}} <i class="fa fa-caret-down"></i>
+        <button type="button" class="btn btn-default" id="simple-dropdown" ng-click="fd.filterDropdownService.toggleDDFilters(fd.fieldName)">
+                {{fd.fieldLabel}} <i class="fa fa-caret-down"></i>
                 <!-- {{fd.activeSelection}} -->
         </button>
         
 
-        <ul class="dropdown" aria-labelledby="simple-dropdown" ng-class="{'open': fd.openDropdown}">
+        <ul class="dropdown" aria-labelledby="simple-dropdown" ng-class="{'open': fd.filterDropdownService.currentItem === fd.fieldName }">
+
+                <button class="btn btn-danger" ng-click="fd.cancelSelection()"><i class="fa fa-times"></i></button>
+                <button class="btn btn-success" ng-click="fd.applySelection(fd.selectionArray)"><i class="fa fa-check"></i></button>
+
                 <dropdown-search qlik-field="{{fd.fieldName}}"></dropdown-search>
-                <li ng-repeat="row in fd.rows"><a href ng-click="fd.applySelection(row.qText)">{{row.qText}}</a></li>
+                <li ng-repeat="row in fd.rows" class="{{row.qState}}"><a href ng-click="fd.applySingleSelection(row.qText)">{{row.qText}}</a></li>
         </ul>
 </div>

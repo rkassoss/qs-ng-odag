@@ -54,13 +54,12 @@
                                                       });
                                               });
                                       });
-                                      console.log(vm.matches);
+                                    //   console.log(vm.matches);
                               });
       
                   }
       
                   this.$onInit = function() {
-                      console.log("Starting Dropdown Search");
                   }
               }
       

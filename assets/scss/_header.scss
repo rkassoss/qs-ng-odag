@@ -1,5 +1,5 @@
 header.site-header {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 10;
+    position: fixed; top: 0; left: 0; right: 0; z-index: 999;
     background-color: white;
     box-shadow: 1px 1px 10px;
     .topbar {
@@ -8,6 +8,13 @@ header.site-header {
     }
     .brand {
         max-width: 80px;
+    }
+    #appTitle {
+        margin-left: 15px;
+    }
+    .actions {
+        flex: 1;
+        @include flexbox(); justify-content: flex-end;
     }
     button {
         font-size: 18px;
@@ -18,7 +25,7 @@ header.site-header {
 }
 
 .blueRow {
-    background-color: $darkBlue; color: white; padding: 15px;
+    background-color: $darkBlue; color: white; padding: 15px 15px 15px 80px;
     @include flexbox(); align-items: center;
     .btn-primary {
         max-width: 320px; float: right;
@@ -28,6 +35,11 @@ header.site-header {
     }
     .externalLink {
         flex: 1;
+    }
+    .clientName {
+        border-left: 3px solid $ibmBlue;
+        padding-left: 10px;
+        margin-left: 15px;
     }
 }
 
@@ -105,8 +117,7 @@ header.site-header {
 }
 
 #navigation {
-    position: fixed; left: 0; top: 128px; bottom: 0; width: 50px;
-
+    position: fixed; left: 0; top: 67px; bottom: 0; width: 50px;
     z-index: 999; background-color: black;
     // @include transform(translateX(-100%));
     @include transition(width .3s);
@@ -151,10 +162,10 @@ header.site-header {
 
 
 #filters {
-    position: fixed; right: 0; top: 128px; bottom: 0; width: 250px;
-    z-index: 999; background-color: black;
+    position: fixed; right: 0; top: 127px; bottom: 0; width: 250px;
+    z-index: 998; background-color: black;
     padding: 15px;
-    @include transform(translateX(100%));
+    @include transform(translateX(110%));
     @include transition(transform .3s);
     h3 {
         color: white;
@@ -189,23 +200,33 @@ header.site-header {
                     background-color: rgb(223, 223, 223);
                 }
             }
+            li.S a {
+                background-color: #61a729; color: white;
+            }
+            li.O a {
+                background-color: white;
+            }
+            li.X a {
+                background-color: #999; color: white;
+            }
             &.open {
-                max-height: 500px;
+                margin-right: 5px;
+                max-height: 300px;
             }
         }
     }
  }
  #lastRelaod {
     display: inline-block;
-    border-left: 3px solid $darkBlue;
-    padding-left: 15px;
-    margin-left: 30px;
+    border-left: 3px solid $ibmBlue;
+    padding-left: 10px;
+    margin-left: 15px;
 }
 
 .hamburger {
     display: inline-block;
     cursor: pointer;
-    width: 20px; margin: 15px;
+    width: 20px; margin: 15px; height: 26px;
     .bar {
         display: block;
         width: 20px;
@@ -233,13 +254,7 @@ header.site-header {
     }
 }
 
-.lui-popover-container, .lui-dialog-container  {
+.lui-popover-container, .lui-dialog-container {
     position: fixed !important;
     z-index: 9999;
-    top: 158px !important;
-
-    .lui-popover__arrow {
-        display: none !important;
-   
-    }
  }

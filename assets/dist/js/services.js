@@ -17,7 +17,7 @@ define('currentSelectionsService', function () {
                     service.selections = _selections;
 
                     $.each(_selections, function(item,value){
-                        console.log(value);
+                        // console.log(value);
                         if (value.qField === 'Unit_Name') {
                             // $.each(value.qSelected, function(sel){
                             //     console.log(sel);
@@ -35,7 +35,7 @@ define('currentSelectionsService', function () {
         }
 
         function clearSelection(qField) {
-            console.log(qField);
+            // console.log(qField);
             qlikService.getApp().field(qField).clear();
             service.currentSelection = "";
         }
@@ -71,6 +71,29 @@ define( 'dataService',function () {
         return dataRetrieval;
 })
  
+define('filterDropdownService',function(){
+    function filterDropdownService() {
+        var service = this;
+  
+        service.toggleDDFilters = toggleDDFilters;
+        service.closeAllFilters = closeAllFilters;
+
+        function toggleDDFilters(itemId) {
+            // console.log('set itemId: '+itemId);
+            // console.log('previuos: '+service.currentItem);
+            if (itemId === service.currentItem) {
+                service.currentItem = null;
+            } else {
+                service.currentItem = itemId;
+            }
+        }
+
+        function closeAllFilters() {
+            service.currentItem = null;
+        }
+    }
+    return filterDropdownService;
+});
 define('qlikService', function () {
 
     function qlikService() {

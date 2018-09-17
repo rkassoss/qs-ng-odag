@@ -26,7 +26,7 @@ define( 'topHeader',function () {
 
             function toggleNav() {
                 vm.navigation = !vm.navigation;
-                console.log(vm.navigation);
+                // console.log(vm.navigation);
                 $('#viewWrap').toggleClass('move');
                 qlikObject.resize();
             }
@@ -40,7 +40,7 @@ define( 'topHeader',function () {
                 // qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
                 currentSelectionsService.getCurrentSelections();
                 qlikService.getApp().getAppLayout(function(layout){
-                    console.log(layout);
+                    // console.log(layout);
                     vm.relaodTime = layout.qLastReloadTime;
                     vm.appTitle = layout.qTitle;
                 });

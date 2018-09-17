@@ -17,7 +17,7 @@ define('currentSelectionsService', function () {
                     service.selections = _selections;
 
                     $.each(_selections, function(item,value){
-                        console.log(value);
+                        // console.log(value);
                         if (value.qField === 'Unit_Name') {
                             // $.each(value.qSelected, function(sel){
                             //     console.log(sel);
@@ -35,7 +35,7 @@ define('currentSelectionsService', function () {
         }
 
         function clearSelection(qField) {
-            console.log(qField);
+            // console.log(qField);
             qlikService.getApp().field(qField).clear();
             service.currentSelection = "";
         }
