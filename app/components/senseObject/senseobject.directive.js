@@ -12,6 +12,13 @@
 
                     vm.exportToExcel = exportToExcel;
                     vm.expand = expand;
+                    vm.exportPdf = exportPdf;
+
+                    var pdfSettings = {
+                        documentSize: "A4",
+                        aspectRatio: 2,
+                        orientation: "landscape"
+                    };
 
                    
 
@@ -38,6 +45,25 @@
                         });
                     }
 
+                    function exportImg() {
+                        if (qsVersion == 'Sep18') {
+                            vm.model.exportImg().then(function(result){
+                                console.log('Png Link:', result);
+                            });
+                        } else {
+                            alert('nope');
+                        }
+                    }
+
+                    function exportPdf() {
+                        if (qsVersion == 'Sep18') {
+                            vm.model.exportPdf().then(function(result){
+                                console.log('PDF Link:', result);
+                            });
+                        } else {
+                            alert('nope');
+                        }
+                    }
 
                     function getQlikObject() {
                         qlikService.getApp()

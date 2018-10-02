@@ -7,6 +7,15 @@
             function dashboardController(qlikService){
                 var vm = this;
                 
+
+                vm.string = 'test';
+
+
+
+                vm.submit = function() {
+                    vm.string = vm.string.split(",");
+                    qlikService.getApp().field('Unit_Name').selectValues(vm.string);
+                };
                 
 
                 init();

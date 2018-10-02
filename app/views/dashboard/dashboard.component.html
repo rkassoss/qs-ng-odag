@@ -1,4 +1,11 @@
 
+<form ng-submit="dash.submit()">
+    Enter text and hit enter:
+    <input type="text" ng-model="dash.string" name="string" />
+    <input type="submit" id="submit" value="Submit" />
+    <pre>string={{dash.string}}</pre>
+  </form>
+
 <div class="row">
     <div class="col-sm-4">
         <sense-object qlik-id="RJZZ"></sense-object>
