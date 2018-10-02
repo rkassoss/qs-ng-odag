@@ -10,17 +10,13 @@
                     var vm = this;
                     var theObject;
 
+                    var qsVersion = "Sep18";
+
                     vm.exportToExcel = exportToExcel;
                     vm.expand = expand;
                     vm.exportPdf = exportPdf;
+                    vm.exportImg = exportImg;
 
-                    var pdfSettings = {
-                        documentSize: "A4",
-                        aspectRatio: 2,
-                        orientation: "landscape"
-                    };
-
-                   
 
                     function exportToExcel() {
                         vm.model.exportData()
@@ -47,8 +43,9 @@
 
                     function exportImg() {
                         if (qsVersion == 'Sep18') {
-                            vm.model.exportImg().then(function(result){
-                                console.log('Png Link:', result);
+                            vm.model.exportImg()
+                            .then(function(reply){
+                                console.log(reply);
                             });
                         } else {
                             alert('nope');
@@ -57,9 +54,11 @@
 
                     function exportPdf() {
                         if (qsVersion == 'Sep18') {
-                            vm.model.exportPdf().then(function(result){
-                                console.log('PDF Link:', result);
-                            });
+                            console.log(vm.model);
+                            vm.model.exportPdf()
+                                .then(function(result){
+                                    console.log('PDF Link:', result);
+                                });
                         } else {
                             alert('nope');
                         }
