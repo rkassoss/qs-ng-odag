@@ -4,7 +4,7 @@
         height: 100px;
     }
     .objectPlaceholder {
-        height: 250px;
+        height: 150px;
     }
     .docs {
         max-height: 180px;
@@ -53,13 +53,7 @@
         height: 100px;
     }
     .objectPlaceholder {
-        height: 350px;
-        &.halfHeight {
-            height: 210px;
-        }
-        &.quarterHeight {
-            height: 70px;
-        }
+        height: 170px;
     }
 }
 

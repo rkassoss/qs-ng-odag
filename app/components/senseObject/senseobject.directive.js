@@ -10,7 +10,7 @@
                     var vm = this;
                     var theObject;
 
-                    var qsVersion = "Sep18";
+                    vm.qsVersion = "Apr18";
 
                     vm.exportToExcel = exportToExcel;
                     vm.expand = expand;
@@ -42,7 +42,7 @@
                     }
 
                     function exportImg() {
-                        if (qsVersion == 'Sep18') {
+                        if (vm.qsVersion == 'Sep18') {
                             vm.model.exportImg()
                             .then(function(reply){
                                 console.log(reply);
@@ -53,7 +53,7 @@
                     }
 
                     function exportPdf() {
-                        if (qsVersion == 'Sep18') {
+                        if (vm.qsVersion == 'Sep18') {
                             console.log(vm.model);
                             vm.model.exportPdf()
                                 .then(function(result){
@@ -105,8 +105,6 @@
                         qlikId: '@',
                         qlikTitle: '@',
                         objectClass: '@',
-                        externalUrl: '@',
-                        linkLabel: '@'
                     },
                     controller: senseObjectController,
                     controllerAs: 'so',

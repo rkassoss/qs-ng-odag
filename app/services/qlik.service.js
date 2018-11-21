@@ -11,7 +11,7 @@ define('qlikService', function () {
 
         function openApp(qlik, appId, config) {
             this.app = qlik.openApp(appId, config);
-            console.log('in');
+            // console.log('in');
         }
 
         function setQlik(qlikJS) {

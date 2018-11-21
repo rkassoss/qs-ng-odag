@@ -1,0 +1,17 @@
+
+<div class="createBookmarkModal">
+        <div class="modal-header">
+            <h3 class="modal-title pull-left" id="modal-title">
+                Create Bookmark
+            </h3>
+            <button data-html2canvas-ignore type="button" class="btn" ng-click="cbm.closeModal()"><i class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="modal-body">
+            <form ng-model="cbm.form" ng-submit="cbm.submitForm()">
+                <input placeholder="Bookmark Title" ng-model="cbm.form.title" required>
+                
+                <button type="submit" value="Submit">Submit</button>
+            </form>
+        </div>
+</div>

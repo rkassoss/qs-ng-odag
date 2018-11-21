@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56.238 70.938">
+  <defs>
+    <style>
+      .cls-1, .cls-3 {
+        fill: #5e7c80;
+      }
+
+      .cls-2, .cls-4 {
+        fill: none;
+      }
+
+      .cls-2, .cls-3, .cls-4 {
+        stroke: #5e7c80;
+      }
+
+      .cls-2 {
+        stroke-miterlimit: 10;
+        stroke-width: 3.438px;
+      }
+
+      .cls-3, .cls-4 {
+        stroke-width: 2.456px;
+      }
+    </style>
+  </defs>
+  <g id="occupancy" transform="translate(-754.981 -231.481)">
+    <path id="Path_33" data-name="Path 33" class="cls-1" d="M779.6,269h3.2v-3.4h-3.4V269Z"/>
+    <path id="Path_34" data-name="Path 34" class="cls-1" d="M784.4,269h3.2v-3.4h-3.3V269Z"/>
+    <path id="Path_35" data-name="Path 35" class="cls-1" d="M779.6,274.5h3.2v-3.4h-3.4v3.4Z"/>
+    <path id="Path_36" data-name="Path 36" class="cls-1" d="M784.4,274.5h3.2v-3.4h-3.3v3.4Z"/>
+    <path id="Path_37" data-name="Path 37" class="cls-1" d="M794.8,280.9H772.2v-18l.5-.4,9.7-8.7,1-.9.3.2.8.7,9.7,8.7.5.4v18Zm5.5-17.3-6-5.4v-7.1h-6.9v.9l-.7-.7h0c-.7-.6-1.4-1.3-2.1-1.9l-1-.9-1,.9-15.8,14.2-.5.4v4.4h2.8V284H798V268.4h2.8V264Z"/>
+    <path id="Path_38" data-name="Path 38" class="cls-2" d="M806.6,300.7h-47a2.9,2.9,0,0,1-2.9-2.9V236.1a2.9,2.9,0,0,1,2.9-2.9h47a2.9,2.9,0,0,1,2.9,2.9v61.7A2.968,2.968,0,0,1,806.6,300.7Z"/>
+    <path id="Path_39" data-name="Path 39" class="cls-3" d="M0,0H44.4" transform="translate(761 239.4)"/>
+    <line id="Line_24" data-name="Line 24" class="cls-4" x2="31.2" transform="translate(767.9 244.6)"/>
+    <line id="Line_25" data-name="Line 25" class="cls-4" x2="44.4" transform="translate(761.4 288.5)"/>
+    <line id="Line_26" data-name="Line 26" class="cls-4" x2="44.3" transform="translate(761.6 294.2)"/>
+  </g>
+</svg>

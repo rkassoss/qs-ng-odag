@@ -1,9 +1,9 @@
 
 body {
-    font-family: 'Roboto', sans-serif !important; font-size: 15px;
-    background-color: #f4f4f4;
+    font-family: Arial, Helvetica, sans-serif !important; font-size: 15px;
+    background-color: #E0E6E6;
     a {
-        color: $ibmBlue; font-weight: 500;
+        color: $turquoise; font-weight: 500;
         @include transition(color .3s);
         text-decoration: none;
         &:hover {
@@ -12,24 +12,65 @@ body {
     }
 }
 
+.kpi-box.panel {
+    padding: 15px;
+
+}
+
+.main-kpi {
+    width: 100%;
+    height: 100px;
+    .qv-footer-wrapper {
+        position: absolute;
+        right: 10px; bottom: 0; font-size: 16px;
+    }
+}
+.change-kpis {
+    @include flexbox();
+    .change-kpi {
+        height: 40px; flex: 1;
+    }
+}
+
+.asset-name {
+    font-size: 24px;
+    color: $blue;
+    font-weight: 700;
+}
+
 .btn {
-    @include transition(background-color .3s);
+    @include transition(background-color .3s, color .3s); display: block;
+    padding: 10px; border: 0;
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+    color: inherit; text-decoration: none;
 }
 
 .btn-primary {
-    background-color: $ibmBlue; color: white; border: 0; box-shadow: 0;
+    background-color: $turquoise; color: white; border: 0; box-shadow: none;
     .fa {
         margin-left: 10px;
     }
-    &:hover {
-        background-color: darken($ibmBlue, 10%);
+    &:hover, &:focus {
+        border: 0;
+        background-color: darken($turquoise,10%);
     }
 }
+
+.btn-clear {
+    background-color: transparent;
+    i {
+        padding-right: 10px;
+    }
+}
+
+
 
 #viewWrap {
     @include transition(margin-left .3s);
     margin-left: 65px;
-    padding-top: 160px;
+    padding-top: 120px;
     &.move {
         margin-left: 250px;
     }
@@ -48,10 +89,10 @@ ul {
 
 .panel {
     border: 0; margin-bottom: 30px;
-    box-shadow: 6px 5px 11px rgba(228, 228, 228, 0.5);
+    box-shadow: 6px 5px 11px rgba(188, 188, 188, 0.5);
     position: relative;
     .panel-header {
-        color: $darkBlue; padding: 15px 15px 0;
+        color: black; padding: 15px 15px 0;
         h3 {
             -webkit-text-overflow: ellipsis;
             text-overflow: ellipsis;
@@ -60,9 +101,9 @@ ul {
         }
     }
     .chart-icons {
-        position: absolute; bottom: 0; left: 0; right: 0;
-        .left-btns {
-           float: left;
+        position: absolute; top: 0; left: 0; right: 0;
+        .btns-wrap {
+            float: right;
         }
     }
     .btn-chart {
@@ -76,13 +117,16 @@ ul {
     }
 }
 
-
+.modal {
+    .objectPlaceholder {
+        height: 500px;
+    }
+}
 
 .objectPlaceholder {
     width: 100%;
     @include transition(opacity 1s);
     @include opacity(1);
-    margin-bottom: 30px;
     article.qv-object {
         header.qv-object-header {
             display: none;
@@ -90,6 +134,17 @@ ul {
     }
     &.animateOut {
         @include opacity(0);
+    }
+
+    &.full-height {
+        height: 600px;
+    }
+}
+
+.naked-kpi {
+    color: black;
+    .value {
+        font-size: 24px;
     }
 }
 
@@ -103,10 +158,17 @@ ul {
         height: 35px;
     }
 }
+.filter-row {
+    @include flexbox();
+    margin-bottom: 30px;
+    simple-object {
+        flex: 1; margin-right: 10px;
+    }
+}
 
 .panel-contact {
     position: relative;
-    background-color: $ibmBlue; color: white;
+    background-color: $turquoise; color: white;
     .fa-user {
         position: absolute; right: 0; font-size: 180px; opacity: .25;
     }
@@ -130,11 +192,6 @@ button, a {
     width: 90%;
 }
 
-.modal-body {
-    .objectPlaceholder {
-        height: 600px;
-    }
-}
 
 .btn-clean {
     background-color: transparent; border: 0; box-shadow: none;
@@ -144,7 +201,7 @@ button, a {
     background-color: transparent; border: 0; box-shadow: none;
     @include transition(font-size .3s);
     &:hover {
-        color: $ibmBlue;
+        color: $turquoise;
     }
 }
 
@@ -164,7 +221,7 @@ button, a {
        font-style: italic;
         margin-bottom: 15px; 
         &.active {
-            border-color: $darkBlue;
+            border-color: $turquoise;
             border-radius: 4px 4px 0 0;
             border-bottom: 1px solid;
         }
@@ -187,7 +244,7 @@ button, a {
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 
-    border: 1px solid $darkBlue;
+    border: 1px solid $turquoise;
     border-radius: 0 0 4px 4px;
 
     
@@ -206,7 +263,7 @@ button, a {
         @include transition(background-color .3s);
 
         &:hover {
-            background-color: lighten($ibmBlue, 35%);
+            background-color: lighten($turquoise, 35%);
         }
     }
     li:last-of-type a {
@@ -243,4 +300,18 @@ button, a {
         display: block;
         margin: 0 auto 30px;
     }
+}
+
+#homepageBg {
+    z-index: 0;
+    position: fixed;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url(/assets/images/Homepage.jpg);
+}
+#homepageContent {
+    position: relative;
+    z-index: 1;
+    color: white;
 }

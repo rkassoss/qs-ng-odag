@@ -15,22 +15,23 @@ define('currentSelectionsService', function () {
                     // console.log(reply);
                     _selections = reply.qSelectionObject.qSelections;
                     service.selections = _selections;
+                    service.assetName = false;
 
                     $.each(_selections, function(item,value){
                         // console.log(value);
-                        if (value.qField === 'Unit_Name') {
+                        if (value.qField === "Asset Name") {
                             // $.each(value.qSelected, function(sel){
                             //     console.log(sel);
                             // });
-                            service.noOfSel = value.qStateCounts.qSelected;
-                            service.clientName = value.qSelected;
+                            service.noOfAssetSel = value.qStateCounts.qSelected;
+                            if (service.noOfAssetSel === 1) {
+                                service.assetName = value.qSelected;
+                            }
                         }
                     })
                     _numberOfSelections = _selections.length;
                     service.numberOfSelections = _numberOfSelections;
                     // console.log(_numberOfSelections);
-
-
                 });
         }
 
@@ -55,15 +56,16 @@ define( 'dataService',function () {
         dataRetrieval.$inject = ['$http'];
         function dataRetrieval($http) {
             var service = this;
-            var data = 'test';
-            service.getListData = getListData;
-           service.setData = setData;
+           
+
+            var url = '/assets/app-data/';
+            var navLinks = url.concat('reports.json');
+
+            service.getNavLinkData = getNavLinkData;
     
-            function getListData() {
-                return data;
-            }
-            function setData(val){
-                data = val;
+            function getNavLinkData() {
+                var promise = $http.get(navLinks);
+                return promise;
             }
            
         }
@@ -107,7 +109,7 @@ define('qlikService', function () {
 
         function openApp(qlik, appId, config) {
             this.app = qlik.openApp(appId, config);
-            console.log('in');
+            // console.log('in');
         }
 
         function setQlik(qlikJS) {

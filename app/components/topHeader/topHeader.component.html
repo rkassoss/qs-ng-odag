@@ -1,57 +1,62 @@
 <header class="site-header">
     <div class="topbar">
         <div class="brand">
-            <img class="img-responsive" src="/assets/images/IBM-Logo.png" />
+                <a href="#" ui-sref="home"><img src="/assets/images/dws_logo.png" /></a>
         </div>
-        <div id="appTitle">
-                <strong>App:</strong> {{th.appTitle}}
-        </div>
-        
 
-        <div id="lastRelaod">
-                <strong>Status as of:</strong>
-                {{ th.relaodTime | date:"MM/dd/yyyy 'at' h:mma" }}
+        <div class="titles">
+            {{th.appTitle}} - Alternatives Group
+            <img src="/assets/images/separator.png" />
+            <!-- todo: use a service json file for all the report names and use it on both the header and sidebar -->
+
+            <span class="page-title">{{th.pageTitle}}</span>
         </div>
-                
         <div class="actions">
-                <div class="custom-currentS-wrap" ng-mouseover="showS=true" ng-mouseleave="showS=false">
-                        <button type="button" class="btn-clean selButton">Current Selections <i class="fa fa-angle-down"></i><span class="badge" ng-if="th.currentSelectionsService.numberOfSelections">{{th.currentSelectionsService.numberOfSelections}}</span></button>
-                        <div class="currentS" ng-show="showS && th.currentSelectionsService.numberOfSelections">
-                            <ul>
-                                <li ng-repeat="selection in th.currentSelectionsService.selections">
-                                    <span class="theField">{{selection.qField}}</span><span class="theSel">{{selection.qSelected}}</span>
-                                <button ng-click="th.currentSelectionsService.clearSelection(selection.qField)" class="btn-clean btn-close"><i class="fa fa-close" ></i></button>
-                                </li>
+            <button type="button" class="btn btn-clear btn-header"><i class="fa fa-question-circle"></i>Help</button>
+            <button type="button" class="btn btn-clear btn-header" ng-click="th.selfService()"><i class="fa fa-magic"></i>Self-Service</button>
 
-                                <li class="text-center"><button class="btn-clean" ng-click="th.currentSelectionsService.clearAll()"><i class="fa fa-refresh"></i>Clear All Selections</button></li>
-                            </ul>
-                        </div>
+            <div class="bookamkrsWrap">
+                <button type="button" class="btn btn-clear btn-header" ng-click="th.showBookmarks()"><i class="fa fa-bookmark"></i>Bookmarks</button>
+                <div id="bookmarksDD" ng-class="{'reveal' : th.revealBookmarks}">
+                    <ul>
+                        <!-- Using the bookmarks description to store paghe location -->
+                        <li ng-repeat="bm in th.bookmarks"><a href="#" ng-click="th.applyBookmark(bm.qInfo.qId,bm.qData.description)">{{bm.qData.title}} <span>Location: {{bm.qData.description}}</span></a><button class="btn-naked remove" ng-click="th.delBookmark(bm.qInfo.qId)"><i class="fa fa-fw fa-trash"></i></button></li>
+                        <form ng-model="th.form" ng-submit="th.submitBMForm()" id="createBM" ng-if="th.pageTitle != 'Home'">
+                                <h5>Create a New Bookmark</h5>
+                                <div class="input-group">
+                                        <input ng-model="th.form.title" required type="text" class="form-control" placeholder="Bookmark Title" required>
+                                        <span class="input-group-btn">
+                                          <button class="btn" type="submit">Submit</button>
+                                        </span>
+                                </div><!-- /input-group -->
+                         </form>
+                         <button id="closeBookmakrs" class="btn btn-clear" ng-click="th.showBookmarks()"><i class="fa fa-angle-up"></i>Close Window</button>
+                    </ul>
                 </div>
-                <button type="button" class="btn-clean" ng-click="th.toggleSidebar()">Filters <i class="fa fa-filter"></i></button>
+
+                                
+                
+            </div>
+            
+
+            
+
+            
+
+            <div id="lastRelaod">
+                Last reload:<br>
+                {{ th.relaodTime | date:"MM/dd/yyyy 'at' h:mma" }}
+            </div>
         </div>
+
+        
     </div>
 
     <!-- Using custom, current selections instead -->
-    <!-- <div id="CurrentSelections"></div> -->
-
-    <div class="blueRow">
-        <div class="page-title"><strong>Page: </strong>{{th.pageTitle}}</div>
-        <div class="clientName" ng-if="th.currentSelectionsService.noOfSel === 1"> 
-            <strong>Client: </strong>{{th.currentSelectionsService.clientName}}
-        </div>
-
-        <div class="externalLink">
-                <a ng-href="https://strueview2.deloitte.com/#/my-inspections/selfAssessment/inspections" target="_blank" class="btn btn-primary">Data Submission Portal <i class="fa fa-external-link"></i></a>
-        </div>
-    </div>
-    
+    <div id="CurrentSelections" class="move"></div>
 </header>
 
-<!-- <div id="sidebarMenu" class="left-slide-menu" ng-class="{'slideIn' : th.sidebarIn }">
-    <h3>Custom Dropdowns</h3>
-    <filter-dropdown field-name="Case Owner"></filter-dropdown>
-    <filter-dropdown field-name="Priority"></filter-dropdown>
-</div> -->
+
 <div id="navigation" ng-class="{'slideIn' : th.navigation }">
         <div class="hamburger" ng-class="{'active': th.navigation }" ng-click="th.toggleNav()">
                 <span class="bar"></span>
@@ -59,26 +64,23 @@
                 <span class="bar"></span>
         </div>
         <ul class="nav-links">
-                <li ui-sref-active="active">
-                    <a ui-sref="dashboard">
-                        <span><i class="fa fa-edit"></i><span class="nav-label">Dashboard</span></span>
-                    </a>
-                </li>
-                <li ui-sref-active="active">
-                    <a ui-sref="another-view">
-                        <span><i class="fa fa-eye"></i><span class="nav-label">Another View</span></span>
-                    </a>
+                <li ng-repeat="group in th.reports">
+                    <div class="groupTitle">
+                            <img ng-src="{{group.iconPath}}" class="group-icon" />
+                            <h3>{{group.name}}</h3>
+                    </div>
+                        
+                        <ul>
+                            <li ui-sref-active="active" ng-repeat="report in group.reports">
+                                <a ng-if="report.state" href="#" ui-sref="{{report.state}}">
+                                    <span class="nav-label">{{report.name}}</span>
+                                </a>
+                                <a ng-if="!report.state" class="isDisabled">
+                                    <span class="nav-label">{{report.name}}</span>
+                                </a>
+                            </li>
+                        </ul>
                 </li>
         </ul>
         <reload-time></reload-time>
 </div>
-
-<div id="filters" ng-class="{'slideIn' : th.sidebarIn }">
-    <ul class="filter">
-        <h3></h3>
-        <li class="">
-            <!-- <filter-dropdown field-name="Unit_Name" field-label="Select a Customer"></filter-dropdown> -->
-            <simple-object object-id="ycppXj" object-class="filterObject"></simple-object>
-        </li>
-    </ul>
-</div> 

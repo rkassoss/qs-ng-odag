@@ -1,0 +1,6 @@
+<div class="kpi-box panel">
+        <div class="main-kpi" id="{{kb.mainKpi}}" ng-style="styleAtt"></div>
+                <div class="change-kpis" ng-if="kb.changeKpiId">
+                    <div class="change-kpi" ng-repeat="id in kb.changeKpiId" id="{{id}}" ></div>
+        </div>
+</div>

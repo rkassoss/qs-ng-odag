@@ -4,15 +4,16 @@ define( 'dataService',function () {
         dataRetrieval.$inject = ['$http'];
         function dataRetrieval($http) {
             var service = this;
-            var data = 'test';
-            service.getListData = getListData;
-           service.setData = setData;
+           
+
+            var url = '/assets/app-data/';
+            var navLinks = url.concat('reports.json');
+
+            service.getNavLinkData = getNavLinkData;
     
-            function getListData() {
-                return data;
-            }
-            function setData(val){
-                data = val;
+            function getNavLinkData() {
+                var promise = $http.get(navLinks);
+                return promise;
             }
            
         }

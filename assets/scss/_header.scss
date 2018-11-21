@@ -1,53 +1,67 @@
 header.site-header {
     position: fixed; top: 0; left: 0; right: 0; z-index: 999;
-    background-color: white;
-    box-shadow: 1px 1px 10px;
+    background-color: black;
+    background-image: url(/assets/images/background.png);
+    background-position: left;
+    box-shadow: 0px 2px 11px 0px rgba(0,0,0,.5);
     .topbar {
-        padding: 15px;
-        @include flexbox(); align-items: baseline; justify-content: space-between;
+        @include flexbox(); justify-content: space-between;
+        color: white; height: 60px;
+        .actions .btn-header {
+            margin-left: 15px;
+            &:hover {
+                color: $orange;
+            }
+        }
     }
     .brand {
-        max-width: 80px;
+        width: 250px; //sidebar width;
+        img {
+            max-width: 100px;
+        }
     }
     #appTitle {
         margin-left: 15px;
     }
+    .titles {
+        @include flexbox(); align-items: center;
+        img { 
+            margin: 0 15px;
+        }
+    }
     .actions {
         flex: 1;
         @include flexbox(); justify-content: flex-end;
+        align-items: center;
     }
-    button {
-        font-size: 18px;
-        &:hover {
-            color: $ibmBlue;
+    #lastRelaod {
+        margin: 0 15px;
+        font-size: 13px;
+        line-height: 16px;
+        font-style: italic;
+        border-left: 1px solid #767676;
+        padding-left: 15px;
+    }
+}
+
+#CurrentSelections {
+    @include transition(margin-left .3s);
+    margin-left: 60px;
+    &.move {
+        margin-left: 250px;
+    }
+    .qv-panel-current-selections, .buttons .qv-subtoolbar-button, .buttons-end .qv-subtoolbar-button {
+        background-color: $blue;
+        &.active {
+            color: white;
         }
     }
+    .buttons-end {
+        div[tid="toggleGlobalSearchButton"] {
+            display: none;
+        }
+    }   
 }
-
-.blueRow {
-    background-color: $darkBlue; color: white; padding: 15px 15px 15px 80px;
-    @include flexbox(); align-items: center;
-    .btn-primary {
-        max-width: 320px; float: right;
-    }
-    .fa {
-        margin-left: 10px;
-    }
-    .externalLink {
-        flex: 1;
-    }
-    .clientName {
-        border-left: 3px solid $ibmBlue;
-        padding-left: 10px;
-        margin-left: 15px;
-    }
-}
-
-// #CurrentSelections {
-//     .buttons-end {
-//         display: none;
-//     }   
-// }
 
 .custom-currentS-wrap {
     display: inline-block; position: relative;
@@ -68,7 +82,7 @@ header.site-header {
                 list-style: none; display: block; position: relative;
                 border-bottom: 1px solid #fafafa; padding: 15px;
                 .theField {
-                    background-color: $ibmBlue; color: rgb(233, 233, 233);
+                    background-color: $turquoise; color: rgb(233, 233, 233);
                     font-size: 14px; padding: 5px; 
                 }
                 .theSel {
@@ -112,54 +126,82 @@ header.site-header {
     position: relative; margin-right: 30px;
     .badge {
         position: absolute; right: -5px; top: -15px;
-        background-color: $ibmBlue;
+        background-color: $blue;
     }
 }
 
 #navigation {
-    position: fixed; left: 0; top: 67px; bottom: 0; width: 50px;
+    position: fixed; left: 0; top: 60px; bottom: 0; width: 60px;
     z-index: 999; background-color: black;
+    box-shadow: 6px 5px 11px rgba(0, 0, 0, 0.3);
     // @include transform(translateX(-100%));
     @include transition(width .3s);
-
+    > ul {
+        @include transition(opacity .3s); opacity: .5;
+        ul {
+            @include transition(transform .3s, opacity .3s, max-height .75s);
+            max-height: 0;
+            transform: translateX(100%); opacity: 0; 
+        }
+    }
     .nav-links {
         li {
             margin: 0; padding: 0; overflow: hidden;
+            .groupTitle {
+                @include flexbox(); align-items: center;  padding-left: 15px;
+                img.group-icon {
+                    width: 30px; height: auto;
+                }
+                h3 {
+                    padding-left: 15px;
+                    color: $grey1;
+                }
+            }
+            
             &.active {
-                a { background-color: rgb(114, 114, 114); }
+                a {  background-color: $turquoise; color: white; }
             }
             a {
                 white-space: nowrap;
-                display: block; padding: 15px;
-                font-size: 22px; line-height: 32px; color: white;
+                display: block; padding: 0 0 0 30px;
+                font-size: 16 px; line-height: 32px; color: white;
                 @include transition(background-color .3s, color .3s);
                 text-decoration: none;
-                .nav-label {
-                    margin-left: 15px;
-                }
-
                 &:hover {
                     background-color: rgb(36, 36, 36);
                 }
+                &.isDisabled {
+                    color: currentColor;
+                    cursor: not-allowed;
+                  }
             }
         }
     }
     &.slideIn {
         // @include transform(translateX(0));
         width: 250px;
-    }
-    #lastRelaod {
-        display: none;
-        position: absolute;
-        bottom: 15px;
-        left: 15px;
-        text-align: left;
-        color: white;
-        border-right: 0;
-        font-size: 16px;
+        > ul {
+            opacity: 1;
+            ul {
+                transform: translateX(0); opacity: 1;
+                max-height: 600px;
+            }
+        }
     }
 }
 
+.qv-global-selections {
+    left: 50px;
+    top: 98px;
+    z-index: 999;
+    height: calc(100vh - 98px) !important;
+    .qv-gs-section {
+        height: 75%;
+    }
+    .qv-gs-section[tid="globalSelections.bottomSection"] {
+        display: none;
+    }
+}
 
 #filters {
     position: fixed; right: 0; top: 127px; bottom: 0; width: 250px;
@@ -216,22 +258,16 @@ header.site-header {
         }
     }
  }
- #lastRelaod {
-    display: inline-block;
-    border-left: 3px solid $ibmBlue;
-    padding-left: 10px;
-    margin-left: 15px;
-}
 
 .hamburger {
     display: inline-block;
     cursor: pointer;
-    width: 20px; margin: 15px; height: 26px;
+    width: 30px; margin: 5px 15px; height: 26px;
     .bar {
         display: block;
         width: 20px;
         height: 3px;
-        background-color: white;
+        background-color: $grey1;
         margin: 5px auto;
         @include transition(transform .3s, width .3s, background-color .3s);
     }
@@ -249,7 +285,7 @@ header.site-header {
     }
     &:hover {
         .bar {
-            background-color: $ibmBlue;
+            background-color: white;
         }
     }
 }
@@ -257,4 +293,59 @@ header.site-header {
 .lui-popover-container, .lui-dialog-container {
     position: fixed !important;
     z-index: 9999;
+ }
+
+
+ #bookmarksDD {
+     position: absolute; 
+     right: 0; width: 400px;
+     background-color: black; 
+     max-height: 0; @include transition(max-height .3s);
+     overflow: hidden; z-index: 999; color: white;
+     &.reveal {
+        max-height: 500px;
+     }
+     ul {
+        padding: 15px; padding-bottom: 0;
+        li {
+            margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 15px;
+            position: relative; padding-right: 30px;
+            a {
+                color: white; display: block;
+                span {
+                    display: block;
+                    font-size: 14px; color: #b9b9b9;
+                }
+                &:hover {
+                    color: $orange;
+                }
+            }
+            .remove {
+                background: transparent; border: 0;
+                position: absolute; right: 0; top: 15px;
+                color: #767676;
+                &:hover {
+                    color: red;
+                }
+            }
+            &:last-of-type {
+                border-bottom: 1px solid white;
+            }
+        }
+
+        #createBM {
+            .btn {
+                padding: 7px; border-width: 1px; background-color: $turquoise;
+            }
+        }
+        .btn-primary {
+            width: 100%; margin: 5px auto;
+            &:hover {
+                background-color: darken($turquoise,10%);
+            }
+        }
+        #closeBookmakrs {
+            display: block; margin: 15px auto;
+        }
+     }
  }

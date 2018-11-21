@@ -1,0 +1,17 @@
+<svg id="returns" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70.9 69.1">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5e7c80;
+      }
+    </style>
+  </defs>
+  <path id="Path_29" data-name="Path 29" class="cls-1" d="M62.5,43l8.4-8.4-8.4-8.4"/>
+  <path id="Path_30" data-name="Path 30" class="cls-1" d="M57,22.3,36.2,3a2.352,2.352,0,0,0-1.7-.6H29V6.8h4.4v13a5.56,5.56,0,0,0,5.7,5.3h14V62.9a2.12,2.12,0,0,1-2.2,2H6.9a2.12,2.12,0,0,1-2.2-2V8.9a2.12,2.12,0,0,1,2.2-2h.5V2.4H6.9C3.1,2.4,0,5.2,0,8.7v54a6.694,6.694,0,0,0,6.9,6.4h44a6.694,6.694,0,0,0,6.9-6.4V23.9a2.469,2.469,0,0,0-.8-1.6"/>
+  <path id="Path_31" data-name="Path 31" class="cls-1" d="M25.2,0H11.1A1.71,1.71,0,0,0,9.3,1.7V24.5a.466.466,0,0,0,.8.4l7.4-7.2a2.2,2.2,0,0,1,1.6,0l7.2,7.2c.4.2.8,0,.8-.4V1.7A1.863,1.863,0,0,0,25.2,0"/>
+  <rect id="Rectangle_352" data-name="Rectangle 352" class="cls-1" width="2.4" height="2.4" transform="translate(24.8 35.6)"/>
+  <rect id="Rectangle_353" data-name="Rectangle 353" class="cls-1" width="2.4" height="2.4" transform="translate(24.8 40.1)"/>
+  <rect id="Rectangle_354" data-name="Rectangle 354" class="cls-1" width="2.4" height="2.4" transform="translate(24.8 44.7)"/>
+  <rect id="Rectangle_355" data-name="Rectangle 355" class="cls-1" width="2.4" height="2.4" transform="translate(24.8 49.2)"/>
+  <path id="Path_32" data-name="Path 32" class="cls-1" d="M43,47.1H40.6V44.7H43Zm0,4.6H40.6V49.3H43Zm-3.8,6.9H35.8V54.3h3.4ZM34.5,47.1H32.1V44.7h2.4Zm0,4.6H32.1V49.3h2.4ZM31.7,41.2H29.3V58.6H22.9V34.2h8.8Zm4.6,8.1h2.4v2.4H36.3Zm0-4.6h2.4v2.4H36.3Zm13,13.9H45.7V41.2H34.2V31.1H20.5V58.6H18.6c-.4,0-.8.3-.8.6v1.6H50.1V59.2c0-.3-.4-.6-.8-.6"/>
+</svg>

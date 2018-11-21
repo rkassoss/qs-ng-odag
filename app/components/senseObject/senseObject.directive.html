@@ -8,15 +8,14 @@
         </div>
 
         <div class="chart-icons text-right">
-            <div class="left-btns">
-                    <button class="btn btn-chart" ng-click="so.exportImg()"><i class="fa fa-camera"></i></button>
-                    <button class="btn btn-chart" ng-click="so.exportPdf()"><i class="fa fa-file-pdf-o"></i></button>
+            <div class="btns-wrap">
+                    <div ng-if="so.qsVersion == 'Sep18'">
+                            <button class="btn btn-chart" ng-click="so.exportImg()"><i class="fa fa-camera"></i></button>
+                            <button class="btn btn-chart" ng-click="so.exportPdf()"><i class="fa fa-file-pdf-o"></i></button>
+                    </div>
+                    
                     <button class="btn btn-chart" ng-click="so.exportToExcel()"><i class="fa fa-download"></i></button>
                     <button class="btn btn-chart hidden-xs" ng-click="so.expand()"><i class="fa fa-expand"></i></button>
-            </div>
-                
-            <div class="chart-cta pull-right" ng-if="so.externalUrl">
-                    <a ng-href="{{so.externalUrl}}" target="_blank" class="btn btn-primary">{{so.linkLabel}} <i class="fa fa-external-link"></i></a>
             </div>
         </div>
 </div>
