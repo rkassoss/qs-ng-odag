@@ -1,115 +1,6 @@
 (function () {
     'use strict';
 
-    define('filterDropdown',function() {
-        
-        function filterDropdown() {
-                filterDropdownController.$inject = ["qlikService","filterDropdownService"];
-                function filterDropdownController(qlikService, filterDropdownService){
-                    var vm = this;
-                    var objectId;
-
-                    if (!vm.fieldLabel) {
-                        vm.fieldLabel = vm.fieldName;
-                    }
-
-                    vm.filterDropdownService = filterDropdownService;
-                    vm.fetchValues = fetchValues;
-
-                    // vm.addToSelection = addToSelection;
-                    // vm.applySelection = applySelection;
-                    // vm.cancelSelection = cancelSelection;
-                    
-                    vm.applySingleSelection = applySingleSelection;
-
-                    vm.selectionArray = [];
-
-                    // function addToSelection(value) { // future=> add multiple selection options
-                    //     var indexOfVal = vm.selectionArray.indexOf(value);
-                    //     if(indexOfVal !== -1) { // if value is already in - remove it
-                    //         vm.selectionArray.splice(indexOfVal, 1);
-                    //     } else {
-                    //         vm.selectionArray.push(value); // if not - add
-                    //     }
-                    //     console.log(vm.selectionArray);
-                    // }
-                    // function applySelection(array) { // future=> add multiple selection options
-                    //     // console.log(array);
-                    //     qlikService.getApp().field(vm.fieldName).clear().then(function(r){
-                    //         qlikService.getApp().field(vm.fieldName).selectValues(array,true,true);
-                    //     });
-                    // }
-                    // function cancelSelection() { // future=> add multiple selection options
-                    //     vm.selectionArray = [];
-                    // }
-
-                    function applySingleSelection(value) { // present=> single selection
-                        // console.log(array);
-                        qlikService.getApp().field(vm.fieldName).selectMatch(value);
-                    }
-
-                    function fetchValues() {
-                        // console.log(vm.fieldName);
-                        qlikService.getApp().createList({
-                            "qDef": {
-                                "qFieldDefs": [vm.fieldName],
-                                "qSortCriterias": [{
-                                    "qSortByLoadOrder"  : 0,
-                                    "qSortByAscii" : 1
-                                }]
-                            },
-                            "qAutoSortByState": {
-                                qDisplayNumberOfRows: 1
-                            },
-                            "qInitialDataFetch": [{
-                                qTop : 0,
-                                qLeft : 0,
-                                qHeight : 250,
-                                qWidth : 1
-                            }]
-                        }, function(reply) {
-                            console.log(reply.qListObject.qDataPages);
-                            objectId = reply.qInfo.qId;
-                            vm.rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
-                        });
-                    }
-
-                    
-
-                    vm.$onInit = function() {
-                        fetchValues();
-                    }
-
-
-                    vm.$onDestroy = function() {
-                        console.log('destroy list'+ objectId);
-                        qlikService.getApp().destroySessionObject(objectId);
-                    }
-
-
-                    vm.$onChanges = function(changes) {
-                        
-                    }
-                }
-        
-                return {
-                    bindings: {
-                        fieldName: '@',
-                        fieldLabel: '@'
-                    },
-                    controller: filterDropdownController,
-                    controllerAs: 'fd',
-                    templateUrl: '/app/components/filterDropdown/filterDropdown.component.html'
-                }
-        }
-
-        return filterDropdown();
-    });
-
-} ());
-(function () {
-    'use strict';
-
     define('docList',function(){
         function docList() {
             docListController.$inject = ['qlikService'];
@@ -300,6 +191,409 @@
 (function () {
     'use strict';
 
+    define('filterDropdown',function() {
+        
+        function filterDropdown() {
+                filterDropdownController.$inject = ["qlikService","filterDropdownService"];
+                function filterDropdownController(qlikService, filterDropdownService){
+                    var vm = this;
+                    var objectId;
+
+                    if (!vm.fieldLabel) {
+                        vm.fieldLabel = vm.fieldName;
+                    }
+
+                    vm.filterDropdownService = filterDropdownService;
+                    vm.fetchValues = fetchValues;
+
+                    // vm.addToSelection = addToSelection;
+                    // vm.applySelection = applySelection;
+                    // vm.cancelSelection = cancelSelection;
+                    
+                    vm.applySingleSelection = applySingleSelection;
+
+                    vm.selectionArray = [];
+
+                    // function addToSelection(value) { // future=> add multiple selection options
+                    //     var indexOfVal = vm.selectionArray.indexOf(value);
+                    //     if(indexOfVal !== -1) { // if value is already in - remove it
+                    //         vm.selectionArray.splice(indexOfVal, 1);
+                    //     } else {
+                    //         vm.selectionArray.push(value); // if not - add
+                    //     }
+                    //     console.log(vm.selectionArray);
+                    // }
+                    // function applySelection(array) { // future=> add multiple selection options
+                    //     // console.log(array);
+                    //     qlikService.getApp().field(vm.fieldName).clear().then(function(r){
+                    //         qlikService.getApp().field(vm.fieldName).selectValues(array,true,true);
+                    //     });
+                    // }
+                    // function cancelSelection() { // future=> add multiple selection options
+                    //     vm.selectionArray = [];
+                    // }
+
+                    function applySingleSelection(value) { // present=> single selection
+                        // console.log(array);
+                        qlikService.getApp().field(vm.fieldName).selectMatch(value);
+                    }
+
+                    function fetchValues() {
+                        // console.log(vm.fieldName);
+                        qlikService.getApp().createList({
+                            "qDef": {
+                                "qFieldDefs": [vm.fieldName],
+                                "qSortCriterias": [{
+                                    "qSortByLoadOrder"  : 0,
+                                    "qSortByAscii" : 1
+                                }]
+                            },
+                            "qAutoSortByState": {
+                                qDisplayNumberOfRows: 1
+                            },
+                            "qInitialDataFetch": [{
+                                qTop : 0,
+                                qLeft : 0,
+                                qHeight : 250,
+                                qWidth : 1
+                            }]
+                        }, function(reply) {
+                            console.log(reply.qListObject.qDataPages);
+                            objectId = reply.qInfo.qId;
+                            vm.rows = _.flatten(reply.qListObject.qDataPages[0].qMatrix);
+                        });
+                    }
+
+                    
+
+                    vm.$onInit = function() {
+                        fetchValues();
+                    }
+
+
+                    vm.$onDestroy = function() {
+                        console.log('destroy list'+ objectId);
+                        qlikService.getApp().destroySessionObject(objectId);
+                    }
+
+
+                    vm.$onChanges = function(changes) {
+                        
+                    }
+                }
+        
+                return {
+                    bindings: {
+                        fieldName: '@',
+                        fieldLabel: '@'
+                    },
+                    controller: filterDropdownController,
+                    controllerAs: 'fd',
+                    templateUrl: '/app/components/filterDropdown/filterDropdown.component.html'
+                }
+        }
+
+        return filterDropdown();
+    });
+
+} ());
+(function () {
+    'use strict';
+
+
+        define( 'senseObject',function () {
+            
+            function senseObject() {
+                senseObjectController.$inject = ['dataService','qlikService','$uibModal'];
+                function senseObjectController(dataService,qlikService,$uibModal) {
+                    var vm = this;
+                    var theObject;
+
+                    vm.qsVersion = "Apr18";
+
+                    vm.exportToExcel = exportToExcel;
+                    vm.expand = expand;
+                    vm.exportPdf = exportPdf;
+                    vm.exportImg = exportImg;
+
+
+                    function exportToExcel() {
+                        vm.model.exportData()
+                            .then(function(reply){
+                                console.log(reply);
+                                var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
+                                var link = reply.qUrl;
+                                window.open(baseUrl+link,'_blank');
+                            });
+                    }
+
+                    function expand() {
+                        var modalInstance = $uibModal.open({
+                            animation: true,
+                            component: 'expandModal',
+                            size: 'lg',
+                            resolve: {
+                                qlikId: function () {
+                                    return vm.qlikId;
+                                }
+                            }
+                        });
+                    }
+
+                    function exportImg() {
+                        if (vm.qsVersion == 'Sep18') {
+                            vm.model.exportImg()
+                            .then(function(reply){
+                                console.log(reply);
+                            });
+                        } else {
+                            alert('nope');
+                        }
+                    }
+
+                    function exportPdf() {
+                        if (vm.qsVersion == 'Sep18') {
+                            console.log(vm.model);
+                            vm.model.exportPdf()
+                                .then(function(result){
+                                    console.log('PDF Link:', result);
+                                });
+                        } else {
+                            alert('nope');
+                        }
+                    }
+
+                    function getQlikObject() {
+                        qlikService.getApp()
+                        .visualization.get(vm.qlikId).then(function(vis){
+                            // console.log(vis);
+                            if(!vm.qlikTitle){
+                                vm.title = vis.model.layout.title;
+                            } else {
+                                vm.title = vm.qlikTitle;
+                            }
+                           
+                            vis.model.layout.showTitles = false;
+                            vis.show(vm.qlikId);
+                            theObject = vis;
+                            vm.model = vis.model;
+                        });
+                    }
+
+                    
+                    vm.$onInit = function() {
+                        setTimeout(function() {
+                            getQlikObject();
+                        }, 300)
+                    }
+
+
+                    vm.$onDestroy = function() {
+                        console.log('destroy');
+                        theObject.close();
+                    }
+
+
+                    vm.$onChanges = function(changes) {
+                        
+                    }
+
+                }
+                return {
+                    bindings: {
+                        qlikId: '@',
+                        qlikTitle: '@',
+                        objectClass: '@',
+                    },
+                    controller: senseObjectController,
+                    controllerAs: 'so',
+                    templateUrl: '/app/components/senseObject/senseObject.directive.html'
+                }
+            }
+
+            return senseObject();
+        });
+} ());
+(function () {
+    'use strict';
+
+    define('tableButton', function(){
+        function tableButton() {
+            tableButtonController.$inject = ['qlikService'];
+            function tableButtonController(qlikService){
+                var vm = this;
+                vm.exportToExcel = exportToExcel;
+                
+                vm.isCollapsed =vm.animateNow = true;
+                var tableObject;
+                vm.revealTable = revealTable;
+
+                function exportToExcel() {
+                    tableObject.model.exportData()
+                        .then(function(reply){
+                            console.log(reply);
+                            var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
+                            var link = reply.qUrl;
+                            window.open(baseUrl+link,'_blank');
+                        });
+                }
+
+
+
+                function getQlikTable(qlikId) {
+                    qlikService.getApp().visualization.get(qlikId).then(function(table){
+                        console.log(table);
+                        vm.title = table.model.layout.title;
+                        table.show(vm.tableId);
+                        tableObject = table;
+                    });
+                }
+
+                function revealTable() {
+                    vm.isCollapsed = !vm.isCollapsed;
+                    console.log(vm.isCollapsed);
+                    if (!vm.isCollapsed) {
+                        getQlikTable(vm.tableId);
+                        setTimeout(function() {
+                            vm.animateNow = false;
+                        }, 300)
+                    } else {
+                        tableObject.close();
+                        vm.animateNow = true;
+                    }
+                }
+
+
+                vm.$onInit = function() {
+
+                }
+
+                vm.$onDestroy = function() {
+                    tableObject.close();
+                }
+            }
+    
+            return {
+                bindings: {
+                    tableId: '@',
+                    buttonText: '@'
+                },
+                controller: tableButtonController,
+                controllerAs: 'tb',
+                templateUrl: '/app/components/tableButton/tableButton.component.html'
+            }
+        }
+        return tableButton();
+    });
+
+
+    
+
+} ());
+define( 'topHeader',function () {
+    
+    function topHeader() {
+        topHeaderController.$inject = ['$window','$state','dataService','qlikService','currentSelectionsService','$transitions'];
+        function topHeaderController($window, $state , dataService,qlikService, currentSelectionsService, $transitions) {
+            var vm = this;
+
+            vm.toggleSidebar = toggleSidebar;
+            vm.toggleNav = toggleNav;
+            vm.currentSelectionsService = currentSelectionsService;
+
+            vm.sidebarIn = false;
+            vm.navigation = true;
+
+
+            vm.delBookmark = delBookmark;
+            vm.applyBookmark = applyBookmark;
+            vm.showBookmarks = showBookmarks;
+
+            vm.submitBMForm = submitBMForm;
+            vm.stateName = $state.current.name;
+
+            vm.revealBookmarks = false;
+
+
+            vm.selfService = selfService;
+
+            $transitions.onSuccess({}, function(transition) {
+                vm.pageTitle = transition.to().title;
+                console.log(
+                    "Successful Transition from " + transition.from().title +
+                    " to " + transition.to().title
+                );
+            });
+
+            function toggleNav() {
+                vm.navigation = !vm.navigation;
+                // console.log(vm.navigation);
+                $('#viewWrap,#CurrentSelections').toggleClass('move');
+                qlikObject.resize();
+            }
+
+            function toggleSidebar() {
+                vm.sidebarIn = !vm.sidebarIn;
+            }
+
+            function showBookmarks() {
+                vm.revealBookmarks = !vm.revealBookmarks;
+            }
+
+            function applyBookmark(id,url) {
+                // console.log(id,url);
+                qlikService.getApp().bookmark.apply(id).then(function(reply){
+                    if (url){
+                        $state.go(url);
+                    }
+                });
+
+            }
+
+            function delBookmark(id) {
+                qlikService.getApp().bookmark.remove(id).then(function(model){
+                    qlikService.getApp().doSave();
+                });
+            }
+
+            function submitBMForm() {
+                qlikService.getApp().bookmark.create(vm.form.title, vm.stateName);
+                qlikService.getApp().doSave();
+            }
+
+            function selfService() {
+                $window.open((config.isSecure ? "https://" : "http://") + config.host + config.prefix + 'sense/app/' + appId ,'_blank');
+            }
+            
+            init();
+            function init() {
+                qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
+                currentSelectionsService.getCurrentSelections();
+                qlikService.getApp().getAppLayout(function(layout){
+                    // console.log(layout);
+                    vm.relaodTime = layout.qLastReloadTime;
+                    vm.appTitle = layout.qTitle;
+                });
+
+                qlikService.getApp().getList( "BookmarkList", function ( reply ) {
+                    vm.bookmarks = _.flatten(reply.qBookmarkList.qItems);
+                    console.log(vm.bookmarks);
+                });
+            }
+        }
+        return {
+            bindings: {},
+            controller: topHeaderController,
+            controllerAs: 'th',
+            templateUrl: 'app/components/topHeader/topHeader.component.html'
+        }
+    }
+
+    return topHeader();
+});
+(function () {
+    'use strict';
+
     define('simpleObject',function(){
         function simpleObject() {
             simpleObjectController.$inject = ['qlikService'];
@@ -425,305 +719,6 @@
         return simpleTable();
     });
 } ());
-(function () {
-    'use strict';
-
-    define('tableButton', function(){
-        function tableButton() {
-            tableButtonController.$inject = ['qlikService'];
-            function tableButtonController(qlikService){
-                var vm = this;
-                vm.exportToExcel = exportToExcel;
-                
-                vm.isCollapsed =vm.animateNow = true;
-                var tableObject;
-                vm.revealTable = revealTable;
-
-                function exportToExcel() {
-                    tableObject.model.exportData()
-                        .then(function(reply){
-                            console.log(reply);
-                            var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
-                            var link = reply.qUrl;
-                            window.open(baseUrl+link,'_blank');
-                        });
-                }
-
-
-
-                function getQlikTable(qlikId) {
-                    qlikService.getApp().visualization.get(qlikId).then(function(table){
-                        console.log(table);
-                        vm.title = table.model.layout.title;
-                        table.show(vm.tableId);
-                        tableObject = table;
-                    });
-                }
-
-                function revealTable() {
-                    vm.isCollapsed = !vm.isCollapsed;
-                    console.log(vm.isCollapsed);
-                    if (!vm.isCollapsed) {
-                        getQlikTable(vm.tableId);
-                        setTimeout(function() {
-                            vm.animateNow = false;
-                        }, 300)
-                    } else {
-                        tableObject.close();
-                        vm.animateNow = true;
-                    }
-                }
-
-
-                vm.$onInit = function() {
-
-                }
-
-                vm.$onDestroy = function() {
-                    tableObject.close();
-                }
-            }
-    
-            return {
-                bindings: {
-                    tableId: '@',
-                    buttonText: '@'
-                },
-                controller: tableButtonController,
-                controllerAs: 'tb',
-                templateUrl: '/app/components/tableButton/tableButton.component.html'
-            }
-        }
-        return tableButton();
-    });
-
-
-    
-
-} ());
-(function () {
-    'use strict';
-
-
-        define( 'senseObject',function () {
-            
-            function senseObject() {
-                senseObjectController.$inject = ['dataService','qlikService','$uibModal'];
-                function senseObjectController(dataService,qlikService,$uibModal) {
-                    var vm = this;
-                    var theObject;
-
-                    vm.qsVersion = "Apr18";
-
-                    vm.exportToExcel = exportToExcel;
-                    vm.expand = expand;
-                    vm.exportPdf = exportPdf;
-                    vm.exportImg = exportImg;
-
-
-                    function exportToExcel() {
-                        vm.model.exportData()
-                            .then(function(reply){
-                                console.log(reply);
-                                var baseUrl = (config.isSecure ? "https://" : "http://") + config.host + (config.port ? ":" + config.port : "");
-                                var link = reply.qUrl;
-                                window.open(baseUrl+link,'_blank');
-                            });
-                    }
-
-                    function expand() {
-                        var modalInstance = $uibModal.open({
-                            animation: true,
-                            component: 'expandModal',
-                            size: 'lg',
-                            resolve: {
-                                qlikId: function () {
-                                    return vm.qlikId;
-                                }
-                            }
-                        });
-                    }
-
-                    function exportImg() {
-                        if (vm.qsVersion == 'Sep18') {
-                            vm.model.exportImg()
-                            .then(function(reply){
-                                console.log(reply);
-                            });
-                        } else {
-                            alert('nope');
-                        }
-                    }
-
-                    function exportPdf() {
-                        if (vm.qsVersion == 'Sep18') {
-                            console.log(vm.model);
-                            vm.model.exportPdf()
-                                .then(function(result){
-                                    console.log('PDF Link:', result);
-                                });
-                        } else {
-                            alert('nope');
-                        }
-                    }
-
-                    function getQlikObject() {
-                        qlikService.getApp()
-                        .visualization.get(vm.qlikId).then(function(vis){
-                            // console.log(vis);
-                            if(!vm.qlikTitle){
-                                vm.title = vis.model.layout.title;
-                            } else {
-                                vm.title = vm.qlikTitle;
-                            }
-                           
-                            vis.model.layout.showTitles = false;
-                            vis.show(vm.qlikId);
-                            theObject = vis;
-                            vm.model = vis.model;
-                        });
-                    }
-
-                    
-                    vm.$onInit = function() {
-                        setTimeout(function() {
-                            getQlikObject();
-                        }, 300)
-                    }
-
-
-                    vm.$onDestroy = function() {
-                        console.log('destroy');
-                        theObject.close();
-                    }
-
-
-                    vm.$onChanges = function(changes) {
-                        
-                    }
-
-                }
-                return {
-                    bindings: {
-                        qlikId: '@',
-                        qlikTitle: '@',
-                        objectClass: '@',
-                    },
-                    controller: senseObjectController,
-                    controllerAs: 'so',
-                    templateUrl: '/app/components/senseObject/senseObject.directive.html'
-                }
-            }
-
-            return senseObject();
-        });
-} ());
-define( 'topHeader',function () {
-    
-    function topHeader() {
-        topHeaderController.$inject = ['$window','$state','dataService','qlikService','currentSelectionsService','$transitions'];
-        function topHeaderController($window, $state , dataService,qlikService, currentSelectionsService, $transitions) {
-            var vm = this;
-
-            vm.toggleSidebar = toggleSidebar;
-            vm.toggleNav = toggleNav;
-            vm.currentSelectionsService = currentSelectionsService;
-
-            vm.sidebarIn = false;
-            vm.navigation = true;
-
-
-            vm.delBookmark = delBookmark;
-            vm.applyBookmark = applyBookmark;
-            vm.showBookmarks = showBookmarks;
-
-            vm.submitBMForm = submitBMForm;
-            vm.stateName = $state.current.name;
-
-            vm.revealBookmarks = false;
-
-
-            vm.selfService = selfService;
-
-            $transitions.onSuccess({}, function(transition) {
-                vm.pageTitle = transition.to().title;
-                console.log(
-                    "Successful Transition from " + transition.from().title +
-                    " to " + transition.to().title
-                );
-            });
-
-            function toggleNav() {
-                vm.navigation = !vm.navigation;
-                // console.log(vm.navigation);
-                $('#viewWrap,#CurrentSelections').toggleClass('move');
-                qlikObject.resize();
-            }
-
-            function toggleSidebar() {
-                vm.sidebarIn = !vm.sidebarIn;
-            }
-
-            function showBookmarks() {
-                vm.revealBookmarks = !vm.revealBookmarks;
-            }
-
-            function applyBookmark(id,url) {
-                // console.log(id,url);
-                qlikService.getApp().bookmark.apply(id).then(function(reply){
-                    if (url){
-                        $state.go(url);
-                    }
-                });
-
-            }
-
-            function delBookmark(id) {
-                qlikService.getApp().bookmark.remove(id).then(function(model){
-                    qlikService.getApp().doSave();
-                });
-            }
-
-            function submitBMForm() {
-                qlikService.getApp().bookmark.create(vm.form.title, vm.stateName);
-                qlikService.getApp().doSave();
-            }
-
-            function selfService() {
-                $window.open((config.isSecure ? "https://" : "http://") + config.host + config.prefix + 'sense/app/' + appId ,'_blank');
-            }
-            
-            init();
-            function init() {
-                qlikService.getApp().getObject('CurrentSelections','CurrentSelections');
-                currentSelectionsService.getCurrentSelections();
-                qlikService.getApp().getAppLayout(function(layout){
-                    // console.log(layout);
-                    vm.relaodTime = layout.qLastReloadTime;
-                    vm.appTitle = layout.qTitle;
-                });
-
-                qlikService.getApp().getList( "BookmarkList", function ( reply ) {
-                    vm.bookmarks = _.flatten(reply.qBookmarkList.qItems);
-                    console.log(vm.bookmarks);
-                });
-
-                dataService.getNavLinkData().then(function(reply){
-                    // console.log(reply.data);
-                    vm.reports = reply.data;
-                });
-            }
-        }
-        return {
-            bindings: {},
-            controller: topHeaderController,
-            controllerAs: 'th',
-            templateUrl: 'app/components/topHeader/topHeader.component.html'
-        }
-    }
-
-    return topHeader();
-});
 (function () {
     'use strict';
 

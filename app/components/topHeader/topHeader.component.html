@@ -1,20 +1,11 @@
 <header class="site-header">
     <div class="topbar">
         <div class="brand">
-                <a href="#" ui-sref="home"><img src="/assets/images/dws_logo.png" /></a>
+                <a href="#" ui-sref="home">{{th.appTitle}}</a>
         </div>
 
-        <div class="titles">
-            {{th.appTitle}} - Alternatives Group
-            <img src="/assets/images/separator.png" />
-            <!-- todo: use a service json file for all the report names and use it on both the header and sidebar -->
-
-            <span class="page-title">{{th.pageTitle}}</span>
-        </div>
         <div class="actions">
             <button type="button" class="btn btn-clear btn-header"><i class="fa fa-question-circle"></i>Help</button>
-            <button type="button" class="btn btn-clear btn-header" ng-click="th.selfService()"><i class="fa fa-magic"></i>Self-Service</button>
-
             <div class="bookamkrsWrap">
                 <button type="button" class="btn btn-clear btn-header" ng-click="th.showBookmarks()"><i class="fa fa-bookmark"></i>Bookmarks</button>
                 <div id="bookmarksDD" ng-class="{'reveal' : th.revealBookmarks}">
@@ -33,16 +24,7 @@
                          <button id="closeBookmakrs" class="btn btn-clear" ng-click="th.showBookmarks()"><i class="fa fa-angle-up"></i>Close Window</button>
                     </ul>
                 </div>
-
-                                
-                
             </div>
-            
-
-            
-
-            
-
             <div id="lastRelaod">
                 Last reload:<br>
                 {{ th.relaodTime | date:"MM/dd/yyyy 'at' h:mma" }}
@@ -51,36 +33,6 @@
 
         
     </div>
-
     <!-- Using custom, current selections instead -->
     <div id="CurrentSelections" class="move"></div>
 </header>
-
-
-<div id="navigation" ng-class="{'slideIn' : th.navigation }">
-        <div class="hamburger" ng-class="{'active': th.navigation }" ng-click="th.toggleNav()">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-        </div>
-        <ul class="nav-links">
-                <li ng-repeat="group in th.reports">
-                    <div class="groupTitle">
-                            <img ng-src="{{group.iconPath}}" class="group-icon" />
-                            <h3>{{group.name}}</h3>
-                    </div>
-                        
-                        <ul>
-                            <li ui-sref-active="active" ng-repeat="report in group.reports">
-                                <a ng-if="report.state" href="#" ui-sref="{{report.state}}">
-                                    <span class="nav-label">{{report.name}}</span>
-                                </a>
-                                <a ng-if="!report.state" class="isDisabled">
-                                    <span class="nav-label">{{report.name}}</span>
-                                </a>
-                            </li>
-                        </ul>
-                </li>
-        </ul>
-        <reload-time></reload-time>
-</div>

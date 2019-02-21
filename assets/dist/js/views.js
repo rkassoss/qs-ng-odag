@@ -56,31 +56,4 @@
         }
         return occupancy();
     });
-
-    define('occMarketValue',function(){
-        function occMarketValue() {
-            occMarketValueController.$inject = ['qlikService','currentSelectionsService'];
-            function occMarketValueController(qlikService, currentSelectionsService){
-                var vm = this;
-                init();
-                vm.currentSelectionsService = currentSelectionsService;
-              
-                function init(){
-                    currentSelectionsService.getCurrentSelections();
-                }
-            }
-    
-            return {
-                bindings: {},
-                controller: occMarketValueController,
-                controllerAs: 'omv',
-                templateUrl: '/app/views/occupancy/occMarketValue.component.html'
-            }
-        }
-        return occMarketValue();
-    });
-
-
-    
-
 } ());

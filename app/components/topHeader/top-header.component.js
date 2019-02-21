@@ -87,11 +87,6 @@ define( 'topHeader',function () {
                     vm.bookmarks = _.flatten(reply.qBookmarkList.qItems);
                     console.log(vm.bookmarks);
                 });
-
-                dataService.getNavLinkData().then(function(reply){
-                    // console.log(reply.data);
-                    vm.reports = reply.data;
-                });
             }
         }
         return {

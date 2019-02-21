@@ -8,13 +8,21 @@ var qlikObject;
 // };
 // var appId = 'Kinesis.qvf';
 
-var config = { // Ran K - April 2018 QS
+var config = { // Ran K - QS November 2018 Patch 1
   host: 'qmi-qs-odag',
   prefix: '/',
   port: 443,
   isSecure: true
 };
 var appId = 'cd6fead1-9d81-435f-abfa-ef572f244d2f';
+
+// var config = { // Ran K - QS June 2018 Patch 1
+//     host: 'qmi-qs-ticket',
+//     prefix: '/o365/',
+//     port: 443,
+//     isSecure: true
+//   };
+// var appId = '056af7a2-921f-46ce-89d1-6482b2f6461b';
 
 
 require.config({
@@ -33,78 +41,6 @@ require.config({
     }
 });
 
-// server does not respond to "Alow-Access-Control-Origin:*" and Whitelisting the mashup web server from the QMC under virtual proxy.
-// to overide this we define the schema ourselves below and add the extension name to the array "extList" in line 96.
-// Idealy should be resolved from the qmc as noted and remove the below code lines 49-114.
-require.undef("general.services/content-api/content-api");
-define("general.services/content-api/content-api", ["qvangular", "core.utils/deferred", "translator", "xsrfplugin", "require"], function(a, b, c, d, e) {
-        a.service("$contentApi", ["$http", function(f) {
-            function g(a) {
-                a.headers || (a.headers = {})
-            }
-
-            function h(a) {
-                a.params || (a.params = {})
-            }
-
-            function i(a) {
-                var b = d.getRandomString(16);
-                return a.headers["X-Qlik-XrfKey"] = b, a.params.xrfkey = b, a
-            }
-
-            function j(a) {
-                var b = e.toUrl(""),
-                    c = b.indexOf("/resources");
-                return c > -1 && (b = b.substring(0, c)), a.url = b + a.url, a
-            }
-
-            function k(a) {
-                var b = c.language;
-                return b && (a.headers["Accept-Language"] = "pseudo" !== b ? b : "qps-ploc"), a
-            }
-
-            function l(b) {
-                return g(b), h(b), a.$rootScope.isPersonalMode || i(b), j(b), k(b), f(b)
-            }
-
-            function m() {
-                var a = new b,
-                    c = {
-                        method: "GET",
-                        url: "/qrs/extension/schema"
-                    };
-                return l(c).then(function(b) {
-                    var c = b.data;
-                    a.resolve(c)
-                }).catch(function(b) {
-                    var c = b.data;
-                    a.reject(c)
-                }), a.promise
-            }
-
-            function m1(){
-                var a = new b;
-                var extList = ["VizlibFilter"];
-
-                var ext = {};
-                extList.forEach(function(e){
-                    ext[e] = {type: 'visualization'};
-                });
-
-                a.resolve(ext)
-                return a.promise;
-            }
-
-            return {
-                getExtensions: m1,                
-                getExtensions1: m,
-                request: l
-            }
-        }])
-    });
-
-
-
 // bootstrap the app
 require(["js/qlik"], function (qlik) {
     require(["angular",
@@ -113,7 +49,6 @@ require(["js/qlik"], function (qlik) {
             "routes", 
             'home',
             'occupancy',
-            'occMarketValue',
             'topHeader',
             'senseObject', 
             'simpleObject',
@@ -130,7 +65,7 @@ require(["js/qlik"], function (qlik) {
             'filterDropdownService'
     ],
         function (angular, uiRoute, uibootstrap, routes, 
-            home, occupancy, occMarketValue, 
+            home, occupancy, 
             topHeader, senseObject, simpleObject,nakedKpi, kpiBox, filterDropdown,dropdownSearch,simpleTable, expandModal, createBookmarkModal, dataService, qlikService,currentSelectionsService, filterDropdownService ) {
             app = angular.module('mashup-app', [
                 'ui.router',
@@ -148,7 +83,6 @@ require(["js/qlik"], function (qlik) {
             app.config(routes);
             app.component('home',home);
             app.component('occupancy',occupancy);
-            app.component('occMarketValue',occMarketValue);
 
             app.component('topHeader',topHeader);
 
@@ -174,6 +108,7 @@ require(["js/qlik"], function (qlik) {
                 qlikService.openApp(qlik, appId, config);
                 qlikObject = qlik;
             }]);
+
             angular.bootstrap(document, ["qlik-angular", "mashup-app"]);
         }
     )

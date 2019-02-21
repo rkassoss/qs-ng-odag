@@ -1,8 +1,8 @@
 define('routes',function(){
     function routeConfig($locationProvider, $stateProvider, $urlRouterProvider){
         $stateProvider
-        .state('home', {
-            url: '/home',
+        .state('/', {
+            url: '/',
             template: '<home></home>',
             title: 'Home'
         })
@@ -11,12 +11,8 @@ define('routes',function(){
           template: '<occupancy></occupancy>',
           title: 'Occupancy'
         })
-        .state('occMarketValue', {
-            url: '/occMarketValue',
-            template: '<occ-market-value></occ-market-value>',
-            title: 'Market Value by State'
-        });
-        $urlRouterProvider.otherwise('/home');
+        ;
+        $urlRouterProvider.otherwise('/');
     }
     routeConfig.$inject = ['$locationProvider', '$stateProvider', '$urlRouterProvider'];
     return routeConfig;
