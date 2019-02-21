@@ -9,12 +9,12 @@ var qlikObject;
 // var appId = 'Kinesis.qvf';
 
 var config = { // Ran K - April 2018 QS
-  host: 'qmi-qs-cln',
+  host: 'qmi-qs-odag',
   prefix: '/',
   port: 443,
   isSecure: true
 };
-var appId = 'fa2e1a53-2f60-4f13-939e-083c417dfc4c';
+var appId = 'cd6fead1-9d81-435f-abfa-ef572f244d2f';
 
 
 require.config({
